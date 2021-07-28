@@ -11,9 +11,8 @@
 
 + 不着眼于替换你现在的编辑器或者 IDE 避免降低工作效率；
 + org-mode 是一种非常具有表达力的文档标记格式，并且配合 org-babel 可以执行代码块保存实验结果（类似 Jupyter Notebook）；
-+ [[https://github.com/org-roam/org-roam][org-roam]] 基于 org-mode 实现来 Roam Research[fn:1][fn:2] 的方式进行先进的笔记管理；
-+ 基于 GitHub 可以实现免费的托管和；
-+ 配合 [[https://github.com/kaushalmodi/ox-hugo/][ox-hugo]] 生成 [[https://gohugo.io][hugo]] 站点并结合 GitHub Pages 免费发布到网上。
++ [[https://github.com/org-roam/org-roam][org-roam]] 基于 org-mode 实现 Roam Research[fn:1][fn:2] 的方式进行先进的笔记管理；
++ 基于 GitHub 可以实现免费的托管和；配合 [[https://github.com/kaushalmodi/ox-hugo/][ox-hugo]] 生成 [[https://gohugo.io][hugo]] 站点并结合 GitHub Pages 免费发布到网上。
 
 也许通过这个你可以爱上 Emacs 并开始将它作为主要编辑器最终助力你提升工作效率。
 * 安装、启动、退出
