@@ -72,6 +72,8 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 ** buffer
 这个可能和大多数编辑器不太一样，Emacs 突出了 buffer 的语义，从而弱化了编辑文件语义，比如在其他编辑器或者 IDE 你可能是想的切换编辑文件，
 但是 Emacs 更突出了是切换到对应的 buffer（ ~C-x b~ ） 编辑，而后通过 ~C-x C-s~ 将 buffer 的内容保存到文件中（如果是生成的 buffer 则会提示选择要保存的文件名）。
+
+同时 Emacs 有很多临时的 buffer 来充当日志的角色，比如默认的 ~*Messages*~ (~C-x b *Messages* RET~) 就是一个只读 buffer 显示一些日志信息，某些操作失败了之后也会保存一些错误消息到指定的 buffer 中，我们只要切换过去就能看到。
 * 基本增强
 默认安装的 Emacs 可以说是又丑又不好用，所以为了使用更加顺畅或者更贴合现代编辑器，我们需要修改一些配置并做一些插件的扩展。
 
@@ -204,7 +206,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 + 简单粗暴：直接拷贝 elisp 文件到指定位置；
 + 内置的 package.el 可以安装 [[https://melpa.org/#/getting-started][MELPA]] 的包。
 + [[https://github.com/dimitri/el-get][el-get]] 可以支持多种源，如 MELPA、EmacsWiki、GitHub 等等
-+ [[https://github.com/raxod502/straight.el][straight.el]] 同样支持很多中源，同时还支持版本锁定、集成 ~use-package~ 、指向 fork、本地修改等。
++ [[https://github.com/raxod502/straight.el][straight.el]] 同样支持很多种源，并集成了 el-get 的源，同时还支持版本锁定、集成 ~use-package~ 、指向 fork、本地修改等。
 
 目前我正在使用的就是 ~use-package~ + ~straight.el~ 的方式， ~use-package~ 感觉不是很适合小白，因为很多搜索到的配置在 ~use-package~ 下要做一些改变，所以在这里我也是很纠结要不要用 ~use-package~ 。
 但是我相信通过简单的学习，这些应该不会成为障碍，所以这里我们就以 ~use-package~ + ~straight.el~ 作为我们的插件包管理方案。
@@ -236,18 +238,109 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 #+END_SRC
-然后我们开始执行当前 buffer： ~M-x eval-buffer RET~ ，然后 straight.el 就会同步源：
+然后我们开始执行当前 buffer： ~M-x eval-buffer RET~ ，然后 straight.el 就会开始同步源：
 [[file:images/02-package.png]]
 ** 外观
+经过漫长的等待之后，我们终于可以进行下一步了：美化！我们将安装配置以下插件：
 + doom-theme
 + doom-modeline
++ nyan-mode
 + all-the-icons
++ emojify
 + dashboard
++ centaur-tabs
+将以下配置追加到 ~init.el~ 中：
+#+BEGIN_SRC elisp
+;;; Appearance
+(use-package doom-themes
+  :ensure t
+  :straight (doom-themes :host github :repo "hlissner/emacs-doom-themes"
+                         :files ("*.el" "themes"))
+  :init
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
+  ;; may have their own settings.
+  ;; (load-theme 'doom-nord t)
+  (load-theme 'doom-vibrant t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+
+  ;; Enable custom neotree theme
+  (doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
+
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+
+(use-package doom-modeline
+  :straight t
+  :after nyan-mode
+  :custom
+  (doom-modeline-mu4e nil)
+  (doom-modeline-gnus nil)
+  (doom-modeline-buffer-file-name-style 'truncate-all)
+  :init
+  (doom-modeline-mode 1))
+
+(use-package nyan-mode
+  :straight t
+  :init
+  (nyan-mode 1))
+
+(use-package emojify
+  :straight (emojify :host github :repo "iqbalansari/emacs-emojify"
+                     :files ("*.el" "data"))
+  :hook
+  (after-init . global-emojify-mode)
+  :init
+  (setq emojify-emoji-styles '(unicode github)))
+
+(use-package dashboard
+  :straight (dashboard :host github :repo "emacs-dashboard/emacs-dashboard"
+                       :files ("*.el" "banners"))
+  :custom
+  (dashboard-center-content 1)
+  (dashboard-set-heading-icons t)
+  (dashboard-set-file-icons t)
+  (dashboard-startup-banner "~/.emacs.d/logo.png")
+  (dashboard-items '((projects . 5)
+                     (recents . 5)
+                     (agenda . 5)
+                     (registers . 5)))
+  :init
+  (dashboard-setup-startup-hook)
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
+
+(use-package all-the-icons :straight t)
+
+(use-package centaur-tabs
+  :straight t
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  :custom
+  (centaur-tabs-set-icons t)
+  (centaur-tabs-style "wave")
+  :bind
+  ("C-c t p" . centaur-tabs-backward)
+  ("C-c t n" . centaur-tabs-forward))
+#+END_SRC
+又是一次漫长的等待！
+
+[[file:images/03-install-pretty.png]]
+
+好了，现在我们还需要安装一下 ~all-the-icons~ 的字体： ~M-x all-the-icons-install-fonts RET~ 。现在再看我们的 Emacs：
+
+[[file:images/04-pretty.png]]
+
+是不是漂亮多了（特意放大了窗体）！
 ** 操作
-+ ivy
-+ counsel
-+ swiper
-+ which-key
+在上面的配置过程中你可能已经感觉了 ~M-x~ 、 buffer 切换、文件打开等不太好用，其实社区已经有成熟的补全框架，可以对类似的场景进行补全，
+我们将通过一下插件增强操作性：
++ ivy + counsel + swiper
++ which-key 当时忘记下面该按哪个键的时候可以对你进行提醒
 * 操作习惯的改变
 ** 是否需要左侧目录树？
 ** 是否需要 Tabbar？
@@ -255,12 +348,18 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 ** 高效移动
 ** 复制粘贴
 * 准备笔记记录
++ org-mode
++ org-roam
++ org-superstar
++ org-journal
 * 开始笔记记录
 * 收集笔记：org-protocol
 * 托管笔记：magit
 * 导出 Hugo 站点
 * 发布 GitHub Pages
 ** GitHub workflow
+* 接下来？
+遇到不会的就去问搜索引擎、社区、身边的人、提 Issue 等，掌握 Emacs 无他，但手熟尔!
 * Footnotes
 
 [fn:6] 其实这里要复杂的多，具体的可以参见文档 [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Mode-Line.html][Mode Line]]

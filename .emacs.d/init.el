@@ -117,3 +117,78 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+
+(use-package doom-themes
+  :ensure t
+  :straight (doom-themes :host github :repo "hlissner/emacs-doom-themes"
+                         :files ("*.el" "themes"))
+  :init
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
+  ;; may have their own settings.
+  ;; (load-theme 'doom-nord t)
+  (load-theme 'doom-vibrant t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+
+  ;; Enable custom neotree theme
+  (doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
+
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+
+(use-package doom-modeline
+  :straight t
+  :after nyan-mode
+  :custom
+  (doom-modeline-mu4e nil)
+  (doom-modeline-gnus nil)
+  (doom-modeline-buffer-file-name-style 'truncate-all)
+  :init
+  (doom-modeline-mode 1))
+
+(use-package nyan-mode
+  :straight t
+  :init
+  (nyan-mode 1))
+
+(use-package emojify
+  :straight (emojify :host github :repo "iqbalansari/emacs-emojify"
+                     :files ("*.el" "data"))
+  :hook
+  (after-init . global-emojify-mode)
+  :init
+  (setq emojify-emoji-styles '(unicode github)))
+
+(use-package dashboard
+  :straight (dashboard :host github :repo "emacs-dashboard/emacs-dashboard"
+                       :files ("*.el" "banners"))
+  :custom
+  (dashboard-center-content 1)
+  (dashboard-set-heading-icons t)
+  (dashboard-set-file-icons t)
+  (dashboard-startup-banner "~/.emacs.d/logo.png")
+  (dashboard-items '((projects . 5)
+                     (recents . 5)
+                     (agenda . 5)
+                     (registers . 5)))
+  :init
+  (dashboard-setup-startup-hook)
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
+
+(use-package all-the-icons :straight t)
+
+(use-package centaur-tabs
+  :straight t
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  :custom
+  (centaur-tabs-set-icons t)
+  (centaur-tabs-style "wave")
+  :bind
+  ("C-c t p" . centaur-tabs-backward)
+  ("C-c t n" . centaur-tabs-forward))

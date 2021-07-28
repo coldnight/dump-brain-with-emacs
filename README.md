@@ -1,35 +1,35 @@
 
 # Table of Contents
 
-1.  [前言](#org1f2fd43)
-2.  [安装、启动、退出](#org5709f89)
-    1.  [Linux](#org766ccf2)
-    2.  [macOS](#org1994a1c)
-    3.  [Windows](#org8031380)
-    4.  [退出 Emacs](#org0b0f411)
-3.  [黑话](#orga4dea85)
-    1.  [快捷键](#org236081f)
-    2.  [概念](#org2a6f39a)
-    3.  [buffer](#org5479486)
-4.  [基本增强](#org0a48636)
-    1.  [创建配置文件](#org3315429)
-    2.  [基本配置](#orgbc4af87)
-    3.  [插件包管理](#org4dfcd30)
-    4.  [外观](#org7db45ef)
-    5.  [操作](#org2c3cd5a)
-5.  [操作习惯的改变](#org9face0e)
-    1.  [是否需要左侧目录树？](#org9385472)
-    2.  [是否需要 Tabbar？](#orga07776d)
-    3.  [习惯 `M-x` 和 `C-h ?`](#org250f73e)
-    4.  [高效移动](#org780b179)
-    5.  [复制粘贴](#org887affe)
-6.  [准备笔记记录](#orgc326300)
-7.  [开始笔记记录](#org098e0bf)
-8.  [收集笔记：org-protocol](#org5b911c9)
-9.  [托管笔记：magit](#org6f4e296)
-10. [导出 Hugo 站点](#orgff4a98f)
-11. [发布 GitHub Pages](#org525ddec)
-    1.  [GitHub workflow](#org79d759e)
+1.  [前言](#orgf27586c)
+2.  [安装、启动、退出](#orga96f1bc)
+    1.  [Linux](#org440b7e4)
+    2.  [macOS](#org9c5dd38)
+    3.  [Windows](#orgb49e77f)
+    4.  [退出 Emacs](#orga9ba730)
+3.  [黑话](#orgb5144d3)
+    1.  [快捷键](#org759ce73)
+    2.  [概念](#org9091565)
+    3.  [buffer](#org81e6528)
+4.  [基本增强](#org2f3701c)
+    1.  [创建配置文件](#orga693659)
+    2.  [基本配置](#org35216c7)
+    3.  [插件包管理](#org30bf7a5)
+    4.  [外观](#org524e178)
+    5.  [操作](#org4aba199)
+5.  [操作习惯的改变](#org4a5e0a4)
+    1.  [是否需要左侧目录树？](#orgcb8b9c9)
+    2.  [是否需要 Tabbar？](#org0cdedbc)
+    3.  [习惯 `M-x` 和 `C-h ?`](#orge236336)
+    4.  [高效移动](#orgab260e8)
+    5.  [复制粘贴](#orgb923f22)
+6.  [准备笔记记录](#org60393db)
+7.  [开始笔记记录](#org7d4b096)
+8.  [收集笔记：org-protocol](#org3eab52c)
+9.  [托管笔记：magit](#org380ef55)
+10. [导出 Hugo 站点](#orgb5ad93d)
+11. [发布 GitHub Pages](#orgf314960)
+    1.  [GitHub workflow](#orgd09beab)
 
 其他入门教程：
 
@@ -37,7 +37,7 @@
 -   [An Emacs Tutorial for Vim User](https://github.com/w0mTea/An.Emacs.Tutorial.for.Vim.User)
 
 
-<a id="org1f2fd43"></a>
+<a id="orgf27586c"></a>
 
 # 前言
 
@@ -52,7 +52,7 @@
 也许通过这个你可以爱上 Emacs 并开始将它作为主要编辑器最终助力你提升工作效率。
 
 
-<a id="org5709f89"></a>
+<a id="orga96f1bc"></a>
 
 # 安装、启动、退出
 
@@ -60,7 +60,7 @@
 为了贴合我们的主题我们这里选择最新的稳定版本 27.2 进行，建议大家也安装最新稳定版 27.2。
 
 
-<a id="org766ccf2"></a>
+<a id="org440b7e4"></a>
 
 ## Linux
 
@@ -69,7 +69,7 @@
 -   pacman（Archlinux）
 
 
-<a id="org1994a1c"></a>
+<a id="org9c5dd38"></a>
 
 ## macOS
 
@@ -83,7 +83,7 @@ macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安�
     $ open -a /usr/local/opt/emacs-mac/Emacs.app/
 
 
-<a id="org8031380"></a>
+<a id="orgb49e77f"></a>
 
 ## Windows
 
@@ -96,21 +96,21 @@ macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安�
     PS> emacs
 
 
-<a id="org0b0f411"></a>
+<a id="orga9ba730"></a>
 
 ## 退出 Emacs
 
 快捷键按 `C-x C-c` （就是按住 `Ctrl` 不松开继续按 `x` ，然后再按住 `Ctrl` 不松开继续按 `c` ，聪明的你肯定发现只要按住 `Ctrl` 不松开依次按 `x` 和 `c` 键就可以了）。
 
 
-<a id="orga4dea85"></a>
+<a id="orgb5144d3"></a>
 
 # 黑话
 
 Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着时代的气息，可能不是很好理解。所以为了便于大家理解，我们在此提前进行解释，大家遇到不懂的可以随时翻回来查看:
 
 
-<a id="org236081f"></a>
+<a id="org759ce73"></a>
 
 ## 快捷键
 
@@ -174,7 +174,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 </table>
 
 
-<a id="org2a6f39a"></a>
+<a id="org9091565"></a>
 
 ## 概念
 
@@ -232,15 +232,17 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 </table>
 
 
-<a id="org5479486"></a>
+<a id="org81e6528"></a>
 
 ## buffer
 
 这个可能和大多数编辑器不太一样，Emacs 突出了 buffer 的语义，从而弱化了编辑文件语义，比如在其他编辑器或者 IDE 你可能是想的切换编辑文件，
 但是 Emacs 更突出了是切换到对应的 buffer（ `C-x b` ） 编辑，而后通过 `C-x C-s` 将 buffer 的内容保存到文件中（如果是生成的 buffer 则会提示选择要保存的文件名）。
 
+同时 Emacs 有很多临时的 buffer 来充当日志的角色，比如默认的 `*Messages*` (`C-x b *Messages* RET`) 就是一个只读 buffer 显示一些日志信息，某些操作失败了之后也会保存一些错误消息到指定的 buffer 中，我们只要切换过去就能看到。
 
-<a id="org0a48636"></a>
+
+<a id="org2f3701c"></a>
 
 # 基本增强
 
@@ -249,7 +251,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 ![img](images/00-installation.png)
 
 
-<a id="org3315429"></a>
+<a id="orga693659"></a>
 
 ## 创建配置文件
 
@@ -262,7 +264,7 @@ Emacs 的配置文件都写在 `$HOME/.emacs.d/init.el` 中，其中 `$HOME` 就
 -   Windows: C:/Users/<username>/AppData/Roaming/.emacs.d/init.el（这个目录很深，而且默认状态下AppData目录是隐藏的。）<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>
 
 
-<a id="orgbc4af87"></a>
+<a id="org35216c7"></a>
 
 ## 基本配置
 
@@ -380,7 +382,7 @@ Emacs 的配置文件都写在 `$HOME/.emacs.d/init.el` 中，其中 `$HOME` 就
 -   `(Emacs-Lisp, ElDoc)` 表示当前 buffer 的主模式和次模式（主模式只能有一个，但是次模式可以有多个）。
 
 
-<a id="org4dfcd30"></a>
+<a id="org30bf7a5"></a>
 
 ## 插件包管理
 
@@ -389,7 +391,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 -   简单粗暴：直接拷贝 elisp 文件到指定位置；
 -   内置的 package.el 可以安装 [MELPA](https://melpa.org/#/getting-started) 的包。
 -   [el-get](https://github.com/dimitri/el-get) 可以支持多种源，如 MELPA、EmacsWiki、GitHub 等等
--   [straight.el](https://github.com/raxod502/straight.el) 同样支持很多中源，同时还支持版本锁定、集成 `use-package` 、指向 fork、本地修改等。
+-   [straight.el](https://github.com/raxod502/straight.el) 同样支持很多种源，并集成了 el-get 的源，同时还支持版本锁定、集成 `use-package` 、指向 fork、本地修改等。
 
 目前我正在使用的就是 `use-package` + `straight.el` 的方式， `use-package` 感觉不是很适合小白，因为很多搜索到的配置在 `use-package` 下要做一些改变，所以在这里我也是很纠结要不要用 `use-package` 。
 但是我相信通过简单的学习，这些应该不会成为障碍，所以这里我们就以 `use-package` + `straight.el` 作为我们的插件包管理方案。
@@ -421,21 +423,114 @@ Emacs 安装插件的方式多种多样，一般可以：
           (eval-print-last-sexp)))
       (load bootstrap-file nil 'nomessage))
 
-然后我们开始执行当前 buffer： `M-x eval-buffer RET` ，然后 straight.el 就会同步源：
+然后我们开始执行当前 buffer： `M-x eval-buffer RET` ，然后 straight.el 就会开始同步源：
 ![img](images/02-package.png)
 
 
-<a id="org7db45ef"></a>
+<a id="org524e178"></a>
 
 ## 外观
 
+经过漫长的等待之后，我们终于可以进行下一步了：美化！我们将安装配置以下插件：
+
 -   doom-theme
 -   doom-modeline
+-   nyan-mode
 -   all-the-icons
+-   emojify
 -   dashboard
+-   centaur-tabs
+
+将以下配置追加到 `init.el` 中：
+
+    ;;; Appearance
+    (use-package doom-themes
+      :ensure t
+      :straight (doom-themes :host github :repo "hlissner/emacs-doom-themes"
+                             :files ("*.el" "themes"))
+      :init
+      ;; Global settings (defaults)
+      (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+            doom-themes-enable-italic t) ; if nil, italics is universally disabled
+      ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
+      ;; may have their own settings.
+      ;; (load-theme 'doom-nord t)
+      (load-theme 'doom-vibrant t)
+
+      ;; Enable flashing mode-line on errors
+      (doom-themes-visual-bell-config)
+
+      ;; Enable custom neotree theme
+      (doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
+
+      ;; Corrects (and improves) org-mode's native fontification.
+      (doom-themes-org-config))
+
+    (use-package doom-modeline
+      :straight t
+      :after nyan-mode
+      :custom
+      (doom-modeline-mu4e nil)
+      (doom-modeline-gnus nil)
+      (doom-modeline-buffer-file-name-style 'truncate-all)
+      :init
+      (doom-modeline-mode 1))
+
+    (use-package nyan-mode
+      :straight t
+      :init
+      (nyan-mode 1))
+
+    (use-package emojify
+      :straight (emojify :host github :repo "iqbalansari/emacs-emojify"
+                         :files ("*.el" "data"))
+      :hook
+      (after-init . global-emojify-mode)
+      :init
+      (setq emojify-emoji-styles '(unicode github)))
+
+    (use-package dashboard
+      :straight (dashboard :host github :repo "emacs-dashboard/emacs-dashboard"
+                           :files ("*.el" "banners"))
+      :custom
+      (dashboard-center-content 1)
+      (dashboard-set-heading-icons t)
+      (dashboard-set-file-icons t)
+      (dashboard-startup-banner "~/.emacs.d/logo.png")
+      (dashboard-items '((projects . 5)
+                         (recents . 5)
+                         (agenda . 5)
+                         (registers . 5)))
+      :init
+      (dashboard-setup-startup-hook)
+      (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
+
+    (use-package all-the-icons :straight t)
+
+    (use-package centaur-tabs
+      :straight t
+      :demand
+      :config
+      (centaur-tabs-mode t)
+      :custom
+      (centaur-tabs-set-icons t)
+      (centaur-tabs-style "wave")
+      :bind
+      ("C-c t p" . centaur-tabs-backward)
+      ("C-c t n" . centaur-tabs-forward))
+
+又是一次漫长的等待！
+
+![img](images/03-install-pretty.png)
+
+好了，现在我们还需要安装一下 `all-the-icons` 的字体： `M-x all-the-icons-install-fonts RET` 。现在再看我们的 Emacs：
+
+![img](images/04-pretty.png)
+
+是不是漂亮多了！
 
 
-<a id="org2c3cd5a"></a>
+<a id="org4aba199"></a>
 
 ## 操作
 
@@ -445,67 +540,72 @@ Emacs 安装插件的方式多种多样，一般可以：
 -   which-key
 
 
-<a id="org9face0e"></a>
+<a id="org4a5e0a4"></a>
 
 # 操作习惯的改变
 
 
-<a id="org9385472"></a>
+<a id="orgcb8b9c9"></a>
 
 ## 是否需要左侧目录树？
 
 
-<a id="orga07776d"></a>
+<a id="org0cdedbc"></a>
 
 ## 是否需要 Tabbar？
 
 
-<a id="org250f73e"></a>
+<a id="orge236336"></a>
 
 ## 习惯 `M-x` 和 `C-h ?`
 
 
-<a id="org780b179"></a>
+<a id="orgab260e8"></a>
 
 ## 高效移动
 
 
-<a id="org887affe"></a>
+<a id="orgb923f22"></a>
 
 ## 复制粘贴
 
 
-<a id="orgc326300"></a>
+<a id="org60393db"></a>
 
 # 准备笔记记录
 
+-   org-mode
+-   org-roam
+-   org-superstar
+-   org-journal
 
-<a id="org098e0bf"></a>
+
+<a id="org7d4b096"></a>
 
 # 开始笔记记录
 
 
-<a id="org5b911c9"></a>
+<a id="org3eab52c"></a>
 
 # 收集笔记：org-protocol
 
 
-<a id="org6f4e296"></a>
+<a id="org380ef55"></a>
 
 # 托管笔记：magit
 
 
-<a id="orgff4a98f"></a>
+<a id="orgb5ad93d"></a>
 
 # 导出 Hugo 站点
 
 
-<a id="org525ddec"></a>
+<a id="orgf314960"></a>
 
 # 发布 GitHub Pages
 
 
-<a id="org79d759e"></a>
+<a id="orgd09beab"></a>
 
 ## GitHub workflow
 
