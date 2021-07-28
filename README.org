@@ -208,6 +208,36 @@ Emacs 安装插件的方式多种多样，一般可以：
 
 目前我正在使用的就是 ~use-package~ + ~straight.el~ 的方式， ~use-package~ 感觉不是很适合小白，因为很多搜索到的配置在 ~use-package~ 下要做一些改变，所以在这里我也是很纠结要不要用 ~use-package~ 。
 但是我相信通过简单的学习，这些应该不会成为障碍，所以这里我们就以 ~use-package~ + ~straight.el~ 作为我们的插件包管理方案。
+
+为了启动整个包管理世界，我们需要先安装包管理，手动的安装：
+#+BEGIN_SRC shell
+$ cd ~/.emacs.d/
+$ git clone git@github.com:jwiegley/use-package.git
+$ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
+#+END_SRC
+然后在 ~init.el~ 中追加如下内容：
+#+BEGIN_SRC elisp
+;; use package
+(eval-when-compile
+  (add-to-list 'load-path "~/.emacs.d/use-package")
+  (require 'use-package))
+
+;; straight.el to manage package
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+#+END_SRC
+然后我们开始执行当前 buffer： ~M-x eval-buffer RET~ ，然后 straight.el 就会同步源：
+[[file:images/02-package.png]]
 ** 外观
 + doom-theme
 + doom-modeline
