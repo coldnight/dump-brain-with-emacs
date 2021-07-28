@@ -420,12 +420,21 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 看下现在的操作：
 
 [[http://g.recordit.co/08QtGtwill.gif]]
-* 操作习惯的改变
-** 是否需要左侧目录树？
-** 是否需要 Tabbar？
-** 习惯 ~M-x~ 和 ~C-h ?~
-** 高效移动
-** 复制粘贴
+* 改变操作习惯
+现在我们已经有了一套非常先进的编辑器，但是继续使用之前还有一些基本的操作需要我们掌握，这部分没有特别好的办法，只能大家自信用心记一下，然后多用：
+** 移动
+| 操作        | 快捷键                                                 |
+|-------------+--------------------------------------------------------|
+| 按字符移动  | ⬇ ~C-n~ ⬆ ~C-p~ ⬅ ~C-b~ ➡ ~C-f~                |
+| 行首尾      | ahead： ~C-a~ end： ~C-e~                              |
+| buffer 头尾 | ~M-,~ （就是 M-< 不按 shift）， ~M-.~ (M-< 不按 shift) |
+| 向上/向下   | ~C-v~ ~M-v~                                            |
+** 选择和复制粘贴
+~C-SPC~ (SPC 即空格)开始选择，然后通过上面快捷键移动。
++ ~M-w~ 将选择内容放入 ~king-ring~ 但不删除选择区域
++ ~C-w~ 删除选择区域并将内容放入 ~king-ring~
++ ~M-y~ 从 ~king-ring~ 中选择粘贴
++ ~C-y~ 将放入 ~king-ring~ 的最后一条进行粘贴
 * 准备笔记记录
 + org-mode
 + org-roam
@@ -438,7 +447,12 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 * 发布 GitHub Pages
 ** GitHub workflow
 * 接下来？
-遇到不会的就去问搜索引擎、社区、身边的人、提 Issue 等，掌握 Emacs 无他，但手熟尔!
+遇到不会的 ~C-h~ 是你的好帮手（which-key 会帮你弹出所有帮助主题），常用的有：
+
+ + ~f~ 函数（major mode 和 minor mode 也是一个函数）
+ + ~v~ 变量
+ + ~b~ 按键绑定
+然后就去问搜索引擎、社区、身边的人、提 Issue 等，掌握 Emacs 无他，但手熟尔!
 * Footnotes
 
 [fn:6] 其实这里要复杂的多，具体的可以参见文档 [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Mode-Line.html][Mode Line]]
