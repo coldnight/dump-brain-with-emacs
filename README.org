@@ -46,8 +46,6 @@ PS> choco install emacs-full
 #+BEGIN_SRC powershell
 PS> emacs
 #+END_SRC
-** 启动 Emacs
-[[file:images/00-intallation.png]]
 ** 退出 Emacs
 快捷键按 ~C-x C-c~ （就是按住 ~Ctrl~ 不松开继续按 ~x~ ，然后再按住 ~Ctrl~ 不松开继续按 ~c~ ，聪明的你肯定发现只要按住 ~Ctrl~ 不松开依次按 ~x~ 和 ~c~ 键就可以了）。
 * 黑话
@@ -76,6 +74,8 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 但是 Emacs 更突出了是切换到对应的 buffer（ ~C-x b~ ） 编辑，而后通过 ~C-x C-s~ 将 buffer 的内容保存到文件中（如果是生成的 buffer 则会提示选择要保存的文件名）。
 * 基本增强
 默认安装的 Emacs 可以说是又丑又不好用，所以为了使用更加顺畅或者更贴合现代编辑器，我们需要修改一些配置并做一些插件的扩展。
+[[file:images/00-installation.png]]
+
 ** 创建配置文件
 Emacs 的配置文件都写在 ~$HOME/.emacs.d/init.el~ 中，其中 ~$HOME~ 就是用户的家目录，对应到不同的系统位置会有细微的差异：
 
@@ -188,9 +188,10 @@ Emacs 的配置文件都写在 ~$HOME/.emacs.d/init.el~ 中，其中 ~$HOME~ 就
 (unless (string-match-p "^Power N/A" (battery))   ; 笔记本上显示电量
   (display-battery-mode 1))
 #+END_SRC
-[[file:images/00-installation.png]]
+
 此时我们可以运行当前 buffer 让配置生效： ~M-x eval-buffer RET~ ，然后通过 ~C-x C-s~ 进行保存。
 此时效果如下：
+
 [[file:images/01-basic.png]]
 ** 插件包管理
 Emacs 安装插件的方式多种多样，一般可以：
