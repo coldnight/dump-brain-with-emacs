@@ -1,2 +1,16 @@
 #+TITLE: 从零开始用 Emacs 管理笔记
 #+DATE: <2021-07-28 三>
+
+其他入门教程：
++ [[https://github.com/redguardtoo/mastering-emacs-in-one-year-guide][一年成为Emacs高手 (像神一样使用编辑器)]]。
++ [[https://github.com/w0mTea/An.Emacs.Tutorial.for.Vim.User][An Emacs Tutorial for Vim User]]
+
+* 前言
+
+不同于其他 Emacs 教程，本文着重于从零开始通过 Emacs 做笔记管理，这样做的好处如下：
+
++ 不着眼于替换你现在的编辑器或者 IDE 避免降低工作效率；
++ org-roam 基于先进的 Roam Research 的方式进行先进的笔记管理；
++ 基于 GitHub 可以实现免费的托管和发布（GitHub Pages）随时可查。
+
+也许通过这个你可以爱上 Emacs 并开始将它作为主要编辑器最终助力你提升工作效率。
