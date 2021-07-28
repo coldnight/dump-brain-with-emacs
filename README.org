@@ -531,7 +531,7 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 好吧，真正的开始之前你可能还需要学习以下 Org-mode 的语法，这里不做深入展开建议参考以下文章，或者随时询问搜索引擎（如 Org-mode 如何插入链接等）：
 + [[https://www.zmonster.me/2015/07/12/org-mode-introduction.html][Org-mode的语法解读]]
 
-现在让我们敲下 ~C-c n f~ ，是不是能看到一个弹出层让我们输出 ~Node:~ ，现在没有任何节点，让我们输入 ~Notes~ 作为我们的根节点（当然你可以选择别的主题）。
+现在让我们敲下 ~C-c n f~ ，是不是能看到一个弹出层让我们输入 ~Node:~ ，现在没有任何节点，让我们输入 ~Notes~ 作为我们的根节点（当然你可以选择别的主题）。
 接下来我们可以按下 ~C-c C-c~ 完成（或者 ~C-c C-k~ 中止）。
 
 好了，现在我们有了第一篇，我们想添加第二篇，直接在这篇笔记中的任意位置按下 ~C-c n i~ 继续我们的创作，输入标题： ~技术~ ，然后按下 ~C-c C-c~ 。
@@ -539,11 +539,13 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 现在我们就能在 ~Notes~ 这个 buffer 下看到一个指向 ~技术~ 的链接，那么如何跳转过去呢？光标移动到上面按下 ~C-c C-o~ 即可！那么返回呢？
 按下 ~C-c C-.~ ！其实 org-roam 提供了 Backlinks 机制，但是我很少使用，这里不做进一步的展开讨论。
 
-** 引用子目录（headline）
 org-roam 刚刚发布了 v2（我们现在用的也是 v2），支持基于 headline 创建节点，我们可以通过 Org-mode 语法创建一个 headline（以 ~*~ 开头），
 然后光标移动上去执行 ~M-x org-id-get-create~ ，这时候（或许等一会）你再次通过 ~C-c n f~ 就能看到一个指向该 Headline 的节点。
 
-[[file:images/05-org-roam.png]]
+只有亲自试一下你才能感受到 org-roam 的强大！
+
+[[http://g.recordit.co/cYKhCjkqQN.gif]]
+
 * 进阶
 ** 收集笔记：org-protocol
 ** 托管笔记：magit
