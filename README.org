@@ -74,9 +74,11 @@ PS> emacs
 ** 习惯 ~M-x~ 和 ~C-h ?~
 * 准备笔记记录
 * 开始笔记记录
-* org-protocol
+* 收集笔记：org-protocol
+* 托管笔记：magit
 * 导出 Hugo 站点
 * 发布 GitHub Pages
+** GitHub workflow
 * Footnotes
 
 
