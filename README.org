@@ -96,14 +96,10 @@ Emacs 的配置文件都写在 ~$HOME/.emacs.d/init.el~ 中，其中 ~$HOME~ 就
 (if (file-exists-p custom-file)
     (load custom-file))
 
-;;; init-commont.el -- Emacs 基本配置
-;;;
-;;; Commentary:
-;;;
-;;;    基本配置
-;;; Code:
-;;;
-
+;; Font
+;; Download Victor Mono at https://rubjo.github.io/victor-mono/
+(set-face-attribute 'default nil
+                    :family "Victor Mono" :height 145 :weight 'normal)
 ;; 中文显示
 (set-language-environment "utf-8")
 (set-buffer-file-coding-system 'utf-8)
@@ -421,13 +417,13 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 
 [[http://g.recordit.co/08QtGtwill.gif]]
 * 改变操作习惯
-现在我们已经有了一套非常先进的编辑器，但是继续使用之前还有一些基本的操作需要我们掌握，这部分没有特别好的办法，只能大家自信用心记一下，然后多用：
+现在我们已经有了一套非常先进的编辑器，但是继续使用之前还有一些基本的操作需要我们掌握，这部分没有特别好的办法，只能建议大家多练习几遍形成肌肉记忆。
 ** 移动
 | 操作        | 快捷键                                                 |
 |-------------+--------------------------------------------------------|
 | 按字符移动  | ⬇ ~C-n~ ⬆ ~C-p~ ⬅ ~C-b~ ➡ ~C-f~                |
 | 行首尾      | ahead： ~C-a~ end： ~C-e~                              |
-| buffer 头尾 | ~M-,~ （就是 M-< 不按 shift）， ~M-.~ (M-< 不按 shift) |
+| buffer 头尾 | ~M-,~ （就是 M-< 不按 shift）， ~M-.~ (M-> 不按 shift) |
 | 向上/向下   | ~C-v~ ~M-v~                                            |
 ** 选择和复制粘贴
 ~C-SPC~ (SPC 即空格)开始选择，然后通过上面快捷键移动。
@@ -435,16 +431,124 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 + ~C-w~ 删除选择区域并将内容放入 ~king-ring~
 + ~M-y~ 从 ~king-ring~ 中选择粘贴
 + ~C-y~ 将放入 ~king-ring~ 的最后一条进行粘贴
-* 准备笔记记录
+* 准备记录笔记
+我们接下来准备通过 hugo 发布站点，所以现在先让我们通过 hugo 创建一个站点：
+
+1. [[https://gohugo.io/getting-started/installing/][安装 Hugo]]
+2. 创建一个 hugo 站点
+	#+BEGIN_SRC shell
+	$ hugo new site ~/notes/
+	#+END_SRC
+3. 创建相关目录
+	#+BEGIN_SRC shell
+	$ mkdir -p ~/notes/content-org
+	#+END_SRC
+
+我们需要用到以下插件：
+
 + org-mode
 + org-roam
 + org-superstar
-+ org-journal
-* 开始笔记记录
-* 收集笔记：org-protocol
-* 托管笔记：magit
-* 导出 Hugo 站点
-* 发布 GitHub Pages
+
+让我们将以下配置追加到 ~init.el~ 中：
+#+BEGIN_SRC elisp
+(setq-local my/dump-brain-root "~/notes/")
+(use-package org
+  :straight (:type git :host github :repo "bzg/org-mode")
+  :after ein
+  :bind
+  ("C-c c" . org-capture)
+  ("C-c a o" . org-agenda)
+  ("C-c C-." . org-mark-ring-goto)
+  :custom
+  (org-startup-indented t)
+  (org-hide-leading-stars t)
+  (org-odd-level-only nil)
+  (org-insert-heading-respect-content nil)
+  (org-M-RET-may-split-line '((item) (default . t)))
+  (org-special-ctrl-a/e t)
+  (org-return-follows-link nil)
+  (org-use-speed-commands t)
+  (org-startup-align-all-tables nil)
+  (org-log-into-drawer nil)
+  (org-tags-column 1)
+  (org-ellipsis " \u25bc" )
+  (org-speed-commands-user nil)
+  (org-blank-before-new-entry '((heading . nil) (plain-list-item . nil)))
+  (org-completion-use-ido t)
+  (org-indent-mode t)
+  (org-startup-truncated nil)
+  :custom-face
+  (org-headline-done ((nil (:strike-through t))))
+  :init
+  (require 'org-id)
+  (defun my/org-id-update-id-locations-current-dir()
+    "Update id locations from current dir."
+    (interactive)
+    (org-id-update-id-locations (directory-files "." t "\.org\$" t)))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((ein . t)
+     (dot . t))))
+
+(use-package org-roam
+  :after org
+  :straight t
+  :config
+  (org-roam-setup)
+  ;; If using org-roam-protocol
+  (require 'org-roam-protocol)
+  :bind
+  ("C-c n l" . org-roam-buffer-toggle)
+  ("C-c n f" . org-roam-node-find)
+  ("C-c n g" . org-roam-graph)
+  ("C-c n i" . org-roam-node-insert)
+  ("C-c n c" . org-roam-capture)
+  ;; Dailies
+  ("C-c n j" . org-roam-dailies-capture-today)
+  :custom
+  (org-roam-v2-ack t)
+  (org-roam-directory (string-join (cons my/dump-brain-root '("content-org")) "/"))
+  (org-roam-capture-templates `(("d" "default" plain "%?"
+                                 :unnarrowed t
+                                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                                                    "#+TITLE: ${title}
+#+AUTHOR: Gray King
+#+DATE: %U
+#+HUGO_BASE_DIR: ../
+#+HUGO_SECTION: notes
+")))))
+
+(use-package org-superstar
+  :straight t
+  :hook
+  (org-mode . (lambda () (org-superstar-mode 1))))
+#+END_SRC
+然后通过 ~M-x eval-buffer RET~ 使其生效（现在输出这个命令是不是愉快多了？）！
+* 开始记录笔记
+漫长的等待之后我们终于可以开始记录了。
+
+好吧，真正的开始之前你可能还需要学习以下 Org-mode 的语法，这里不做深入展开建议参考以下文章，或者随时询问搜索引擎（如 Org-mode 如何插入链接等）：
++ [[https://www.zmonster.me/2015/07/12/org-mode-introduction.html][Org-mode的语法解读]]
+
+现在让我们敲下 ~C-c n f~ ，是不是能看到一个弹出层让我们输出 ~Node:~ ，现在没有任何节点，让我们输入 ~Notes~ 作为我们的根节点（当然你可以选择别的主题）。
+接下来我们可以按下 ~C-c C-c~ 完成（或者 ~C-c C-k~ 中止）。
+
+好了，现在我们有了第一篇，我们想添加第二篇，直接在这篇笔记中的任意位置按下 ~C-c n i~ 继续我们的创作，输入标题： ~技术~ ，然后按下 ~C-c C-c~ 。
+
+现在我们就能在 ~Notes~ 这个 buffer 下看到一个指向 ~技术~ 的链接，那么如何跳转过去呢？光标移动到上面按下 ~C-c C-o~ 即可！那么返回呢？
+按下 ~C-c C-.~ ！其实 org-roam 提供了 Backlinks 机制，但是我很少使用，这里不做进一步的展开讨论。
+
+** 引用子目录（headline）
+org-roam 刚刚发布了 v2（我们现在用的也是 v2），支持基于 headline 创建节点，我们可以通过 Org-mode 语法创建一个 headline（以 ~*~ 开头），
+然后光标移动上去执行 ~M-x org-id-get-create~ ，这时候（或许等一会）你再次通过 ~C-c n f~ 就能看到一个指向该 Headline 的节点。
+
+[[file:images/05-org-roam.png]]
+* 进阶
+** 收集笔记：org-protocol
+** 托管笔记：magit
+** 导出 Hugo 站点
+** 发布 GitHub Pages
 ** GitHub workflow
 * 接下来？
 遇到不会的 ~C-h~ 是你的好帮手（which-key 会帮你弹出所有帮助主题），常用的有：

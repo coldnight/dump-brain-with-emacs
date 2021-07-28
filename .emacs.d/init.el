@@ -4,13 +4,10 @@
 (if (file-exists-p custom-file)
     (load custom-file))
 
-;;; init-commont.el -- Emacs 基本配置
-;;;
-;;; Commentary:
-;;;
-;;;    基本配置
-;;; Code:
-;;;
+;; Font
+;; Download Victor Mono at https://rubjo.github.io/victor-mono/
+(set-face-attribute 'default nil
+                    :family "Victor Mono" :height 145 :weight 'normal)
 
 ;; 中文显示
 (set-language-environment "utf-8")
@@ -264,3 +261,99 @@
   (which-key-show-early-on-C-h t)
   :init
   (which-key-mode))
+
+(setq-local my/dump-brain-root "~/notes/")
+
+(use-package org
+  :straight (:type git :host github :repo "bzg/org-mode")
+  :after ein
+  :bind
+  ("C-c c" . org-capture)
+  ("C-c a o" . org-agenda)
+  ("C-c C-." . org-mark-ring-goto)
+  :custom
+  (org-startup-indented t)
+  (org-hide-leading-stars t)
+  (org-odd-level-only nil)
+  (org-insert-heading-respect-content nil)
+  (org-M-RET-may-split-line '((item) (default . t)))
+  (org-special-ctrl-a/e t)
+  (org-return-follows-link nil)
+  (org-use-speed-commands t)
+  (org-startup-align-all-tables nil)
+  (org-log-into-drawer nil)
+  (org-tags-column 1)
+  (org-ellipsis " \u25bc" )
+  (org-speed-commands-user nil)
+  (org-blank-before-new-entry '((heading . nil) (plain-list-item . nil)))
+  (org-completion-use-ido t)
+  (org-indent-mode t)
+  (org-startup-truncated nil)
+  :custom-face
+  (org-headline-done ((nil (:strike-through t))))
+  :init
+  (require 'org-id)
+  (defun my/org-id-update-id-locations-current-dir()
+    "Update id locations from current dir."
+    (interactive)
+    (org-id-update-id-locations (directory-files "." t "\.org\$" t)))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((ein . t)
+     (dot . t))))
+
+(use-package org-journal
+  :after org
+  :straight t
+  :bind
+  ("C-c j s" . org-journal-search)
+  ("C-c j f" . org-journal-open-next-entry)
+  ("C-c j b" . org-journal-open-previous-entry)
+  ("C-c j j" . org-journal-new-entry)
+  :custom
+  (org-journal-file-type 'weekly)
+  (org-journal-dir (string-join (cons my/dump-brain-root '("journal")) "/"))
+  :init
+  (defun org-journal-file-header-func (time)
+    "Custom function to create journal header."
+    (concat
+     (pcase org-journal-file-type
+       (`daily "#+TITLE: Daily Journal\n#+STARTUP: showeverything\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal\n#+DATE: %U")
+       (`weekly "#+TITLE: Weekly Journal\n#+STARTUP: folded\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal\n#+DATE: %U")
+       (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal\n#+DATE: %U")
+       (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded\n#+HUGO_BASE_DIR: ../\n#+HUGO_SECTION: journal\n#+DATE: %U"))))
+  (setq org-journal-file-header 'org-journal-file-header-func)
+  (setq org-journal-enable-agenda-integration t))
+
+(use-package org-roam
+  :after org
+  :straight t
+  :config
+  (org-roam-setup)
+  ;; If using org-roam-protocol
+  (require 'org-roam-protocol)
+  :bind
+  ("C-c n l" . org-roam-buffer-toggle)
+  ("C-c n f" . org-roam-node-find)
+  ("C-c n g" . org-roam-graph)
+  ("C-c n i" . org-roam-node-insert)
+  ("C-c n c" . org-roam-capture)
+  ;; Dailies
+  ("C-c n j" . org-roam-dailies-capture-today)
+  :custom
+  (org-roam-v2-ack t)
+  (org-roam-directory (string-join (cons my/dump-brain-root '("content-org")) "/"))
+  (org-roam-capture-templates `(("d" "default" plain "%?"
+                                 :unnarrowed t
+                                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                                                    "#+TITLE: ${title}
+#+AUTHOR: Gray King
+#+DATE: %U
+#+HUGO_BASE_DIR: ../
+#+HUGO_SECTION: notes
+")))))
+
+(use-package org-superstar
+  :straight t
+  :hook
+  (org-mode . (lambda () (org-superstar-mode 1))))
