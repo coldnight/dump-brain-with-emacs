@@ -16,18 +16,58 @@
 + 配合 [[https://github.com/kaushalmodi/ox-hugo/][ox-hugo]] 生成 [[https://gohugo.io][hugo]] 站点并结合 GitHub Pages 免费发布到网上。
 
 也许通过这个你可以爱上 Emacs 并开始将它作为主要编辑器最终助力你提升工作效率。
-* 安装 Emacs
+* 黑话翻译
+下文可能会出现一些大家不太理解的地方，这里提前进行翻译，大家遇到不懂的可以随时翻回来查看:
+
+| 黑话                        | 解释                                                                                                        |
+|-----------------------------+-------------------------------------------------------------------------------------------------------------|
+| ~C-c C-x~                   | 这是一段快捷键，你需要先按住 ~Ctrl~ 不松开然后按 ~c~ ，松开之后继续按住 ~Ctrl~ 不松开然后按 ~x~             |
+| ~C-c~                       | ~Ctrl~ + ~c~                                                                                                |
+| ~M-x~                       | ~Meta~ + ~c~ ，Meta 键一般意味着 Alt 或者 ESC                                                               |
+| ~s-l~                       | ~Super~ + ~l~ , Super 键现在比较少见，可以通过 ~C-x @-s~ 按出 ~s-~ 前缀，所以这个完整的快捷键是 ~C-x @-s l~ |
+| ~M-x org-id-get-create RET~ | ~M-x~ 会弹出命令输出框，然后输入 ~org-id-get-create~ 按回车（ ~RET~ 表示回车）                              |
+* 安装、启动、退出
+现在最新稳定版是 27.2，主线版本是 Emacs 28 并且已经合并 Native Comp，我日常使用的就是编译了 Native Comp 的主线版本。
+为了贴合我们的主题我们这里选择最新的稳定版本 27.2 进行，建议大家也安装最新稳定版 27.2。
 ** Linux
-** macOs
++ yum（CentOS/RHEL/Fedora）
+  #+BEGIN_SRC
+  #+END_SRC
++ apt（Debian/Ubuntu）
+  #+BEGIN_SRC
+  #+END_SRC
++ pacman（Archlinux）
+** macOS
+macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安装最新版。我之前比较常用的是 emacs-mac 这个版本，可以通过 [[https://brew.sh/][Homebrew]] 安装：
+#+BEGIN_SRC shell
+$ brew tap railwaycat/emacsmacport
+$ brew install emacs-mac
+#+END_SRC
+然后在终端里通过以下命令打开 Emacs：
+#+BEGIN_SRC
+$ open -a /usr/local/opt/emacs-mac/Emacs.app/
+#+END_SRC
 ** Windows
+可以通过 Powershell 和 [[https://chocolatey.org/][Chocolatey]][fn:3] 安装：
+#+BEGIN_SRC powershell
+PS> choco install emacs-full
+#+END_SRC
+安装后可以在 Powershell 中启动 Emacs：
+#+BEGIN_SRC powershell
+PS> emacs
+#+END_SRC
+** 退出 Emacs
+快捷键按 ~C-x C-c~ （就是按住 ~Ctrl~ 不松开继续按 ~x~ ，然后再按住 ~Ctrl~ 不松开继续按 ~c~ ，聪明的你肯定发现只要按住 ~Ctrl~ 不松开依次按 ~x~ 和 ~c~ 键就可以了）。
 * 插件包管理
 * 基本增强
+默认安装的 Emacs 可以说是又丑又不好用，所以为了使用更加顺畅或者更贴合现代编辑器，我们需要修改一些配置并做一些插件的扩展。
 ** 外观
 + doom-theme
 + doom-modeline
 + all-the-icons
 + dashboard
 ** ivy + counsel + swiper
+** which-key
 * 操作习惯的改变
 ** 是否需要左侧目录树？
 ** 是否需要 Tabbar？
@@ -38,5 +78,6 @@
 * 发布 GitHub Pages
 * Footnotes
 
+[fn:3] [[https://zhuanlan.zhihu.com/p/111673670][在 Windows 上安装 GNU Emacs]]
 [fn:2] [[https://fortelabs.co/blog/how-to-take-smart-notes/][How To Take Smart Notes: 10 Principles to Revolutionize Your Note-Taking and Writing]]
 [fn:1] [[https://www.nateliason.com/blog/roam][https://www.nateliason.com/blog/roam]]
