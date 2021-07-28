@@ -1,26 +1,27 @@
 
 # Table of Contents
 
-1.  [前言](#orga72140f)
-2.  [黑话翻译](#orgcd35f14)
-3.  [安装、启动、退出](#org4e19ef8)
-    1.  [Linux](#org602aa39)
-    2.  [macOS](#orgad866d3)
-    3.  [Windows](#orga2e7256)
-    4.  [退出 Emacs](#org925b2a6)
-4.  [插件包管理](#org2d544e0)
-5.  [基本增强](#org92b2403)
-    1.  [外观](#orga23dee6)
-    2.  [ivy + counsel + swiper](#org1260e05)
-    3.  [which-key](#orge6d81ad)
-6.  [操作习惯的改变](#org583ed19)
-    1.  [是否需要左侧目录树？](#orgc595acd)
-    2.  [是否需要 Tabbar？](#org4776f65)
-    3.  [习惯 `M-x` 和 `C-h ?`](#org5ed5119)
-7.  [准备笔记记录](#orgf059628)
-8.  [开始笔记记录](#orgb41c133)
-9.  [导出 Hugo 站点](#orgb21e894)
-10. [发布 GitHub Pages](#orga2c6646)
+1.  [前言](#org54e90eb)
+2.  [黑话翻译](#orgef0e400)
+3.  [安装、启动、退出](#org6cd071f)
+    1.  [Linux](#orgd291d31)
+    2.  [macOS](#org172c805)
+    3.  [Windows](#org5c749a5)
+    4.  [退出 Emacs](#orgca5f16f)
+4.  [插件包管理](#orge384a68)
+5.  [基本增强](#org607ed18)
+    1.  [外观](#orgfd3562e)
+    2.  [ivy + counsel + swiper](#orgec94427)
+    3.  [which-key](#org0e3b9fb)
+6.  [操作习惯的改变](#org13f6d8a)
+    1.  [是否需要左侧目录树？](#org6c247dc)
+    2.  [是否需要 Tabbar？](#orgc8efd4f)
+    3.  [习惯 `M-x` 和 `C-h ?`](#orgab26651)
+7.  [准备笔记记录](#orgc81a60e)
+8.  [开始笔记记录](#org1805ceb)
+9.  [org-protocol](#org63aaa2b)
+10. [导出 Hugo 站点](#org6b5c26b)
+11. [发布 GitHub Pages](#orgec8343b)
 
 其他入门教程：
 
@@ -28,7 +29,7 @@
 -   [An Emacs Tutorial for Vim User](https://github.com/w0mTea/An.Emacs.Tutorial.for.Vim.User)
 
 
-<a id="orga72140f"></a>
+<a id="org54e90eb"></a>
 
 # 前言
 
@@ -43,7 +44,7 @@
 也许通过这个你可以爱上 Emacs 并开始将它作为主要编辑器最终助力你提升工作效率。
 
 
-<a id="orgcd35f14"></a>
+<a id="orgef0e400"></a>
 
 # 黑话翻译
 
@@ -66,8 +67,8 @@
 
 <tbody>
 <tr>
-<td class="org-left"><code>C-c C-x</code></td>
-<td class="org-left">这是一段快捷键，你需要先按住 <code>Ctrl</code> 不松开然后按 <code>c</code> ，松开之后继续按住 <code>Ctrl</code> 不松开然后按 <code>x</code></td>
+<td class="org-left"><code>C-x C-c</code><sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup></td>
+<td class="org-left">这是一段快捷键，你需要先按住 <code>Ctrl</code> 不松开然后按 <code>x</code> ，松开之后继续按住 <code>Ctrl</code> 不松开然后按 <code>c</code></td>
 </tr>
 
 
@@ -97,7 +98,7 @@
 </table>
 
 
-<a id="org4e19ef8"></a>
+<a id="org6cd071f"></a>
 
 # 安装、启动、退出
 
@@ -105,7 +106,7 @@
 为了贴合我们的主题我们这里选择最新的稳定版本 27.2 进行，建议大家也安装最新稳定版 27.2。
 
 
-<a id="org602aa39"></a>
+<a id="orgd291d31"></a>
 
 ## Linux
 
@@ -114,7 +115,7 @@
 -   pacman（Archlinux）
 
 
-<a id="orgad866d3"></a>
+<a id="org172c805"></a>
 
 ## macOS
 
@@ -128,11 +129,11 @@ macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安�
     $ open -a /usr/local/opt/emacs-mac/Emacs.app/
 
 
-<a id="orga2e7256"></a>
+<a id="org5c749a5"></a>
 
 ## Windows
 
-可以通过 Powershell 和 [Chocolatey](https://chocolatey.org/)<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup> 安装：
+可以通过 Powershell 和 [Chocolatey](https://chocolatey.org/)<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup> 安装：
 
     PS> choco install emacs-full
 
@@ -141,26 +142,26 @@ macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安�
     PS> emacs
 
 
-<a id="org925b2a6"></a>
+<a id="orgca5f16f"></a>
 
 ## 退出 Emacs
 
 快捷键按 `C-x C-c` （就是按住 `Ctrl` 不松开继续按 `x` ，然后再按住 `Ctrl` 不松开继续按 `c` ，聪明的你肯定发现只要按住 `Ctrl` 不松开依次按 `x` 和 `c` 键就可以了）。
 
 
-<a id="org2d544e0"></a>
+<a id="orge384a68"></a>
 
 # 插件包管理
 
 
-<a id="org92b2403"></a>
+<a id="org607ed18"></a>
 
 # 基本增强
 
 默认安装的 Emacs 可以说是又丑又不好用，所以为了使用更加顺畅或者更贴合现代编辑器，我们需要修改一些配置并做一些插件的扩展。
 
 
-<a id="orga23dee6"></a>
+<a id="orgfd3562e"></a>
 
 ## 外观
 
@@ -170,52 +171,57 @@ macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安�
 -   dashboard
 
 
-<a id="org1260e05"></a>
+<a id="orgec94427"></a>
 
 ## ivy + counsel + swiper
 
 
-<a id="orge6d81ad"></a>
+<a id="org0e3b9fb"></a>
 
 ## which-key
 
 
-<a id="org583ed19"></a>
+<a id="org13f6d8a"></a>
 
 # 操作习惯的改变
 
 
-<a id="orgc595acd"></a>
+<a id="org6c247dc"></a>
 
 ## 是否需要左侧目录树？
 
 
-<a id="org4776f65"></a>
+<a id="orgc8efd4f"></a>
 
 ## 是否需要 Tabbar？
 
 
-<a id="org5ed5119"></a>
+<a id="orgab26651"></a>
 
 ## 习惯 `M-x` 和 `C-h ?`
 
 
-<a id="orgf059628"></a>
+<a id="orgc81a60e"></a>
 
 # 准备笔记记录
 
 
-<a id="orgb41c133"></a>
+<a id="org1805ceb"></a>
 
 # 开始笔记记录
 
 
-<a id="orgb21e894"></a>
+<a id="org63aaa2b"></a>
+
+# org-protocol
+
+
+<a id="org6b5c26b"></a>
 
 # 导出 Hugo 站点
 
 
-<a id="orga2c6646"></a>
+<a id="orgec8343b"></a>
 
 # 发布 GitHub Pages
 
@@ -226,4 +232,6 @@ macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安�
 
 <sup><a id="fn.2" href="#fnr.2">2</a></sup> [How To Take Smart Notes: 10 Principles to Revolutionize Your Note-Taking and Writing](https://fortelabs.co/blog/how-to-take-smart-notes/)
 
-<sup><a id="fn.3" href="#fnr.3">3</a></sup> [在 Windows 上安装 GNU Emacs](https://zhuanlan.zhihu.com/p/111673670)
+<sup><a id="fn.3" href="#fnr.3">3</a></sup> 这是退出 Emacs 的快捷键，非常有用，相信我
+
+<sup><a id="fn.4" href="#fnr.4">4</a></sup> [在 Windows 上安装 GNU Emacs](https://zhuanlan.zhihu.com/p/111673670)

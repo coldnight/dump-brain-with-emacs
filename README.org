@@ -21,7 +21,7 @@
 
 | 黑话                        | 解释                                                                                                        |
 |-----------------------------+-------------------------------------------------------------------------------------------------------------|
-| ~C-c C-x~                   | 这是一段快捷键，你需要先按住 ~Ctrl~ 不松开然后按 ~c~ ，松开之后继续按住 ~Ctrl~ 不松开然后按 ~x~             |
+| ~C-x C-c~[fn:4]                   | 这是一段快捷键，你需要先按住 ~Ctrl~ 不松开然后按 ~x~ ，松开之后继续按住 ~Ctrl~ 不松开然后按 ~c~             |
 | ~C-c~                       | ~Ctrl~ + ~c~                                                                                                |
 | ~M-x~                       | ~Meta~ + ~c~ ，Meta 键一般意味着 Alt 或者 ESC                                                               |
 | ~s-l~                       | ~Super~ + ~l~ , Super 键现在比较少见，可以通过 ~C-x @-s~ 按出 ~s-~ 前缀，所以这个完整的快捷键是 ~C-x @-s l~ |
@@ -74,10 +74,13 @@ PS> emacs
 ** 习惯 ~M-x~ 和 ~C-h ?~
 * 准备笔记记录
 * 开始笔记记录
+* org-protocol
 * 导出 Hugo 站点
 * 发布 GitHub Pages
 * Footnotes
 
+
+[fn:4] 这是退出 Emacs 的快捷键，非常有用，相信我
 [fn:3] [[https://zhuanlan.zhihu.com/p/111673670][在 Windows 上安装 GNU Emacs]]
 [fn:2] [[https://fortelabs.co/blog/how-to-take-smart-notes/][How To Take Smart Notes: 10 Principles to Revolutionize Your Note-Taking and Writing]]
 [fn:1] [[https://www.nateliason.com/blog/roam][https://www.nateliason.com/blog/roam]]
