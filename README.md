@@ -1,31 +1,30 @@
 
 # Table of Contents
 
-1.  [前言](#orgd4f87b4)
-2.  [黑话](#org73335b3)
-    1.  [快捷键](#orga991728)
-    2.  [概念](#org9b273f9)
-3.  [安装、启动、退出](#org3ed9fd2)
-    1.  [Linux](#orga9a653b)
-    2.  [macOS](#org9a69449)
-    3.  [Windows](#orgdcda224)
-    4.  [退出 Emacs](#org7a7567d)
-4.  [插件包管理](#org799c8ed)
-5.  [基本增强](#orgd2fff9d)
-    1.  [外观](#org1fb78c6)
-    2.  [ivy + counsel + swiper](#org4a5cd7f)
-    3.  [which-key](#org339cab9)
-6.  [操作习惯的改变](#org896b508)
-    1.  [是否需要左侧目录树？](#org570b678)
-    2.  [是否需要 Tabbar？](#org46da5e8)
-    3.  [习惯 `M-x` 和 `C-h ?`](#org76b63be)
-7.  [准备笔记记录](#org62b1069)
-8.  [开始笔记记录](#orgb0266fe)
-9.  [收集笔记：org-protocol](#org9d9a036)
-10. [托管笔记：magit](#orge7f042d)
-11. [导出 Hugo 站点](#org5d46bb6)
-12. [发布 GitHub Pages](#org9c34675)
-    1.  [GitHub workflow](#org69d4a70)
+1.  [前言](#org04c036d)
+2.  [黑话](#org9b06525)
+    1.  [快捷键](#org9b6c170)
+    2.  [概念](#org25bf53b)
+3.  [安装、启动、退出](#org7706594)
+    1.  [Linux](#org78323fb)
+    2.  [macOS](#org5655b48)
+    3.  [Windows](#org6b7049c)
+    4.  [退出 Emacs](#org54c3175)
+4.  [插件包管理](#org0da072d)
+5.  [基本增强](#org5f9a6fa)
+    1.  [外观](#org8840a06)
+    2.  [操作](#org4868047)
+6.  [操作习惯的改变](#orge6635b2)
+    1.  [是否需要左侧目录树？](#orgd1e53ed)
+    2.  [是否需要 Tabbar？](#orgbb6065b)
+    3.  [习惯 `M-x` 和 `C-h ?`](#org5a17899)
+7.  [准备笔记记录](#org971f0af)
+8.  [开始笔记记录](#org3896050)
+9.  [收集笔记：org-protocol](#org2fd873d)
+10. [托管笔记：magit](#org17595cc)
+11. [导出 Hugo 站点](#orgd15dc40)
+12. [发布 GitHub Pages](#orga053884)
+    1.  [GitHub workflow](#org237439e)
 
 其他入门教程：
 
@@ -33,7 +32,7 @@
 -   [An Emacs Tutorial for Vim User](https://github.com/w0mTea/An.Emacs.Tutorial.for.Vim.User)
 
 
-<a id="orgd4f87b4"></a>
+<a id="org04c036d"></a>
 
 # 前言
 
@@ -48,14 +47,14 @@
 也许通过这个你可以爱上 Emacs 并开始将它作为主要编辑器最终助力你提升工作效率。
 
 
-<a id="org73335b3"></a>
+<a id="org9b06525"></a>
 
 # 黑话
 
 Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着时代的气息，可能不是很好理解。所以为了便于大家理解，我们在此提前进行解释，大家遇到不懂的可以随时翻回来查看:
 
 
-<a id="orga991728"></a>
+<a id="org9b6c170"></a>
 
 ## 快捷键
 
@@ -83,7 +82,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 
 <tr>
 <td class="org-left"><code>C-x C-c</code><sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup></td>
-<td class="org-left">这是一段快捷键，你需要先出 <code>C-x</code> ，然后继续按出 <code>Ctrl-c</code> ，两段快捷键中间可以间隔任意时间</td>
+<td class="org-left">组合快捷键，你需要先按出 <code>C-x</code> ，然后继续按出 <code>Ctrl-c</code> ，两段快捷键中间可以间隔任意时间</td>
 </tr>
 
 
@@ -113,7 +112,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 </table>
 
 
-<a id="org9b273f9"></a>
+<a id="org25bf53b"></a>
 
 ## 概念
 
@@ -153,7 +152,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 </table>
 
 
-<a id="org3ed9fd2"></a>
+<a id="org7706594"></a>
 
 # 安装、启动、退出
 
@@ -161,7 +160,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 为了贴合我们的主题我们这里选择最新的稳定版本 27.2 进行，建议大家也安装最新稳定版 27.2。
 
 
-<a id="orga9a653b"></a>
+<a id="org78323fb"></a>
 
 ## Linux
 
@@ -170,7 +169,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 -   pacman（Archlinux）
 
 
-<a id="org9a69449"></a>
+<a id="org5655b48"></a>
 
 ## macOS
 
@@ -184,7 +183,7 @@ macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安�
     $ open -a /usr/local/opt/emacs-mac/Emacs.app/
 
 
-<a id="orgdcda224"></a>
+<a id="org6b7049c"></a>
 
 ## Windows
 
@@ -197,26 +196,26 @@ macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安�
     PS> emacs
 
 
-<a id="org7a7567d"></a>
+<a id="org54c3175"></a>
 
 ## 退出 Emacs
 
 快捷键按 `C-x C-c` （就是按住 `Ctrl` 不松开继续按 `x` ，然后再按住 `Ctrl` 不松开继续按 `c` ，聪明的你肯定发现只要按住 `Ctrl` 不松开依次按 `x` 和 `c` 键就可以了）。
 
 
-<a id="org799c8ed"></a>
+<a id="org0da072d"></a>
 
 # 插件包管理
 
 
-<a id="orgd2fff9d"></a>
+<a id="org5f9a6fa"></a>
 
 # 基本增强
 
 默认安装的 Emacs 可以说是又丑又不好用，所以为了使用更加顺畅或者更贴合现代编辑器，我们需要修改一些配置并做一些插件的扩展。
 
 
-<a id="org1fb78c6"></a>
+<a id="org8840a06"></a>
 
 ## 外观
 
@@ -226,67 +225,67 @@ macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安�
 -   dashboard
 
 
-<a id="org4a5cd7f"></a>
+<a id="org4868047"></a>
 
-## ivy + counsel + swiper
+## 操作
+
+-   ivy
+-   counsel
+-   swiper
+-   which-key
 
 
-<a id="org339cab9"></a>
-
-## which-key
-
-
-<a id="org896b508"></a>
+<a id="orge6635b2"></a>
 
 # 操作习惯的改变
 
 
-<a id="org570b678"></a>
+<a id="orgd1e53ed"></a>
 
 ## 是否需要左侧目录树？
 
 
-<a id="org46da5e8"></a>
+<a id="orgbb6065b"></a>
 
 ## 是否需要 Tabbar？
 
 
-<a id="org76b63be"></a>
+<a id="org5a17899"></a>
 
 ## 习惯 `M-x` 和 `C-h ?`
 
 
-<a id="org62b1069"></a>
+<a id="org971f0af"></a>
 
 # 准备笔记记录
 
 
-<a id="orgb0266fe"></a>
+<a id="org3896050"></a>
 
 # 开始笔记记录
 
 
-<a id="org9d9a036"></a>
+<a id="org2fd873d"></a>
 
 # 收集笔记：org-protocol
 
 
-<a id="orge7f042d"></a>
+<a id="org17595cc"></a>
 
 # 托管笔记：magit
 
 
-<a id="org5d46bb6"></a>
+<a id="orgd15dc40"></a>
 
 # 导出 Hugo 站点
 
 
-<a id="org9c34675"></a>
+<a id="orga053884"></a>
 
 # 发布 GitHub Pages
 
 
-<a id="org69d4a70"></a>
+<a id="org237439e"></a>
 
 ## GitHub workflow
 
