@@ -194,6 +194,11 @@ Emacs 的配置文件都写在 ~$HOME/.emacs.d/init.el~ 中，其中 ~$HOME~ 就
 此时效果如下：
 
 [[file:images/01-basic.png]]
+
+对比上面可以看到中间灰色的（modeline）增加显示了时间、电量，并且去掉了菜单栏滚动条等，并且在左边显示了行号。同时我觉得有必要解释下 modeline（底部灰色的横幅）各个部分的值：
++ ~U:**-~ 可以简单的理解为 U 表示编码系统（UTF-8）， ~**~ 表示 buffer 更改（未保存）[fn:6]
++ ~Bot(100,27)~ 表示光标位置 Bot 即 Bottom 的缩写，即 Bottom(row,column) 。
++ ~(Emacs-Lisp, ElDoc)~ 表示当前 buffer 的主模式和次模式（主模式只能有一个，但是次模式可以有多个）。
 ** 插件包管理
 Emacs 安装插件的方式多种多样，一般可以：
 + 简单粗暴：直接拷贝 elisp 文件到指定位置；
@@ -227,6 +232,8 @@ Emacs 安装插件的方式多种多样，一般可以：
 * 发布 GitHub Pages
 ** GitHub workflow
 * Footnotes
+
+[fn:6] 其实这里要复杂的多，具体的可以参见文档 [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Mode-Line.html][Mode Line]]
 [fn:5] https://www.jianshu.com/p/186a3409e878
 [fn:4] 这是退出 Emacs 的快捷键，非常有用，相信我
 [fn:3] [[https://zhuanlan.zhihu.com/p/111673670][在 Windows 上安装 GNU Emacs]]
