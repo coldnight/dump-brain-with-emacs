@@ -10,13 +10,32 @@
 不同于其他 Emacs 教程，本文着重于从零开始通过 Emacs 做笔记管理，这样做的好处如下：
 
 + 不着眼于替换你现在的编辑器或者 IDE 避免降低工作效率；
-+ org-mode 是一种非常具有表达力的文档标记格式；
++ org-mode 是一种非常具有表达力的文档标记格式，并且配合 org-babel 可以执行代码块保存实验结果（类似 Jupyter Notebook）；
 + [[https://github.com/org-roam/org-roam][org-roam]] 基于 org-mode 实现来 Roam Research[fn:1][fn:2] 的方式进行先进的笔记管理；
 + 基于 GitHub 可以实现免费的托管和；
 + 配合 [[https://github.com/kaushalmodi/ox-hugo/][ox-hugo]] 生成 [[https://gohugo.io][hugo]] 站点并结合 GitHub Pages 免费发布到网上。
 
 也许通过这个你可以爱上 Emacs 并开始将它作为主要编辑器最终助力你提升工作效率。
-
+* 安装 Emacs
+** Linux
+** macOs
+** Windows
+* 插件包管理
+* 基本增强
+** 外观
++ doom-theme
++ doom-modeline
++ all-the-icons
++ dashboard
+** ivy + counsel + swiper
+* 操作习惯的改变
+** 是否需要左侧目录树？
+** 是否需要 Tabbar？
+** 习惯 ~M-x~ 和 ~C-h ?~
+* 准备笔记记录
+* 开始笔记记录
+* 导出 Hugo 站点
+* 发布 GitHub Pages
 * Footnotes
 
 [fn:2] [[https://fortelabs.co/blog/how-to-take-smart-notes/][How To Take Smart Notes: 10 Principles to Revolutionize Your Note-Taking and Writing]]
