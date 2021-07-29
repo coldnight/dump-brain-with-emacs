@@ -14,10 +14,12 @@
 + [[https://github.com/org-roam/org-roam][org-roam]] 基于 org-mode 实现 Roam Research[fn:1][fn:2] 的方式进行先进的笔记管理；
 + 基于 GitHub 可以实现免费的托管和；配合 [[https://github.com/kaushalmodi/ox-hugo/][ox-hugo]] 生成 [[https://gohugo.io][hugo]] 站点并结合 GitHub Pages 免费发布到网上。
 
-也许通过这个你可以爱上 Emacs 并开始将它作为主要编辑器最终助力你提升工作效率。
+也许通过记录笔记你会爱上 Emacs 并开始慢慢掌握它，将它作为主要编辑器！
 * 安装、启动、退出
-现在最新稳定版是 27.2，主线版本是 Emacs 28 并且已经合并 Native Comp，我日常使用的就是编译了 Native Comp 的主线版本。
-为了贴合我们的主题我们这里选择最新的稳定版本 27.2 进行，建议大家也安装最新稳定版 27.2。
+目前（2021-07-29）最新稳定版是 27.2，主线版本 Emacs 28 并且已经合并了 Native Comp，我日常使用的就是编译了 Native Comp 的主线版本。
+
+我们这里选择最新的稳定版本 27.2。
+
 ** Linux
 + yum（CentOS/RHEL/Fedora）
   #+BEGIN_SRC
@@ -87,8 +89,39 @@ Emacs 的配置文件都写在 ~$HOME/.emacs.d/init.el~ 中，其中 ~$HOME~ 就
   touch ~/.emacs.d/init.el
   #+END_SRC
 + Windows: C:/Users/<username>/AppData/Roaming/.emacs.d/init.el（这个目录很深，而且默认状态下AppData目录是隐藏的。）[fn:5]
+** 共享系统剪切板
+默认 Emacs 的剪切板和系统是不共享的，也就是说下面的配置你可能没有办法粘贴到 Emacs 中，这给我们抄配置或者记笔记带来了很大的困惑，
+所以我们先配置 Emacs 和系统共享剪切板。
+
+接下来打开上面新创建的 ~init.el~ 配置文件（当然，用你熟悉的那个），追加如下内容：
+#+BEGIN_SRC elisp
+;; 系统共享剪切板
+;; see also:
+;;   https://www.emacswiki.org/emacs/CopyAndPaste
+;;   https://www.reddit.com/r/emacs/comments/5n9t3f/copypaste_from_system_clipboard_on_windows/
+(defun copy-from-osx ()
+  (shell-command-to-string "pbpaste"))
+
+(defun paste-to-osx (text &optional push)
+  (let ((process-connection-type nil))
+    (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+      (process-send-string proc text)
+      (process-send-eof proc))))
+
+(cond
+ ((memq window-system '(x))
+  (setq x-select-enable-primary t
+        x-select-enable-clipboard nil))
+ ((memq window-system '(mac ns))
+  (setq interprogram-cut-function 'paste-to-osx
+        interprogram-paste-function 'copy-from-osx))
+ ((memq window-system '(win32 pc))
+  (setq select-enable-primary t
+        select-enable-clipboard t
+        save-interprogram-paste-before-kill t)))
+#+END_SRC
 ** 基本配置
-此时我们打开 Emacs 进行如下操作： ~C-x C-f ~/.emacs.d/init.el RET~ 并进行一些基本的配置：
+此时我们打开 Emacs 进行如下操作，打开 ~C-x C-f ~/.emacs.d/init.el RET~ ，拷贝如下内容然后按下 ~C-y~ 将内容粘贴到当前 buffer：
 #+BEGIN_SRC elisp
 ;; 指定自定义配置文件，防止自定义配置污染 init.el，并加载该配置文件
 (setq custom-file (expand-file-name "~/.emacs.d/custom.el"))
@@ -560,6 +593,8 @@ org-roam 刚刚发布了 v2（我们现在用的也是 v2），支持基于 head
 然后就去问搜索引擎、社区、身边的人、提 Issue 等，掌握 Emacs 无他，但手熟尔!
 * Footnotes
 
+
+[fn:7] https://linux.cn/article-9917-1.html
 [fn:6] 其实这里要复杂的多，具体的可以参见文档 [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Mode-Line.html][Mode Line]]
 [fn:5] https://www.jianshu.com/p/186a3409e878
 [fn:4] 这是退出 Emacs 的快捷键，非常有用，相信我
