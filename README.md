@@ -1,35 +1,35 @@
 
 # Table of Contents
 
-1.  [前言](#orgc69452f)
-2.  [安装、启动、退出](#org6e10f31)
-    1.  [Linux](#orgc3f1c15)
-    2.  [macOS](#org7a44146)
-    3.  [Windows](#org9d6c1c6)
-    4.  [退出 Emacs](#org2a9b92f)
-3.  [黑话](#orgb4ffa95)
-    1.  [快捷键](#org0f19268)
-    2.  [概念](#orgd345ee7)
-    3.  [buffer](#org95a88e0)
-4.  [基本增强](#org21c2a54)
-    1.  [创建配置文件](#orgd40b7fa)
-    2.  [共享系统剪切板](#org7a68d21)
-    3.  [基本配置](#org0d38906)
-    4.  [插件包管理](#org6471b2c)
-    5.  [外观](#orgf185200)
-    6.  [操作](#org3aca21c)
-5.  [改变操作习惯](#org5775f42)
-    1.  [移动](#orga47960b)
-    2.  [选择和复制粘贴](#org4c254c8)
-6.  [准备记录笔记](#orgf903d4a)
-7.  [开始记录笔记](#org8d15537)
-8.  [进阶](#org09bc181)
-    1.  [收集笔记：org-protocol](#org2e987ed)
-    2.  [托管笔记：magit](#org8d5df77)
-    3.  [导出 Hugo 站点](#org30a3080)
-    4.  [发布 GitHub Pages](#orgcee2fba)
-    5.  [GitHub workflow](#org1e971b9)
-9.  [接下来？](#orgfdfe185)
+1.  [前言](#orga3bca98)
+2.  [安装、启动、退出](#org0042d07)
+    1.  [Linux](#orge9b3e02)
+    2.  [macOS](#org0450a96)
+    3.  [Windows](#orga9c5b93)
+    4.  [退出 Emacs](#org9b2b636)
+3.  [黑话](#org1ae2c39)
+    1.  [快捷键](#orgf6b5a70)
+    2.  [概念](#org15748cb)
+    3.  [buffer](#orgfe48d19)
+4.  [基本增强](#org2b775ed)
+    1.  [创建配置文件](#org9cf2dcc)
+    2.  [共享系统剪切板](#org3a42c34)
+    3.  [基本配置](#orgb5a49b7)
+    4.  [插件包管理](#org407ff33)
+    5.  [外观](#org7a66cc3)
+    6.  [操作](#org2210732)
+5.  [改变操作习惯](#org843d647)
+    1.  [移动](#org8be8136)
+    2.  [选择和复制粘贴](#org744cc24)
+6.  [准备记录笔记](#org7617aa7)
+7.  [开始记录笔记](#org0bf2dfb)
+8.  [进阶](#orgb6e451e)
+    1.  [收集笔记：org-protocol](#org2f0aab2)
+    2.  [托管笔记：magit](#orgf209457)
+    3.  [导出 Hugo 站点](#org231a853)
+    4.  [发布 GitHub Pages](#org5ab2e04)
+    5.  [GitHub workflow](#org20166e6)
+9.  [接下来？](#org66d6dc9)
 
 其他入门教程：
 
@@ -37,7 +37,7 @@
 -   [An Emacs Tutorial for Vim User](https://github.com/w0mTea/An.Emacs.Tutorial.for.Vim.User)
 
 
-<a id="orgc69452f"></a>
+<a id="orga3bca98"></a>
 
 # 前言
 
@@ -51,7 +51,7 @@
 也许通过记录笔记你会爱上 Emacs 并开始慢慢掌握它，将它作为主要编辑器！
 
 
-<a id="org6e10f31"></a>
+<a id="org0042d07"></a>
 
 # 安装、启动、退出
 
@@ -60,7 +60,7 @@
 我们这里选择最新的稳定版本 27.2。
 
 
-<a id="orgc3f1c15"></a>
+<a id="orge9b3e02"></a>
 
 ## Linux
 
@@ -69,7 +69,7 @@
 -   pacman（Archlinux）
 
 
-<a id="org7a44146"></a>
+<a id="org0450a96"></a>
 
 ## macOS
 
@@ -83,7 +83,7 @@ macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安�
     $ open -a /usr/local/opt/emacs-mac/Emacs.app/
 
 
-<a id="org9d6c1c6"></a>
+<a id="orga9c5b93"></a>
 
 ## Windows
 
@@ -96,21 +96,21 @@ macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安�
     PS> emacs
 
 
-<a id="org2a9b92f"></a>
+<a id="org9b2b636"></a>
 
 ## 退出 Emacs
 
 快捷键按 `C-x C-c` （就是按住 `Ctrl` 不松开继续按 `x` ，然后再按住 `Ctrl` 不松开继续按 `c` ，聪明的你肯定发现只要按住 `Ctrl` 不松开依次按 `x` 和 `c` 键就可以了）。
 
 
-<a id="orgb4ffa95"></a>
+<a id="org1ae2c39"></a>
 
 # 黑话
 
 Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着时代的气息，可能不是很好理解。所以为了便于大家理解，我们在此提前进行解释，大家遇到不懂的可以随时翻回来查看:
 
 
-<a id="org0f19268"></a>
+<a id="orgf6b5a70"></a>
 
 ## 快捷键
 
@@ -174,7 +174,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 </table>
 
 
-<a id="orgd345ee7"></a>
+<a id="org15748cb"></a>
 
 ## 概念
 
@@ -232,7 +232,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 </table>
 
 
-<a id="org95a88e0"></a>
+<a id="orgfe48d19"></a>
 
 ## buffer
 
@@ -242,7 +242,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 同时 Emacs 有很多临时的 buffer 来充当日志的角色，比如默认的 `*Messages*` (`C-x b *Messages* RET`) 就是一个只读 buffer 显示一些日志信息，某些操作失败了之后也会保存一些错误消息到指定的 buffer 中，我们只要切换过去就能看到。
 
 
-<a id="org21c2a54"></a>
+<a id="org2b775ed"></a>
 
 # 基本增强
 
@@ -251,7 +251,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 ![img](images/00-installation.png)
 
 
-<a id="orgd40b7fa"></a>
+<a id="org9cf2dcc"></a>
 
 ## 创建配置文件
 
@@ -264,14 +264,14 @@ Emacs 的配置文件都写在 `$HOME/.emacs.d/init.el` 中，其中 `$HOME` 就
 -   Windows: C:/Users/<username>/AppData/Roaming/.emacs.d/init.el（这个目录很深，而且默认状态下AppData目录是隐藏的。）<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>
 
 
-<a id="org7a68d21"></a>
+<a id="org3a42c34"></a>
 
 ## 共享系统剪切板
 
 默认 Emacs 的剪切板和系统是不共享的，也就是说下面的配置你可能没有办法粘贴到 Emacs 中，这给我们抄配置或者记笔记带来了很大的困扰，
 所以我们先配置 Emacs 和系统共享剪切板。
 
-接下来打开上面新创建的 `init.el` 配置文件（当然，用你熟悉的那个），追加如下内容：
+打开上面新创建的 `init.el` 配置文件（当然，用你熟悉的那个编辑器），追加如下内容：
 
     ;; 系统共享剪切板
     ;; see also:
@@ -299,7 +299,7 @@ Emacs 的配置文件都写在 `$HOME/.emacs.d/init.el` 中，其中 `$HOME` 就
             save-interprogram-paste-before-kill t)))
 
 
-<a id="org0d38906"></a>
+<a id="orgb5a49b7"></a>
 
 ## 基本配置
 
@@ -413,7 +413,7 @@ Emacs 的配置文件都写在 `$HOME/.emacs.d/init.el` 中，其中 `$HOME` 就
 -   `(Emacs-Lisp, ElDoc)` 表示当前 buffer 的主模式和次模式（主模式只能有一个，但是次模式可以有多个）。
 
 
-<a id="org6471b2c"></a>
+<a id="org407ff33"></a>
 
 ## 插件包管理
 
@@ -458,7 +458,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 ![img](images/02-package.png)
 
 
-<a id="orgf185200"></a>
+<a id="org7a66cc3"></a>
 
 ## 外观
 
@@ -561,7 +561,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 是不是漂亮多了（特意放大了窗体）！
 
 
-<a id="org3aca21c"></a>
+<a id="org2210732"></a>
 
 ## 操作
 
@@ -651,14 +651,14 @@ Emacs 安装插件的方式多种多样，一般可以：
 ![img](http://g.recordit.co/08QtGtwill.gif)
 
 
-<a id="org5775f42"></a>
+<a id="org843d647"></a>
 
 # 改变操作习惯
 
 现在我们已经有了一套非常先进的编辑器，但是继续使用之前还有一些基本的操作需要我们掌握，这部分没有特别好的办法，只能建议大家多练习几遍形成肌肉记忆。
 
 
-<a id="orga47960b"></a>
+<a id="org8be8136"></a>
 
 ## 移动
 
@@ -704,7 +704,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 </table>
 
 
-<a id="org4c254c8"></a>
+<a id="org744cc24"></a>
 
 ## 选择和复制粘贴
 
@@ -716,7 +716,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 -   `C-y` 将放入 `king-ring` 的最后一条进行粘贴
 
 
-<a id="orgf903d4a"></a>
+<a id="org7617aa7"></a>
 
 # 准备记录笔记
 
@@ -813,7 +813,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 然后通过 `M-x eval-buffer RET` 使其生效（现在输出这个命令是不是愉快多了？）！
 
 
-<a id="org8d15537"></a>
+<a id="org0bf2dfb"></a>
 
 # 开始记录笔记
 
@@ -839,37 +839,37 @@ org-roam 刚刚发布了 v2（我们现在用的也是 v2），支持基于 head
 ![img](http://g.recordit.co/cYKhCjkqQN.gif)
 
 
-<a id="org09bc181"></a>
+<a id="orgb6e451e"></a>
 
 # 进阶
 
 
-<a id="org2e987ed"></a>
+<a id="org2f0aab2"></a>
 
 ## 收集笔记：org-protocol
 
 
-<a id="org8d5df77"></a>
+<a id="orgf209457"></a>
 
 ## 托管笔记：magit
 
 
-<a id="org30a3080"></a>
+<a id="org231a853"></a>
 
 ## 导出 Hugo 站点
 
 
-<a id="orgcee2fba"></a>
+<a id="org5ab2e04"></a>
 
 ## 发布 GitHub Pages
 
 
-<a id="org1e971b9"></a>
+<a id="org20166e6"></a>
 
 ## GitHub workflow
 
 
-<a id="orgfdfe185"></a>
+<a id="org66d6dc9"></a>
 
 # 接下来？
 
