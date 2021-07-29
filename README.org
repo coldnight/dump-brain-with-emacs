@@ -121,7 +121,7 @@ Emacs 的配置文件都写在 ~$HOME/.emacs.d/init.el~ 中，其中 ~$HOME~ 就
         save-interprogram-paste-before-kill t)))
 #+END_SRC
 ** 基本配置
-此时我们打开 Emacs 进行如下操作，打开 ~C-x C-f ~/.emacs.d/init.el RET~ ，拷贝如下内容然后按下 ~C-y~ 将内容粘贴到当前 buffer：
+此时我们打开 Emacs 进行如下操作，按下 ~C-x C-f ~/.emacs.d/init.el RET~ 打开 Emacs 文件，先拷贝下面的配置内容然后按下 ~C-y~ 将内容粘贴到当前 buffer：
 #+BEGIN_SRC elisp
 ;; 指定自定义配置文件，防止自定义配置污染 init.el，并加载该配置文件
 (setq custom-file (expand-file-name "~/.emacs.d/custom.el"))
