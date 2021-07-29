@@ -245,7 +245,10 @@ $ cd ~/.emacs.d/
 $ git clone git@github.com:jwiegley/use-package.git
 $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 #+END_SRC
-然后在 ~init.el~ 中追加如下内容：
+然后在 ~init.el~ 中追加下面配置内容，建议操作：
+1. 首先拷贝下面内容，然后在 ~init.el~ buffer 里（ ~C-x b init.el RET~ 可以切换到，如果当前不是那个 buffer 的话）
+2. ~M-.~ 切换到文件末尾
+3. ~C-y~ 进行粘贴
 #+BEGIN_SRC elisp
 ;; use package
 (eval-when-compile
@@ -277,7 +280,7 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 + emojify
 + dashboard
 + centaur-tabs
-将以下配置追加到 ~init.el~ 中：
+将以下配置追加到 ~init.el~ 中（回忆下上一节的操作方法）：
 #+BEGIN_SRC elisp
 ;;; Appearance
 (use-package doom-themes
@@ -371,7 +374,7 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 + goto-line-preview 预览要跳转的行
 + which-key 忘记下面该按哪个键的时候可以对你进行提醒
 
-将以下内容追加到 ~init.el~ ：
+将以下内容追加到 ~init.el~ （回忆下「基本配置」一节里的操作）：
 #+BEGIN_SRC elisp
 (use-package counsel
   :straight t
@@ -449,7 +452,7 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 
 [[http://g.recordit.co/08QtGtwill.gif]]
 * 改变操作习惯
-现在我们已经有了一套非常先进的编辑器，但是继续使用之前还有一些基本的操作需要我们掌握，这部分没有特别好的办法，只能建议大家多练习几遍形成肌肉记忆。
+现在我们已经有了一套非常先进的编辑器，但是继续使用之前还有一些基本的操作需要我们掌握（前面已经有一些尝试），这部分没有特别好的办法，只能建议大家多练习几遍形成肌肉记忆。
 ** 移动
 | 操作        | 快捷键                                                 |
 |-------------+--------------------------------------------------------|
