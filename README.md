@@ -1,35 +1,35 @@
 
 # Table of Contents
 
-1.  [前言](#org0eb2a0a)
-2.  [安装、启动、退出](#orgbffb983)
-    1.  [Linux](#orgf19f6c6)
-    2.  [macOS](#org52f624f)
-    3.  [Windows](#org82b776f)
-    4.  [退出 Emacs](#org4dba700)
-3.  [黑话](#org686cacc)
-    1.  [快捷键](#org1f8df73)
-    2.  [概念](#orga4b7581)
-    3.  [buffer](#orgebd0290)
-4.  [基本增强](#orgad49977)
-    1.  [创建配置文件](#org91b4fb6)
-    2.  [共享系统剪切板](#org39d7f43)
-    3.  [基本配置](#orgbad53e2)
-    4.  [插件包管理](#org28d8ffa)
-    5.  [外观](#org7039e10)
-    6.  [操作](#orgc156c0e)
-5.  [改变操作习惯](#org7670a93)
-    1.  [移动](#org9d2b1a4)
-    2.  [选择和复制粘贴](#orge51d1a2)
-6.  [准备记录笔记](#org39bd6af)
-7.  [开始记录笔记](#orgacbdf6f)
-8.  [进阶](#org1ac8682)
-    1.  [收集笔记：org-protocol](#orgba076d8)
-    2.  [托管笔记：magit](#orga432056)
-    3.  [导出 Hugo 站点](#org8e61854)
-    4.  [发布 GitHub Pages](#org8ed947c)
-    5.  [GitHub workflow](#orge0371e2)
-9.  [接下来？](#org1585443)
+1.  [前言](#orgb07c67a)
+2.  [安装、启动、退出](#org77aca1f)
+    1.  [Linux](#orga87ae45)
+    2.  [macOS](#org940d687)
+    3.  [Windows](#orgf1dea57)
+    4.  [退出 Emacs](#org4e400d4)
+3.  [黑话](#orga476483)
+    1.  [快捷键](#orgb657d58)
+    2.  [概念](#orgaf9cddc)
+    3.  [buffer](#org3e7b934)
+4.  [基本增强](#orgf50d72e)
+    1.  [创建配置文件](#org4634ef9)
+    2.  [共享系统剪切板](#org061ccdf)
+    3.  [基本配置](#org9787364)
+    4.  [插件包管理](#org50d0516)
+    5.  [外观](#org03f5ed1)
+    6.  [操作](#org226b68b)
+5.  [改变操作习惯](#org80450f4)
+    1.  [移动](#org502eb5e)
+    2.  [选择和复制粘贴](#org32d6d96)
+6.  [准备记录笔记](#org1ba09ec)
+7.  [开始记录笔记](#org82a7cc3)
+8.  [进阶](#org7cabbb5)
+    1.  [收集笔记：org-protocol](#orgb5e4e25)
+    2.  [托管笔记：magit](#org721a5c6)
+    3.  [导出 Hugo 站点](#org9467939)
+    4.  [发布 GitHub Pages](#org05fdbbd)
+    5.  [GitHub workflow](#orgbda1705)
+9.  [接下来？](#org94f09e6)
 
 其他入门教程：
 
@@ -37,7 +37,7 @@
 -   [An Emacs Tutorial for Vim User](https://github.com/w0mTea/An.Emacs.Tutorial.for.Vim.User)
 
 
-<a id="org0eb2a0a"></a>
+<a id="orgb07c67a"></a>
 
 # 前言
 
@@ -51,7 +51,7 @@
 也许通过记录笔记你会爱上 Emacs 并开始慢慢掌握它，将它作为主要编辑器！
 
 
-<a id="orgbffb983"></a>
+<a id="org77aca1f"></a>
 
 # 安装、启动、退出
 
@@ -60,7 +60,7 @@
 我们这里选择最新的稳定版本 27.2。
 
 
-<a id="orgf19f6c6"></a>
+<a id="orga87ae45"></a>
 
 ## Linux
 
@@ -69,7 +69,7 @@
 -   pacman（Archlinux）
 
 
-<a id="org52f624f"></a>
+<a id="org940d687"></a>
 
 ## macOS
 
@@ -83,7 +83,7 @@ macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安�
     $ open -a /usr/local/opt/emacs-mac/Emacs.app/
 
 
-<a id="org82b776f"></a>
+<a id="orgf1dea57"></a>
 
 ## Windows
 
@@ -96,21 +96,21 @@ macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安�
     PS> emacs
 
 
-<a id="org4dba700"></a>
+<a id="org4e400d4"></a>
 
 ## 退出 Emacs
 
 快捷键按 `C-x C-c` （就是按住 `Ctrl` 不松开继续按 `x` ，然后再按住 `Ctrl` 不松开继续按 `c` ，聪明的你肯定发现只要按住 `Ctrl` 不松开依次按 `x` 和 `c` 键就可以了）。
 
 
-<a id="org686cacc"></a>
+<a id="orga476483"></a>
 
 # 黑话
 
 Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着时代的气息，可能不是很好理解。所以为了便于大家理解，我们在此提前进行解释，大家遇到不懂的可以随时翻回来查看:
 
 
-<a id="org1f8df73"></a>
+<a id="orgb657d58"></a>
 
 ## 快捷键
 
@@ -174,7 +174,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 </table>
 
 
-<a id="orga4b7581"></a>
+<a id="orgaf9cddc"></a>
 
 ## 概念
 
@@ -232,7 +232,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 </table>
 
 
-<a id="orgebd0290"></a>
+<a id="org3e7b934"></a>
 
 ## buffer
 
@@ -242,7 +242,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 同时 Emacs 有很多临时的 buffer 来充当日志的角色，比如默认的 `*Messages*` (`C-x b *Messages* RET`) 就是一个只读 buffer 显示一些日志信息，某些操作失败了之后也会保存一些错误消息到指定的 buffer 中，我们只要切换过去就能看到。
 
 
-<a id="orgad49977"></a>
+<a id="orgf50d72e"></a>
 
 # 基本增强
 
@@ -251,7 +251,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 ![img](images/00-installation.png)
 
 
-<a id="org91b4fb6"></a>
+<a id="org4634ef9"></a>
 
 ## 创建配置文件
 
@@ -264,7 +264,7 @@ Emacs 的配置文件都写在 `$HOME/.emacs.d/init.el` 中，其中 `$HOME` 就
 -   Windows: C:/Users/<username>/AppData/Roaming/.emacs.d/init.el（这个目录很深，而且默认状态下AppData目录是隐藏的。）<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>
 
 
-<a id="org39d7f43"></a>
+<a id="org061ccdf"></a>
 
 ## 共享系统剪切板
 
@@ -299,7 +299,7 @@ Emacs 的配置文件都写在 `$HOME/.emacs.d/init.el` 中，其中 `$HOME` 就
             save-interprogram-paste-before-kill t)))
 
 
-<a id="orgbad53e2"></a>
+<a id="org9787364"></a>
 
 ## 基本配置
 
@@ -419,7 +419,7 @@ Emacs 的配置文件都写在 `$HOME/.emacs.d/init.el` 中，其中 `$HOME` 就
 -   `(Emacs-Lisp, ElDoc)` 表示当前 buffer 的主模式和次模式（主模式只能有一个，但是次模式可以有多个）。
 
 
-<a id="org28d8ffa"></a>
+<a id="org50d0516"></a>
 
 ## 插件包管理
 
@@ -464,7 +464,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 ![img](images/02-package.png)
 
 
-<a id="org7039e10"></a>
+<a id="org03f5ed1"></a>
 
 ## 外观
 
@@ -567,7 +567,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 是不是漂亮多了（特意放大了窗体）！
 
 
-<a id="orgc156c0e"></a>
+<a id="org226b68b"></a>
 
 ## 操作
 
@@ -657,14 +657,14 @@ Emacs 安装插件的方式多种多样，一般可以：
 ![img](http://g.recordit.co/08QtGtwill.gif)
 
 
-<a id="org7670a93"></a>
+<a id="org80450f4"></a>
 
 # 改变操作习惯
 
 现在我们已经有了一套非常先进的编辑器，但是继续使用之前还有一些基本的操作需要我们掌握（前面已经有一些尝试），这部分没有特别好的办法，只能建议大家多练习几遍形成肌肉记忆。
 
 
-<a id="org9d2b1a4"></a>
+<a id="org502eb5e"></a>
 
 ## 移动
 
@@ -710,7 +710,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 </table>
 
 
-<a id="orge51d1a2"></a>
+<a id="org32d6d96"></a>
 
 ## 选择和复制粘贴
 
@@ -722,7 +722,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 -   `C-y` 将放入 `king-ring` 的最后一条进行粘贴
 
 
-<a id="org39bd6af"></a>
+<a id="org1ba09ec"></a>
 
 # 准备记录笔记
 
@@ -819,7 +819,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 然后通过 `M-x eval-buffer RET` 使其生效（现在输出这个命令是不是愉快多了？）！
 
 
-<a id="orgacbdf6f"></a>
+<a id="org82a7cc3"></a>
 
 # 开始记录笔记
 
@@ -845,45 +845,45 @@ org-roam 刚刚发布了 v2（我们现在用的也是 v2），支持基于 head
 ![img](http://g.recordit.co/cYKhCjkqQN.gif)
 
 
-<a id="org1ac8682"></a>
+<a id="org7cabbb5"></a>
 
 # 进阶
 
 
-<a id="orgba076d8"></a>
+<a id="orgb5e4e25"></a>
 
 ## 收集笔记：org-protocol
 
 
-<a id="orga432056"></a>
+<a id="org721a5c6"></a>
 
 ## 托管笔记：magit
 
 
-<a id="org8e61854"></a>
+<a id="org9467939"></a>
 
 ## 导出 Hugo 站点
 
 
-<a id="org8ed947c"></a>
+<a id="org05fdbbd"></a>
 
 ## 发布 GitHub Pages
 
 
-<a id="orge0371e2"></a>
+<a id="orgbda1705"></a>
 
 ## GitHub workflow
 
 
-<a id="org1585443"></a>
+<a id="org94f09e6"></a>
 
 # 接下来？
 
 遇到不会的 `C-h` 是你的好帮手（which-key 会帮你弹出所有帮助主题），常用的有：
 
--   `f` 函数（major mode 和 minor mode 也是一个函数）
--   `v` 变量
--   `b` 按键绑定
+-   `C-h f` 函数（major mode 和 minor mode 也是一个函数）
+-   `C-h v` 变量
+-   `C-h b` 按键绑定
 
 然后就去问搜索引擎、社区、身边的人、提 Issue 等，掌握 Emacs 无他，但手熟尔!
 

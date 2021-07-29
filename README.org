@@ -593,9 +593,9 @@ org-roam 刚刚发布了 v2（我们现在用的也是 v2），支持基于 head
 * 接下来？
 遇到不会的 ~C-h~ 是你的好帮手（which-key 会帮你弹出所有帮助主题），常用的有：
 
- + ~f~ 函数（major mode 和 minor mode 也是一个函数）
- + ~v~ 变量
- + ~b~ 按键绑定
+ + ~C-h f~ 函数（major mode 和 minor mode 也是一个函数）
+ + ~C-h v~ 变量
+ + ~C-h b~ 按键绑定
 然后就去问搜索引擎、社区、身边的人、提 Issue 等，掌握 Emacs 无他，但手熟尔!
 * Footnotes
 
