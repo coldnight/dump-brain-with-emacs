@@ -242,8 +242,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 + [[https://github.com/dimitri/el-get][el-get]] 可以支持多种源，如 MELPA、EmacsWiki、GitHub 等等
 + [[https://github.com/raxod502/straight.el][straight.el]] 同样支持很多种源，并集成了 el-get 的源，同时还支持版本锁定、集成 ~use-package~ 、指向 fork、本地修改等。
 
-这里我们就以 ~use-package~ + ~straight.el~ 作为我们的插件包管理方案。
-一些网上给的配置如果不是 ~use-package~ 的格式，我们可以简单的将配置放在 ~use-package~ 的 ~:init~ 下。
+这里我们就以 ~use-package~ + ~straight.el~ 作为我们的插件包管理方案。[fn:8]
 
 为了启动整个包管理世界，我们需要先安装包管理，手动的安装：
 #+BEGIN_SRC shell
@@ -600,6 +599,8 @@ org-roam 刚刚发布了 v2（我们现在用的也是 v2），支持基于 head
 * Footnotes
 
 
+
+[fn:8] 一些网上给的配置如果不是 ~use-package~ 的格式，我们可以简单的将配置放在 ~use-package~ 的 ~:init~ 下。
 [fn:7] https://linux.cn/article-9917-1.html
 [fn:6] 其实这里要复杂的多，具体的可以参见文档 [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Mode-Line.html][Mode Line]]
 [fn:5] https://www.jianshu.com/p/186a3409e878
