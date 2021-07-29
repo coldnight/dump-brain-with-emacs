@@ -90,7 +90,7 @@ Emacs 的配置文件都写在 ~$HOME/.emacs.d/init.el~ 中，其中 ~$HOME~ 就
   #+END_SRC
 + Windows: C:/Users/<username>/AppData/Roaming/.emacs.d/init.el（这个目录很深，而且默认状态下AppData目录是隐藏的。）[fn:5]
 ** 共享系统剪切板
-默认 Emacs 的剪切板和系统是不共享的，也就是说下面的配置你可能没有办法粘贴到 Emacs 中，这给我们抄配置或者记笔记带来了很大的困惑，
+默认 Emacs 的剪切板和系统是不共享的，也就是说下面的配置你可能没有办法粘贴到 Emacs 中，这给我们抄配置或者记笔记带来了很大的困扰，
 所以我们先配置 Emacs 和系统共享剪切板。
 
 接下来打开上面新创建的 ~init.el~ 配置文件（当然，用你熟悉的那个），追加如下内容：
