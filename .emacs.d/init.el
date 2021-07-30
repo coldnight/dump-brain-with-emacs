@@ -191,7 +191,6 @@
   (dashboard-center-content 1)
   (dashboard-set-heading-icons t)
   (dashboard-set-file-icons t)
-  (dashboard-startup-banner "~/.emacs.d/logo.png")
   (dashboard-items '((projects . 5)
                      (recents . 5)
                      (agenda . 5)
