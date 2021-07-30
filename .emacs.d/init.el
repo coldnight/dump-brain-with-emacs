@@ -286,7 +286,7 @@
   :init
   (which-key-mode))
 
-(setq-local my/dump-brain-root "~/notes/")
+(setq my/dump-brain-root "~/notes/")
 
 (use-package org
   :straight (:type git :host github :repo "bzg/org-mode")
@@ -381,3 +381,7 @@
   :straight t
   :hook
   (org-mode . (lambda () (org-superstar-mode 1))))
+
+(use-package ox-hugo
+  :straight t
+  :after (ox org-mode))

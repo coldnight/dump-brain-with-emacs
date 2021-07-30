@@ -1,35 +1,37 @@
 
 # Table of Contents
 
-1.  [前言](#orgddbfbe5)
-2.  [安装、启动、退出](#orga788ec4)
-    1.  [Linux](#org819d2b1)
-    2.  [macOS](#orgdadb29f)
-    3.  [Windows](#org8d9e5fd)
-    4.  [退出 Emacs](#org0afc270)
-3.  [黑话](#orge12542b)
-    1.  [快捷键](#org4846f09)
-    2.  [概念](#orge7c8ed1)
-    3.  [buffer](#orgc0dbff2)
-4.  [基本增强](#org993018b)
-    1.  [创建配置文件](#org34cac01)
-    2.  [共享系统剪切板](#orgcf74bbb)
-    3.  [基本配置](#orgba3a964)
-    4.  [插件包管理](#orgdafbbd1)
-    5.  [外观](#orgc2b048b)
-    6.  [操作](#org112bf72)
-5.  [改变操作习惯](#org85f557e)
-    1.  [移动](#orgde3b31a)
-    2.  [选择和复制粘贴](#org5d89e0a)
-6.  [准备记录笔记](#org0638acf)
-7.  [开始记录笔记](#orge35eb88)
-8.  [进阶](#org95949f8)
-    1.  [收集笔记：org-protocol](#org0561338)
-    2.  [托管笔记：magit](#orge2c6ea7)
-    3.  [导出 Hugo 站点](#orgc2db094)
-    4.  [发布 GitHub Pages](#org076cbd8)
-    5.  [GitHub workflow](#orge25e95a)
-9.  [接下来？](#org68649e3)
+1.  [前言](#org152e25c)
+2.  [安装、启动、退出](#orgde925ef)
+    1.  [Linux](#org6749cf8)
+    2.  [macOS](#org8262e87)
+    3.  [Windows](#org7a01d37)
+    4.  [退出 Emacs](#org804c893)
+3.  [黑话](#org21e9454)
+    1.  [快捷键](#org84ef2bc)
+    2.  [概念](#org4bc548e)
+    3.  [buffer](#orgf63ace6)
+4.  [基本增强](#orgf0c1d21)
+    1.  [创建配置文件](#org47b3409)
+    2.  [共享系统剪切板](#org622001e)
+    3.  [基本配置](#org75535c3)
+    4.  [插件包管理](#orgc956c5d)
+    5.  [外观](#orgb1b5121)
+    6.  [操作](#orgea6c5ec)
+5.  [改变操作习惯](#orgfa3f2f1)
+    1.  [移动](#org1d06438)
+    2.  [选择和复制粘贴](#org27fcc63)
+6.  [准备记录笔记](#org8968f4f)
+7.  [开始记录笔记](#orgc9a2d98)
+8.  [进阶](#orgbd07c64)
+    1.  [导出 Hugo 站点](#org68c2af5)
+    2.  [发布 GitHub Pages](#org38eba32)
+    3.  [GitHub workflow](#org0e3bcc8)
+9.  [超阶](#org01d7ddb)
+    1.  [项目管理：projectile](#orgdd4f62b)
+    2.  [使用 Emacs 作为 Git 客户端：magit](#orgdb32302)
+    3.  [收集笔记：org-protocol](#org1893728)
+10. [接下来？](#orgf5de4d3)
 
 其他入门教程：
 
@@ -37,7 +39,7 @@
 -   [An Emacs Tutorial for Vim User](https://github.com/w0mTea/An.Emacs.Tutorial.for.Vim.User)
 
 
-<a id="orgddbfbe5"></a>
+<a id="org152e25c"></a>
 
 # 前言
 
@@ -51,7 +53,7 @@
 也许通过记录笔记你会爱上 Emacs 并开始慢慢掌握它，将它作为主要编辑器！
 
 
-<a id="orga788ec4"></a>
+<a id="orgde925ef"></a>
 
 # 安装、启动、退出
 
@@ -60,7 +62,7 @@
 我们这里选择最新的稳定版本 27.2。
 
 
-<a id="org819d2b1"></a>
+<a id="org6749cf8"></a>
 
 ## Linux
 
@@ -69,7 +71,7 @@
 -   pacman（Archlinux）
 
 
-<a id="orgdadb29f"></a>
+<a id="org8262e87"></a>
 
 ## macOS
 
@@ -83,7 +85,7 @@ macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安�
     $ open -a /usr/local/opt/emacs-mac/Emacs.app/
 
 
-<a id="org8d9e5fd"></a>
+<a id="org7a01d37"></a>
 
 ## Windows
 
@@ -96,21 +98,21 @@ macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安�
     PS> emacs
 
 
-<a id="org0afc270"></a>
+<a id="org804c893"></a>
 
 ## 退出 Emacs
 
 快捷键按 `C-x C-c` （就是按住 `Ctrl` 不松开继续按 `x` ，然后再按住 `Ctrl` 不松开继续按 `c` ，聪明的你肯定发现只要按住 `Ctrl` 不松开依次按 `x` 和 `c` 键就可以了）。
 
 
-<a id="orge12542b"></a>
+<a id="org21e9454"></a>
 
 # 黑话
 
 Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着时代的气息，可能不是很好理解。所以为了便于大家理解，我们在此提前进行解释，大家遇到不懂的可以随时翻回来查看:
 
 
-<a id="org4846f09"></a>
+<a id="org84ef2bc"></a>
 
 ## 快捷键
 
@@ -174,7 +176,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 </table>
 
 
-<a id="orge7c8ed1"></a>
+<a id="org4bc548e"></a>
 
 ## 概念
 
@@ -244,7 +246,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 </table>
 
 
-<a id="orgc0dbff2"></a>
+<a id="orgf63ace6"></a>
 
 ## buffer
 
@@ -254,7 +256,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 同时 Emacs 有很多临时的 buffer 来充当日志的角色，比如默认的 `*Messages*` (`C-x b *Messages* RET`) 就是一个只读 buffer 显示一些日志信息，某些操作失败了之后也会保存一些错误消息到指定的 buffer 中，我们只要切换过去就能看到。
 
 
-<a id="org993018b"></a>
+<a id="orgf0c1d21"></a>
 
 # 基本增强
 
@@ -263,7 +265,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 ![img](images/00-installation.png)
 
 
-<a id="org34cac01"></a>
+<a id="org47b3409"></a>
 
 ## 创建配置文件
 
@@ -276,7 +278,7 @@ Emacs 的配置文件都写在 `$HOME/.emacs.d/init.el` 中，其中 `$HOME` 就
 -   Windows: C:/Users/<username>/AppData/Roaming/.emacs.d/init.el（这个目录很深，而且默认状态下AppData目录是隐藏的。）<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>
 
 
-<a id="orgcf74bbb"></a>
+<a id="org622001e"></a>
 
 ## 共享系统剪切板
 
@@ -311,7 +313,7 @@ Emacs 的配置文件都写在 `$HOME/.emacs.d/init.el` 中，其中 `$HOME` 就
             save-interprogram-paste-before-kill t)))
 
 
-<a id="orgba3a964"></a>
+<a id="org75535c3"></a>
 
 ## 基本配置
 
@@ -431,7 +433,7 @@ Emacs 的配置文件都写在 `$HOME/.emacs.d/init.el` 中，其中 `$HOME` 就
 -   `(Emacs-Lisp, ElDoc)` 表示当前 buffer 的主模式和次模式（主模式只能有一个，但是次模式可以有多个）。
 
 
-<a id="orgdafbbd1"></a>
+<a id="orgc956c5d"></a>
 
 ## 插件包管理
 
@@ -475,7 +477,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 ![img](images/02-package.png)
 
 
-<a id="orgc2b048b"></a>
+<a id="orgb1b5121"></a>
 
 ## 外观
 
@@ -578,7 +580,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 是不是漂亮多了（特意放大了窗体）！
 
 
-<a id="org112bf72"></a>
+<a id="orgea6c5ec"></a>
 
 ## 操作
 
@@ -668,14 +670,14 @@ Emacs 安装插件的方式多种多样，一般可以：
 ![img](http://g.recordit.co/08QtGtwill.gif)
 
 
-<a id="org85f557e"></a>
+<a id="orgfa3f2f1"></a>
 
 # 改变操作习惯
 
 现在我们已经有了一套非常先进的编辑器，但是继续使用之前还有一些基本的操作需要我们掌握（前面已经有一些尝试），这部分没有特别好的办法，只能建议大家多练习几遍形成肌肉记忆。
 
 
-<a id="orgde3b31a"></a>
+<a id="org1d06438"></a>
 
 ## 移动
 
@@ -721,7 +723,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 </table>
 
 
-<a id="org5d89e0a"></a>
+<a id="org27fcc63"></a>
 
 ## 选择和复制粘贴
 
@@ -733,7 +735,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 -   `C-y` 将放入 `king-ring` 的最后一条进行粘贴
 
 
-<a id="org0638acf"></a>
+<a id="org8968f4f"></a>
 
 # 准备记录笔记
 
@@ -755,7 +757,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 
 让我们将以下配置追加到 `init.el` 中：
 
-    (setq-local my/dump-brain-root "~/notes/")
+    (setq my/dump-brain-root "~/notes/")
     (use-package org
       :straight (:type git :host github :repo "bzg/org-mode")
       :after ein
@@ -830,7 +832,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 然后通过 `M-x eval-buffer RET` 使其生效（现在输出这个命令是不是愉快多了？）！
 
 
-<a id="orge35eb88"></a>
+<a id="orgc9a2d98"></a>
 
 # 开始记录笔记
 
@@ -860,37 +862,179 @@ org-roam 刚刚发布了 v2（我们现在用的也是 v2），支持基于 head
 ![img](http://g.recordit.co/cYKhCjkqQN.gif)
 
 
-<a id="org95949f8"></a>
+<a id="orgbd07c64"></a>
 
 # 进阶
 
 
-<a id="org0561338"></a>
-
-## 收集笔记：org-protocol
-
-
-<a id="orge2c6ea7"></a>
-
-## 托管笔记：magit
-
-
-<a id="orgc2db094"></a>
+<a id="org68c2af5"></a>
 
 ## 导出 Hugo 站点
 
+如果我们想要方便的查阅我们的笔记，或者想要通过这种方式写播客然后发布出去，我们可以配合
+[ox-hugo](https://github.com/kaushalmodi/ox-hugo) 插件，这个插件可以将 `Org-mode` 格式的文件导出 Hugo 格式的 markdown 文件。
 
-<a id="org076cbd8"></a>
+我们将如下配置内容追加到 `init.el` 中：
+
+    (use-package ox-hugo
+      :straight t
+      :after (ox org-mode))
+
+执行当前 buffer： `M-x eval-buffer RET` 。
+
+完成之后，我们需要配置在笔记目录下，每次保存 Org-mode 文件时自动使用 `ox-hugo` 进行转换。
+
+在 Emacs 中，按如下步骤操作：
+
+1.  创建 `~/notes/.dir-locals.el`: `C-x C-f ~/notes/.dir-locals.el`
+2.  追加如下内容到 `.dir-locals.el`:
+
+        (("content-org/" . ((org-mode . ((eval org-hugo-auto-export-mode))))))
+3.  按下 `C-x C-s` 保存，然后按下 `C-x C-k` 关闭当前 Buffer；
+4.  退出 Emacs 或者 `C-x C-k` 关闭所有 `~/notes` 目录的 Buffer；
+5.  按下 `C-c n f Notes RET`  切换到 `Notes` 节点，做一些无用的改动，然后按下 `C-x C-s` 保存；
+6.  这时候你会看到消息回显区显示已经写入了 Markdown 文件。
+
+你可能需要依次打开现有的 Org-mode 文件，做一些无用的改动然后保存，以生成对应的 Markdown 文件。
+
+最后，通过在 `~/notes` 目录下运行如下命令，即可启动本地 Hugo 站点：
+
+    $ hugo server -D --disableFastRender --navigateToChanged
+
+按照提示打开页面是不是什么都没显示？这是因为我们需要配置一个主题，我们这里使用 [contrast](https://github.com/niklasbuschmann/contrast-hugo)：
+
+    $ cd ~/notes/themes/
+    $ git clone https://github.com/niklasbuschmann/contrast-hugo.git contrast
+
+然后在 `config.toml` 中指定使用该主题：
+
+    theme = "contrast"
+
+现在我们在运行一下我们的 Hugo 站点：
+
+    $ hugo server -D --disableFastRender --navigateToChanged
+
+再次打开浏览器就可以看到内容了！
+
+
+<a id="org38eba32"></a>
 
 ## 发布 GitHub Pages
 
 
-<a id="orge25e95a"></a>
+<a id="org0e3bcc8"></a>
 
 ## GitHub workflow
 
 
-<a id="org68649e3"></a>
+<a id="org01d7ddb"></a>
+
+# 超阶
+
+这里给出一些「更高级」的主题，如果有兴趣可以自行探索。
+
+
+<a id="orgdd4f62b"></a>
+
+## 项目管理：projectile
+
+我们一般使用的 IDE 都是按照项目进行管理，Emacs 也有类似功能的插件 [projectile](https://github.com/bbatsov/projectile)：
+
+-   快速的在多个项目中间切换；
+-   快速的在项目中全文查找（配合 [the<sub>silver</sub><sub>searcher</sub>](https://github.com/ggreer/the_silver_searcher)）；
+-   快速测试、编译和运行。
+
+可以将如下配置内容追加到 `init.el`:
+
+    (use-package projectile
+      :straight t
+      :custom
+      (projectile-enable-caching t)
+      :init
+      (projectile-mode +1)
+
+      (setq projectile-globally-ignored-directories
+            (append '(".git"
+                      ".svn"
+                      ".tox"
+                      ".venv"
+                      ".gradle"
+                      ".meghanada"
+                      ".clangd"
+                      "eln-cache"
+                      "out"
+                      "repl"
+                      "target"
+                      "venv")
+                    projectile-globally-ignored-directories))
+
+      (setq projectile-globally-ignored-files
+            (append '(".DS_Store"
+                      "*.gz"
+                      "*.pyc"
+                      "*.jar"
+                      "*.tar.gz"
+                      "*.tgz"
+                      "*.zip"
+                      "*.eln"
+                      "*.elc"
+                      )
+                    projectile-globally-ignored-files))
+      (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+      (projectile-register-project-type 'hugo '("config.toml" "archetypes" "content")
+                                      :project-file "config.toml"
+                                      :compile "hugo"
+                                      :test "open http://localhost:1313/"
+                                      :run "hugo server -D --disableFastRender --navigateToChanged"))
+
+然后执行当前 buffer 即可： `M-x eval-buffer RET` 。
+
+常用快捷键：
+
+-   `C-c p p` 切换项目
+-   `C-c p U` 运行项目（上面配置如果在一个笔记项目中会弹出 hugo 的运行命令）
+-   `C-c a p` 项目内全局搜索
+
+
+<a id="orgdb32302"></a>
+
+## 使用 Emacs 作为 Git 客户端：magit
+
+Emacs 的一个非常强大的插件 [magit](https://magit.vc/)，作为 Git 客户端非常好用，建议大家学习。
+
+将如下配置内容追加到 `init.el`:
+
+    (use-package magit
+      :straight (magit :host github :repo "magit/magit")
+      :bind
+      ("C-c m s" . magit-status)
+      ("C-c m p" . magit-push-current)
+      ("C-c m c" . magit-branch-checkout)
+      ("C-c m b" . magit-branch-and-checkout)
+      ("C-c m f" . magit-fetch)
+      ("C-c m m" . magit-merge)
+      ("C-c m r" . magit-rebase))
+
+执行当前 buffer： `M-x eval-buffer RET` 。
+
+快捷键就在上面配置文件内，如果需要更复杂的操作可以：
+
+1.  `M-x magit-` 看补全的命令；
+2.  或 `C-c m-s` 打开状态面板，然后按下 `?` 看允许的操作。
+
+
+<a id="org1893728"></a>
+
+## 收集笔记：org-protocol
+
+相信你可能用过一些选中然后发送给笔记客户端进行记录笔记的操作，通过  Emacs 也可以做到，
+基本思路就是在各个系统或应用注册一个 `org-protocol://` 的协议，然后通过这个协议结合
+Emacs 的 client/server 模式，来将内容发送到 Emacs。可以参考：
+
+-   [Org-roam Protocol](https://www.orgroam.com/manual.html#Org_002droam-Protocol)
+
+
+<a id="orgf5de4d3"></a>
 
 # 接下来？
 
