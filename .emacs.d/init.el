@@ -385,3 +385,57 @@
 (use-package ox-hugo
   :straight t
   :after (ox org-mode))
+
+
+
+(use-package projectile
+  :straight t
+  :custom
+  (projectile-enable-caching t)
+  :init
+  (projectile-mode +1)
+
+  (setq projectile-globally-ignored-directories
+        (append '(".git"
+                  ".svn"
+                  ".tox"
+                  ".venv"
+                  ".gradle"
+                  ".meghanada"
+                  ".clangd"
+                  "eln-cache"
+                  "out"
+                  "repl"
+                  "target"
+                  "venv")
+                projectile-globally-ignored-directories))
+
+  (setq projectile-globally-ignored-files
+        (append '(".DS_Store"
+                  "*.gz"
+                  "*.pyc"
+                  "*.jar"
+                  "*.tar.gz"
+                  "*.tgz"
+                  "*.zip"
+                  "*.eln"
+                  "*.elc"
+                  )
+                projectile-globally-ignored-files))
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-register-project-type 'hugo '("config.toml" "archetypes" "content")
+                                  :project-file "config.toml"
+				  :compile "hugo"
+				  :test "open http://localhost:1313/"
+				  :run "hugo server -D --disableFastRender --navigateToChanged"))
+
+(use-package magit
+  :straight (magit :host github :repo "magit/magit")
+  :bind
+  ("C-c m s" . magit-status)
+  ("C-c m p" . magit-push-current)
+  ("C-c m c" . magit-branch-checkout)
+  ("C-c m b" . magit-branch-and-checkout)
+  ("C-c m f" . magit-fetch)
+  ("C-c m m" . magit-merge)
+  ("C-c m r" . magit-rebase))
