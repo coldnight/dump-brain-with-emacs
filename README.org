@@ -2,8 +2,9 @@
 #+DATE: <2021-07-28 三>
 
 其他入门教程：
-+ [[https://github.com/redguardtoo/mastering-emacs-in-one-year-guide][一年成为Emacs高手 (像神一样使用编辑器)]]。
++ [[https://github.com/redguardtoo/mastering-emacs-in-one-year-guide][一年成为Emacs高手 (像神一样使用编辑器)]]
 + [[https://github.com/w0mTea/An.Emacs.Tutorial.for.Vim.User][An Emacs Tutorial for Vim User]]
++ [[https://book.emacs-china.org/][Master Emacs in 21 Days]]
 
 * 前言
 
