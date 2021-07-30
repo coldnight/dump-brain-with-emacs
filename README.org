@@ -699,9 +699,14 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
 #+END_SRC
+接下来我们还需要调整一下 hugo 的配置，按下 ~C-x C-f ~/notes/config.toml RET~ 增加如下配置内容：
+#+BEGIN_SRC yaml
+baseURL = "http://username.github.io/"     # 替换 username 为你自己的用户名
+#+END_SRC
+
 然后将配置文件提交，提交完成就会触发自动构建 GitHub Pages：
 #+BEGIN_SRC
-$ git add .github
+$ git add .github config.toml
 $ git ci -m 'add workflow'
 $ git push origin master
 #+END_SRC
