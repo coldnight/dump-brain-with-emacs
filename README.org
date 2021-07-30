@@ -612,7 +612,7 @@ org-roam 刚刚发布了 v2（我们现在用的也是 v2），支持基于 head
     (("content-org/" . ((org-mode . ((eval org-hugo-auto-export-mode))))))
     #+END_SRC
 3. 按下 ~C-x C-s~ 保存，然后按下 ~C-x C-k~ 关闭当前 Buffer；
-4. 退出 Emacs 或者 ~C-x C-k~ 关闭所有 =~/notes= 目录的 Buffer；
+4. 重新打开 Emacs 或者 ~C-x C-k~ 关闭所有 =~/notes= 目录下的 Buffer；
 5. 按下 ~C-c n f Notes RET~  切换到 ~Notes~ 节点，做一些无用的改动，然后按下 ~C-x C-s~ 保存；
 6. 这时候你会看到消息回显区显示已经写入了 Markdown 文件。
 
@@ -638,7 +638,74 @@ $ hugo server -D --disableFastRender --navigateToChanged
 #+END_SRC
 再次打开浏览器就可以看到内容了！
 ** 发布 GitHub Pages
-** GitHub workflow
+如果你想要将内容发布到网上，[[https://pages.github.com/][GitHub Pages]] 是一个非常好的选择，原因如下：
+
++ 免费
++ 自动化
++ 内容托管防丢失
+
+首先你需要准备一个仓库，仓库名必须是 ~username.github.com~ ，其中 ~username~ 要替换成你自己的 GitHub 用户名。
+比如我的就是 [[https://github.com/coldnight/coldnight.github.com][coldnight.github.com]]。接下来需要将笔记通过 Git 推送到 GitHub 上：
+#+BEGIN_SRC
+$ cd ~/notes
+$ git init  # 初始化项目
+$ git remote add origin https://github.com/coldnight/coldnight.github.com.git  # 一样 username 需要替换成你自己的 GitHub 用户名
+$ git add . && git commit -m 'init'
+$ git push origin master
+#+END_SRC
+接下来配置 [[https://docs.github.com/cn/actions][GitHub Actions]] 进行自动化发布，首先创建配置文件：
+#+BEGIN_SRC
+$ cd ~/notes
+$ mkdir -p .github/workflows
+$ touch .github/workflows/main.yml
+#+END_SRC
+接下来通过 Emacs 打开 ~.github/workflows/main.yml~, 按下 ~C-x C-f ~/notes/.github/workflows/main.yml RET~ ，填充如下内容：
+#+BEGIN_SRC yaml
+# This is a basic workflow to help you get started with Actions
+name: Build hugo site
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.85.0'
+          # extended: true
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/master' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+#+END_SRC
+然后将配置文件提交，提交完成就会触发自动构建 GitHub Pages：
+#+BEGIN_SRC
+$ git add .github
+$ git ci -m 'add workflow'
+$ git push origin master
+#+END_SRC
+一旦构建完成就一通过 http://username.github.io 访问。
 * 超阶
 这里给出一些「更高级」的主题，如果有兴趣可以自行探索。
 ** 项目管理：projectile
