@@ -710,7 +710,7 @@ $ git add .github config.toml
 $ git ci -m 'add workflow'
 $ git push origin master
 #+END_SRC
-一旦构建完成就一通过 http://username.github.io (注意替换 ~username~ 为你的 GitHub 账号)访问。
+一旦构建完成就可以通过浏览器打开 http://username.github.io (注意替换 ~username~ 为你的 GitHub 账号)访问。
 * 超阶
 这里给出一些「更高级」的主题，如果有兴趣可以自行探索。
 ** 项目管理：projectile
