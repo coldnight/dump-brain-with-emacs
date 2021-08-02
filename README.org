@@ -806,7 +806,15 @@ Emacs 的一个非常强大的插件 [[https://magit.vc/][magit]]，作为 Git �
 [[https://github.com/org-roam/org-roam-ui][org-roam-ui]] 可以对连接可视化（不仅如此），效果如下：
 [[https://user-images.githubusercontent.com/21983833/127746882-4ba00691-3be4-49d6-8c8c-e139a14596c2.png]]
 
-有兴趣可以参考上面官方文档！
+如下配置追加到 ~init.el~:
+#+BEGIN_SRC elisp
+(use-package org-roam-ui
+  :straight
+    (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+    :after org-roam
+    :hook (org-roam . org-roam-ui-mode))
+#+END_SRC
+执行当前 buffer： ~M-x eval-buffer RET~ 。然后运行 ~M-x org-roam-ui-mode RET~ ，然后通过浏览器打开 http://127.0.0.1:35901/ 即可看到效果！
 ** 收集笔记：org-protocol
 相信你可能用过一些选中然后发送给笔记客户端进行记录笔记的操作，通过  Emacs 也可以做到，
 基本思路就是在各个系统或应用注册一个 ~org-protocol://~ 的协议，然后通过这个协议结合
