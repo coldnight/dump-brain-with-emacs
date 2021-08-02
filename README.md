@@ -1,37 +1,37 @@
 
 # Table of Contents
 
-1.  [前言](#org3468670)
-2.  [安装、启动、退出](#org5d49eb1)
-    1.  [Linux](#org2a3091c)
-    2.  [macOS](#org67d6fb0)
-    3.  [Windows](#org902dffb)
-    4.  [退出 Emacs](#org658c43f)
-3.  [黑话](#org6aeab0a)
-    1.  [快捷键](#org54d5120)
-    2.  [概念](#org138cc92)
-    3.  [buffer](#org9959152)
-4.  [基本增强](#org9156be9)
-    1.  [创建配置文件](#org1150040)
-    2.  [共享系统剪切板](#org550ece2)
-    3.  [基本配置](#orgc6481db)
-    4.  [插件包管理](#orgd8a1eb3)
-    5.  [外观](#orga478190)
-    6.  [操作](#org103ea8e)
-5.  [改变操作习惯](#org74e997c)
-    1.  [移动](#org5e96f32)
-    2.  [选择和复制粘贴](#orgef3a98b)
-6.  [准备记录笔记](#orgea5e5c8)
-7.  [开始记录笔记](#orgc5a3146)
-8.  [进阶](#org9955d36)
-    1.  [导出 Hugo 站点](#orgf51a30f)
-    2.  [发布 GitHub Pages](#orgbecf82e)
-9.  [超阶](#org396aea0)
-    1.  [项目管理：projectile](#org89f22f9)
-    2.  [使用 Emacs 作为 Git 客户端：magit](#org2e96cc5)
-    3.  [专注编辑](#orgaf2a217)
-    4.  [收集笔记：org-protocol](#org3d641fe)
-10. [接下来？](#org4eb38f5)
+1.  [前言](#org5db4f46)
+2.  [安装、启动、退出](#orgbe64be8)
+    1.  [Linux](#org5883a08)
+    2.  [macOS](#org05853fd)
+    3.  [Windows](#org519de4b)
+    4.  [退出 Emacs](#orgdaf0d3f)
+3.  [黑话](#org7a61402)
+    1.  [快捷键](#org9ffb000)
+    2.  [概念](#org51f2c50)
+    3.  [buffer](#orgb01f4d5)
+4.  [基本增强](#orge277eee)
+    1.  [创建配置文件](#orgb0f21e0)
+    2.  [共享系统剪切板](#org11c6053)
+    3.  [基本配置](#org83df1d0)
+    4.  [插件包管理](#org47b8263)
+    5.  [外观](#org1a0aaaa)
+    6.  [操作](#orgafa6b77)
+5.  [改变操作习惯](#org635009d)
+    1.  [移动](#orgbe87a3e)
+    2.  [选择和复制粘贴](#orgaacfb93)
+6.  [准备记录笔记](#orgdd25ac8)
+7.  [开始记录笔记](#orgcc8d8d2)
+8.  [进阶](#orgfa2fe40)
+    1.  [导出 Hugo 站点](#org4ca9c72)
+    2.  [发布 GitHub Pages](#orgcd9f7e9)
+9.  [超阶](#orgcc7d3ca)
+    1.  [项目管理：projectile](#org3da0b0d)
+    2.  [使用 Emacs 作为 Git 客户端：magit](#org1ea7803)
+    3.  [专注编辑](#org35b93c2)
+    4.  [收集笔记：org-protocol](#orgbad1f06)
+10. [接下来？](#orgc08e02e)
 
 其他入门教程：
 
@@ -40,7 +40,7 @@
 -   [Master Emacs in 21 Days](https://book.emacs-china.org/)
 
 
-<a id="org3468670"></a>
+<a id="org5db4f46"></a>
 
 # 前言
 
@@ -49,12 +49,12 @@
 -   不着眼于替换你现在的编辑器或者 IDE 避免降低工作效率；
 -   org-mode 是一种非常具有表达力的文档标记格式，并且配合 org-babel 可以执行代码块保存实验结果（类似 Jupyter Notebook）；
 -   [org-roam](https://github.com/org-roam/org-roam) 基于 org-mode 实现 Roam Research<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup><sup>, </sup><sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> 的方式进行先进的笔记管理；
--   基于 GitHub 可以实现免费的托管和；配合 [ox-hugo](https://github.com/kaushalmodi/ox-hugo/) 生成 [hugo](https://gohugo.io) 站点并结合 GitHub Pages 免费发布到网上。
+-   在 GitHub 上进行免费托管和发布（[发布 GitHub Pages](#orgcd9f7e9)）。
 
 也许通过记录笔记你会爱上 Emacs 并开始慢慢掌握它，将它作为主要编辑器！
 
 
-<a id="org5d49eb1"></a>
+<a id="orgbe64be8"></a>
 
 # 安装、启动、退出
 
@@ -63,7 +63,7 @@
 我们这里选择最新的稳定版本 27.2。
 
 
-<a id="org2a3091c"></a>
+<a id="org5883a08"></a>
 
 ## Linux
 
@@ -72,7 +72,7 @@
 -   pacman（Archlinux）
 
 
-<a id="org67d6fb0"></a>
+<a id="org05853fd"></a>
 
 ## macOS
 
@@ -86,7 +86,7 @@ macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安�
     $ open -a /usr/local/opt/emacs-mac/Emacs.app/
 
 
-<a id="org902dffb"></a>
+<a id="org519de4b"></a>
 
 ## Windows
 
@@ -99,21 +99,21 @@ macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安�
     PS> emacs
 
 
-<a id="org658c43f"></a>
+<a id="orgdaf0d3f"></a>
 
 ## 退出 Emacs
 
 快捷键按 `C-x C-c` （就是按住 `Ctrl` 不松开继续按 `x` ，然后再按住 `Ctrl` 不松开继续按 `c` ，聪明的你肯定发现只要按住 `Ctrl` 不松开依次按 `x` 和 `c` 键就可以了）。
 
 
-<a id="org6aeab0a"></a>
+<a id="org7a61402"></a>
 
 # 黑话
 
 Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着时代的气息，可能不是很好理解。所以为了便于大家理解，我们在此提前进行解释，大家遇到不懂的可以随时翻回来查看:
 
 
-<a id="org54d5120"></a>
+<a id="org9ffb000"></a>
 
 ## 快捷键
 
@@ -177,7 +177,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 </table>
 
 
-<a id="org138cc92"></a>
+<a id="org51f2c50"></a>
 
 ## 概念
 
@@ -247,7 +247,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 </table>
 
 
-<a id="org9959152"></a>
+<a id="orgb01f4d5"></a>
 
 ## buffer
 
@@ -257,7 +257,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 同时 Emacs 有很多临时的 buffer 来充当日志的角色，比如默认的 `*Messages*` (`C-x b *Messages* RET`) 就是一个只读 buffer 显示一些日志信息，某些操作失败了之后也会保存一些错误消息到指定的 buffer 中，我们只要切换过去就能看到。
 
 
-<a id="org9156be9"></a>
+<a id="orge277eee"></a>
 
 # 基本增强
 
@@ -266,7 +266,7 @@ Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着�
 ![img](images/00-installation.png)
 
 
-<a id="org1150040"></a>
+<a id="orgb0f21e0"></a>
 
 ## 创建配置文件
 
@@ -279,7 +279,7 @@ Emacs 的配置文件都写在 `$HOME/.emacs.d/init.el` 中，其中 `$HOME` 就
 -   Windows: C:/Users/<username>/AppData/Roaming/.emacs.d/init.el（这个目录很深，而且默认状态下AppData目录是隐藏的。）<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>
 
 
-<a id="org550ece2"></a>
+<a id="org11c6053"></a>
 
 ## 共享系统剪切板
 
@@ -314,7 +314,7 @@ Emacs 的配置文件都写在 `$HOME/.emacs.d/init.el` 中，其中 `$HOME` 就
             save-interprogram-paste-before-kill t)))
 
 
-<a id="orgc6481db"></a>
+<a id="org83df1d0"></a>
 
 ## 基本配置
 
@@ -434,7 +434,7 @@ Emacs 的配置文件都写在 `$HOME/.emacs.d/init.el` 中，其中 `$HOME` 就
 -   `(Emacs-Lisp, ElDoc)` 表示当前 buffer 的主模式和次模式（主模式只能有一个，但是次模式可以有多个）。
 
 
-<a id="orgd8a1eb3"></a>
+<a id="org47b8263"></a>
 
 ## 插件包管理
 
@@ -478,7 +478,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 ![img](images/02-package.png)
 
 
-<a id="orga478190"></a>
+<a id="org1a0aaaa"></a>
 
 ## 外观
 
@@ -580,7 +580,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 是不是漂亮多了（特意放大了窗体）！
 
 
-<a id="org103ea8e"></a>
+<a id="orgafa6b77"></a>
 
 ## 操作
 
@@ -670,14 +670,14 @@ Emacs 安装插件的方式多种多样，一般可以：
 ![img](http://g.recordit.co/08QtGtwill.gif)
 
 
-<a id="org74e997c"></a>
+<a id="org635009d"></a>
 
 # 改变操作习惯
 
 现在我们已经有了一套非常先进的编辑器，但是继续使用之前还有一些基本的操作需要我们掌握（前面已经有一些尝试），这部分没有特别好的办法，只能建议大家多练习几遍形成肌肉记忆。
 
 
-<a id="org5e96f32"></a>
+<a id="orgbe87a3e"></a>
 
 ## 移动
 
@@ -723,7 +723,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 </table>
 
 
-<a id="orgef3a98b"></a>
+<a id="orgaacfb93"></a>
 
 ## 选择和复制粘贴
 
@@ -735,7 +735,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 -   `C-y` 将放入 `king-ring` 的最后一条进行粘贴
 
 
-<a id="orgea5e5c8"></a>
+<a id="orgdd25ac8"></a>
 
 # 准备记录笔记
 
@@ -832,7 +832,7 @@ Emacs 安装插件的方式多种多样，一般可以：
 然后通过 `M-x eval-buffer RET` 使其生效（现在输出这个命令是不是愉快多了？）！
 
 
-<a id="orgc5a3146"></a>
+<a id="orgcc8d8d2"></a>
 
 # 开始记录笔记
 
@@ -862,12 +862,12 @@ org-roam 刚刚发布了 v2（我们现在用的也是 v2），支持基于 head
 ![img](http://g.recordit.co/cYKhCjkqQN.gif)
 
 
-<a id="org9955d36"></a>
+<a id="orgfa2fe40"></a>
 
 # 进阶
 
 
-<a id="orgf51a30f"></a>
+<a id="org4ca9c72"></a>
 
 ## 导出 Hugo 站点
 
@@ -917,7 +917,7 @@ org-roam 刚刚发布了 v2（我们现在用的也是 v2），支持基于 head
 再次打开浏览器就可以看到内容了！
 
 
-<a id="orgbecf82e"></a>
+<a id="orgcd9f7e9"></a>
 
 ## 发布 GitHub Pages
 
@@ -995,14 +995,14 @@ org-roam 刚刚发布了 v2（我们现在用的也是 v2），支持基于 head
 一旦构建完成就可以通过浏览器打开 <http://username.github.io> (注意替换 `username` 为你的 GitHub 账号)访问。
 
 
-<a id="org396aea0"></a>
+<a id="orgcc7d3ca"></a>
 
 # 超阶
 
 这里给出一些「更高级」的主题，如果有兴趣可以自行探索。
 
 
-<a id="org89f22f9"></a>
+<a id="org3da0b0d"></a>
 
 ## 项目管理：projectile
 
@@ -1064,7 +1064,7 @@ org-roam 刚刚发布了 v2（我们现在用的也是 v2），支持基于 head
 -   `C-c a p` 项目内全局搜索
 
 
-<a id="org2e96cc5"></a>
+<a id="org1ea7803"></a>
 
 ## 使用 Emacs 作为 Git 客户端：magit
 
@@ -1091,7 +1091,7 @@ Emacs 的一个非常强大的插件 [magit](https://magit.vc/)，作为 Git 客
 2.  或 `C-c m-s` 打开状态面板，然后按下 `?` 看允许的操作。
 
 
-<a id="orgaf2a217"></a>
+<a id="org35b93c2"></a>
 
 ## 专注编辑
 
@@ -1104,7 +1104,7 @@ Emacs 的一个非常强大的插件 [magit](https://magit.vc/)，作为 Git 客
 ![img](http://g.recordit.co/F6SrSTKLHo.gif)
 
 
-<a id="org3d641fe"></a>
+<a id="orgbad1f06"></a>
 
 ## 收集笔记：org-protocol
 
@@ -1115,7 +1115,7 @@ Emacs 的 client/server 模式，来将内容发送到 Emacs。可以参考：
 -   [Org-roam Protocol](https://www.orgroam.com/manual.html#Org_002droam-Protocol)
 
 
-<a id="org4eb38f5"></a>
+<a id="orgc08e02e"></a>
 
 # 接下来？
 
@@ -1125,7 +1125,7 @@ Emacs 的 client/server 模式，来将内容发送到 Emacs。可以参考：
 -   `C-h v` 变量
 -   `C-h b` 按键绑定
 
-然后就去问搜索引擎、社区、身边的人、提 Issue 等，掌握 Emacs 无他，但手熟尔!
+然后就去问搜索引擎、社区或身边的人，同时也欢迎大家创建 issue 进行讨论，掌握 Emacs 无他，但手熟尔!
 
 
 # Footnotes
