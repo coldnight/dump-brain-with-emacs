@@ -835,7 +835,7 @@ Emacs 的 client/server 模式，来将内容发送到 Emacs。可以参考：
  + ~C-h f~ 函数（major mode 和 minor mode 也是一个函数）
  + ~C-h v~ 变量
  + ~C-h b~ 按键绑定
-然后就去问搜索引擎、社区或身边的人，同时也欢迎大家创建 issue 进行讨论，掌握 Emacs 无他，但手熟尔!
+然后就去问搜索引擎、社区或身边的人，同时也欢迎大家创建 [[https://github.com/coldnight/dump-brain-with-emacs/issues][issues]] 进行讨论，掌握 Emacs 无他，但手熟尔!
 * Footnotes
 
 
