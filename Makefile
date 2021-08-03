@@ -1,7 +1,5 @@
 MAKE_ := $(MAKE) -j1 --no-print-directory
 
-DB_LISP_DIR = $(shell pwd)/lisp
-
 EMACS ?= emacs
 FUNC =
 
@@ -11,7 +9,7 @@ emacs-batch:
 	@echo ""
 	@echo "$(ORG_FILE) ::"
 	@env HOME=$(shell pwd)/ $(EMACS) -l $(shell pwd)/.emacs.d/init.el --batch \
-		--eval "(load-file (expand-file-name \"generate-hugo-md.el\" \"$(DB_LISP_DIR)\"))" \
+		--eval "(load-file (expand-file-name \"lisp/generate-hugo-md.el\" \"~\"))" \
 		-f $(FUNC) \
 		--kill
 
