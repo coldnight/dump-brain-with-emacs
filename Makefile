@@ -15,5 +15,8 @@ emacs-batch:
 		-f $(FUNC) \
 		--kill
 
-md:
+init:
+	@$(MAKE_) emacs-batch FUNC=emacs-version
+
+md: init
 	@$(MAKE_) emacs-batch FUNC=generate-readme-to-hugo
