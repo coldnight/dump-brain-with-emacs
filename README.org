@@ -2,6 +2,12 @@
 #+DATE: <2021-07-28 三>
 #+HUGO_BASE_DIR: ../
 
+#+BEGIN_EXPORT html
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/21983833/127746882-4ba00691-3be4-49d6-8c8c-e139a14596c2.png" alt="Dump brain with Emacs" />
+</p>
+#+END_EXPORT
+
 其他入门教程：
 + [[https://github.com/redguardtoo/mastering-emacs-in-one-year-guide][一年成为Emacs高手 (像神一样使用编辑器)]]
 + [[https://github.com/w0mTea/An.Emacs.Tutorial.for.Vim.User][An Emacs Tutorial for Vim User]]
