@@ -10,7 +10,7 @@ FUNC =
 emacs-batch:
 	@echo ""
 	@echo "$(ORG_FILE) ::"
-	@env HOME=$(shell pwd)/ $(EMACS) --batch \
+	@env HOME=$(shell pwd)/ $(EMACS) -l $(shell pwd)/.emacs.d/init.el --batch \
 		--eval "(load-file (expand-file-name \"generate-hugo-md.el\" \"$(DB_LISP_DIR)\"))" \
 		-f $(FUNC) \
 		--kill
