@@ -29,7 +29,8 @@ jobs:
         run: make --no-print-directory -j1 md
       - name: Hugo Actions
         uses: srt32/hugo-action@v0.0.3
-        working-directory: ${{env.working-directory}}/notes
+        with:
+          args: -s notes
       - name: Pushes to another repository
         uses: darkquasar/github-action-push-to-another-repository@master
         env:
