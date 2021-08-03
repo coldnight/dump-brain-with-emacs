@@ -25,7 +25,6 @@ jobs:
           - 'snapshot'
           - '27.2'
           - '26.3'
-          - '25.3'
     # runs-on: ubuntu-latest
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.emacs_version == 'snapshot' }}
