@@ -1,0 +1,44 @@
+name: Build hugo site
+
+# Controls when the action will run.
+on:
+  push:
+    branches:
+      - master
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Find and Replace image files
+        uses: jacobtomlinson/gha-find-replace@master
+        with:
+          find: "/ox-hugo/"
+          replace: "/dump-brain-with-emacs/ox-hugo/"
+          include: "notes/content/"
+      - uses: purcell/setup-emacs@master
+        with:
+          version: '27.2'
+      - name: Generate hugo site
+        run: make --no-print-directory -j1 md
+      - name: Hugo Actions
+        uses: srt32/hugo-action@v0.0.3
+        working-directory: ${{env.working-directory}}/notes
+      - name: Pushes to another repository
+        uses: darkquasar/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'notes/public'
+          target-directory: 'dump-brain-with-emacs'
+          destination-github-username: 'coldnight'
+          destination-repository-name: 'coldnight.github.com'
+          user-email: wh_linux@126.com
+          target-branch: master
+          commit-message: "Auto committed from dump-brain-with-emacs"
