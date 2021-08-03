@@ -1,4 +1,4 @@
-baseURL = "http://example.org/"
+baseURL = "http://coldnight.github.io/dump-brain-with-emacs/"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "Dump brain with Emacs"
 theme = "contrast"
