@@ -35,9 +35,10 @@ jobs:
       - uses: purcell/setup-emacs@master
         with:
           version: ${{ matrix.emacs_version }}
-        os: ubuntu-latest
+        if: matrix.os == 'ubuntu-latest'
       - uses: jcs090218/setup-emacs-windows@master
         with:
           version: ${{ matrix.emacs_version }}
+        if: matrix.os == 'windows'
       - name: Generate hugo site
         run: make --no-print-directory -j1 md
