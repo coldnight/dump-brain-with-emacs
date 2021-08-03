@@ -196,9 +196,11 @@ Emacs 的配置文件都写在 ~$HOME/.emacs.d/init.el~ 中，其中 ~$HOME~ 就
  truncate-string-ellipsis "…"  ;; Unicode ellispis are nicer than "...", and also save /precious/ space
  ;; 当寻找一个同名的文件,改变两个buffer的名字,前面加上目录名
  uniquify-buffer-name-style 'post-forward-angle-brackets)
-(menu-bar-mode -1)            ;; 取消菜单栏
-(scroll-bar-mode -1)          ;; 取消滚动条（在 Emacs 26 中无效）
-(tool-bar-mode -1)            ;; 取消工具栏
+(if (display-graphic-p)
+    (progn
+      (menu-bar-mode -1)            ;; 取消菜单栏
+      (scroll-bar-mode -1)          ;; 取消滚动条（在 Emacs 26 中无效）
+      (tool-bar-mode -1)))          ;; 取消工具栏
 (fset 'yes-or-no-p 'y-or-n-p) ;; 按y或space表示yes,n表示no
 (global-font-lock-mode t)     ;; 语法高亮
 (show-paren-mode t)           ;; 打开括号匹配显示模式
