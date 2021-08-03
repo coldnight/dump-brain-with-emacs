@@ -1,6 +1,6 @@
 #+TITLE: 从零开始用 Emacs 管理笔记
 #+DATE: <2021-07-28 三>
-#+HUGO_BASE_DIR: .
+#+HUGO_BASE_DIR: ../
 
 其他入门教程：
 + [[https://github.com/redguardtoo/mastering-emacs-in-one-year-guide][一年成为Emacs高手 (像神一样使用编辑器)]]
