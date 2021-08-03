@@ -21,16 +21,16 @@ jobs:
           version: '27.2'
       - name: Generate hugo site
         run: make --no-print-directory -j1 md
-      - name: Hugo Actions
-        uses: srt32/hugo-action@v0.0.3
-        with:
-          args: -s notes
       - name: Find and Replace image files
         uses: jacobtomlinson/gha-find-replace@master
         with:
           find: "/ox-hugo/"
           replace: "/dump-brain-with-emacs/ox-hugo/"
           include: "notes/content/"
+      - name: Hugo Actions
+        uses: srt32/hugo-action@v0.0.3
+        with:
+          args: -s notes
       - name: Pushes to another repository
         uses: darkquasar/github-action-push-to-another-repository@master
         env:
