@@ -19,6 +19,7 @@ jobs:
       matrix:
         os:
           - 'ubuntu-latest'
+          - 'windows'
         emacs_version:
           - 'snapshot'
           - '27.2'
@@ -32,6 +33,10 @@ jobs:
         with:
           submodules: true
       - uses: purcell/setup-emacs@master
+        with:
+          version: ${{ matrix.emacs_version }}
+        os: ubuntu-latest
+      - uses: jcs090218/setup-emacs-windows@master
         with:
           version: ${{ matrix.emacs_version }}
       - name: Generate hugo site
