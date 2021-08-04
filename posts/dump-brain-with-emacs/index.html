@@ -500,7 +500,12 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 (use-package ivy-posframe
   :straight <span style="color:#66d9ef">t</span>
   :custom
-  (ivy-posframe-display-functions-alist <span style="color:#f92672">&#39;</span>((<span style="color:#66d9ef">t</span> <span style="color:#f92672">.</span> ivy-posframe-display)))
+  (ivy-posframe-display-functions-alist
+   <span style="color:#f92672">&#39;</span>((swiper          <span style="color:#f92672">.</span> ivy-posframe-display-at-point)  <span style="color:#75715e">;; swiper 紧随光标弹出</span>
+     (complete-symbol <span style="color:#f92672">.</span> ivy-posframe-display-at-point)  <span style="color:#75715e">;; 符号补全紧随光标弹出</span>
+     (<span style="color:#66d9ef">t</span> <span style="color:#f92672">.</span> ivy-posframe-display)))                       <span style="color:#75715e">;; 其他所有都在中心位置弹出</span>
+  (ivy-posframe-parameters <span style="color:#f92672">&#39;</span>((left-fringe <span style="color:#f92672">.</span> <span style="color:#ae81ff">8</span>)
+                             (right-fringe <span style="color:#f92672">.</span> <span style="color:#ae81ff">8</span>)))       <span style="color:#75715e">;; 指示弹出窗口标边缘</span>
   :init
   (ivy-posframe-mode <span style="color:#ae81ff">1</span>))
 
