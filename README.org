@@ -576,7 +576,7 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
   :hook
   (org-mode . (lambda () (org-superstar-mode 1))))
 #+END_SRC
-然后通过 ~M-x eval-buffer RET~ 使其生效（现在输出这个命令是不是愉快多了？）！
+然后通过 ~M-x eval-buffer RET~ 使其生效（现在输入这个命令是不是愉快多了？）！
 * 开始记录笔记
 漫长的等待之后我们终于可以开始记录了。
 
