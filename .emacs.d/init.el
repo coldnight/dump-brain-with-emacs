@@ -258,7 +258,12 @@
 (use-package ivy-posframe
   :straight t
   :custom
-  (ivy-posframe-display-functions-alist '((t . ivy-posframe-display)))
+  (ivy-posframe-display-functions-alist
+   '((swiper          . ivy-posframe-display-at-point)  ;; swiper 紧随光标弹出
+     (complete-symbol . ivy-posframe-display-at-point)  ;; 符号补全紧随光标弹出
+     (t . ivy-posframe-display)))                       ;; 其他所有都在中心位置弹出
+  (ivy-posframe-parameters '((left-fringe . 8)
+                             (right-fringe . 8)))       ;; 指示弹出窗口标边缘
   :init
   (ivy-posframe-mode 1))
 
