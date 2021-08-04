@@ -31,15 +31,10 @@ jobs:
         uses: srt32/hugo-action@v0.0.3
         with:
           args: -s notes
-      - name: Pushes to another repository
-        uses: darkquasar/github-action-push-to-another-repository@master
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/master' }}
         with:
-          source-directory: 'notes/public'
-          target-directory: 'dump-brain-with-emacs'
-          destination-github-username: 'coldnight'
-          destination-repository-name: 'coldnight.github.com'
-          user-email: wh_linux@126.com
-          target-branch: master
-          commit-message: "Auto committed from dump-brain-with-emacs"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./notes/public
