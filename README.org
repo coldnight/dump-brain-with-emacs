@@ -8,6 +8,9 @@
 </p>
 #+END_EXPORT
 
+[[https://github.com/coldnight/dump-brain-with-emacs/actions/workflows/build.yml][https://github.com/coldnight/dump-brain-with-emacs/actions/workflows/build.yml/badge.svg]]
+[[https://github.com/coldnight/dump-brain-with-emacs/actions/workflows/test.yml][https://github.com/coldnight/dump-brain-with-emacs/actions/workflows/test.yml/badge.svg]]
+
 其他入门教程：
 + [[https://github.com/redguardtoo/mastering-emacs-in-one-year-guide][一年成为Emacs高手 (像神一样使用编辑器)]]
 + [[https://github.com/w0mTea/An.Emacs.Tutorial.for.Vim.User][An Emacs Tutorial for Vim User]]
