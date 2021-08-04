@@ -1,4 +1,4 @@
-baseURL = "http://coldnight.github.io/dump-brain-with-emacs/"
+baseURL = "https://coldnight.github.io/dump-brain-with-emacs/"
 languageCode = "en-us"
 title = "Dump brain with Emacs"
 theme = "contrast"
