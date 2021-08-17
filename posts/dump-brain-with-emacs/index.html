@@ -103,11 +103,19 @@ $ brew install emacs-mac
 </tr>
 <tr>
 <td><code>s-l</code></td>
-<td><code>Super</code> + <code>l</code> , Super 键现在比较少见，可以通过 <code>C-x @-s</code> 按出 <code>s-</code> 前缀，所以这个完整的快捷键是 <code>C-x @-s l</code></td>
+<td><code>Super</code> + <code>l</code> , Super 键现在比较少见，可以通过 <code>C-x @ s</code> 按出 <code>s-</code> 前缀，所以这个完整的快捷键是 <code>C-x @ s l</code></td>
+</tr>
+<tr>
+<td><code>C-x @</code> 前缀</td>
+<td>可以用这个前缀快捷键按出一些比较奇怪的「修饰键」，比如上面的 <code>Super</code> ,其他还有 <code>Hyper</code></td>
 </tr>
 <tr>
 <td><code>M-x org-id-get-create RET</code></td>
 <td><code>M-x</code> 会弹出命令输出框，然后输入 <code>org-id-get-create</code> 按回车（ <code>RET</code> 表示回车）</td>
+</tr>
+<tr>
+<td><code>C-u</code> 前缀</td>
+<td>可以给 <code>M-x</code> 命令传递参数，比如禁用某些 minor mode <code>C-u 0 M-x flycheck-mode RET</code> 就是给 <code>flycheck-mode</code> 这个函数传递参数 <code>0</code></td>
 </tr>
 </tbody>
 </table>
