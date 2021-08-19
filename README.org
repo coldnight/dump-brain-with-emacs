@@ -833,6 +833,53 @@ Emacs 的一个非常强大的插件 [[https://magit.vc/][magit]]，作为 Git �
 基本思路就是在各个系统或应用注册一个 ~org-protocol://~ 的协议，然后通过这个协议结合
 Emacs 的 client/server 模式，来将内容发送到 Emacs。可以参考：
  + [[https://www.orgroam.com/manual.html#Org_002droam-Protocol][Org-roam Protocol]]
+** org-babel 结合 Graphviz 内嵌流程图
+org-babel 支持执行 Orgmode 中的代码块，如果你熟悉 [[https://graphviz.org/doc/info/lang.html][DOT Language]] 想要在 Orgmode 中自己画图，可以通过 org-babel 和 Graphviz 来实现。
+
+首先，你需要先安装 [[https://graphviz.org/download/][Graphviz]]。
+
+然后，配置 org-babel 支持 dot（上面配置已经包含这段配置，所以你不用写入这段配置，可以对照看一下位置）：
+#+BEGIN_SRC elisp
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((dot . t)))
+#+END_SRC
+
+接下来，插入 DOT 代码块就可以嵌入流程图，比如下面是一个描述 B-tree 的例子：
+#+BEGIN_SRC
+\#+BEGIN_SRC dot :file b-tree-dot.png :exports results
+digraph {
+  rankdir=TB;
+  node [ shape=record ];
+  label = "查找 user_id = 251";
+  labelloc = "t";
+  struct1 [
+      label = "{<port0>ref}|100|{<port1>ref}|200|ref|300|{<port3>ref}|400|ref|500|ref";
+  ];
+
+  struct2 [
+      label = "ref|111|ref|{<port2>135}|ref|152|ref|169|ref|190|ref"
+  ];
+
+  struct3 [
+      label = "ref|210|ref|230|ref|{<port4>250}|{<port5>ref}|270|ref|290|ref"
+  ];
+  struct4 [
+      label = "250|val|251|val|252|{<port6>val}|253|val|254|val"
+  ];
+  struct1:port1 -> struct2:port2 [
+    label="100 <= key < 200";
+    style = "dotted";
+  ];
+  struct1:port3 -> struct3:port3 [label="200<= key < 300"];
+  struct3:port5 -> struct4:port6 [label="250 <= key < 270"];
+}
+\#+END_SRC
+#+END_SRC
+保存后就会生成并引用图片，图片效果如下：
+[[file:images/b-tree-dot.png][B-tree DOT]]。
+
+当然，除了画流程图，社区还提供了 [[https://github.com/millejoh/emacs-ipython-notebook][emacs-ipython-notebook]] 可以在 Orgmode 中实现类似 Jupyter Notebook 的功能。
 * 接下来？
 遇到不会的 ~C-h~ 是你的好帮手（which-key 会帮你弹出所有帮助主题），常用的有：
 
