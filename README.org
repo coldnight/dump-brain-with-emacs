@@ -846,7 +846,7 @@ org-babel 支持执行 Orgmode 中的代码块，如果你熟悉 [[https://graph
 #+END_SRC
 
 接下来，插入 DOT 代码块就可以嵌入流程图，比如下面是一个描述 B-tree 的例子：
-#+BEGIN_QUOTE
+#+begin_example
 #+BEGIN_SRC dot :file b-tree-dot.png :exports results
 digraph {
   rankdir=TB;
@@ -875,7 +875,7 @@ digraph {
   struct3:port5 -> struct4:port6 [label="250 <= key < 270"];
 }
 #+END_SRC
-#+END_QUOTE
+#+end_example
 保存后就会生成并引用图片，图片效果如下：
 [[file:images/b-tree-dot.png][B-tree DOT]]。
 
