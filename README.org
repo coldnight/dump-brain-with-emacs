@@ -847,34 +847,34 @@ org-babel 支持执行 Orgmode 中的代码块，如果你熟悉 [[https://graph
 
 接下来，插入 DOT 代码块就可以嵌入流程图，比如下面是一个描述 B-tree 的例子：
 #+begin_example
-#+BEGIN_SRC dot :file b-tree-dot.png :exports results
-digraph {
-  rankdir=TB;
-  node [ shape=record ];
-  label = "查找 user_id = 251";
-  labelloc = "t";
-  struct1 [
-      label = "{<port0>ref}|100|{<port1>ref}|200|ref|300|{<port3>ref}|400|ref|500|ref";
-  ];
+  ,#+BEGIN_SRC dot :file b-tree-dot.png :exports results
+  digraph {
+    rankdir=TB;
+    node [ shape=record ];
+    label = "查找 user_id = 251";
+    labelloc = "t";
+    struct1 [
+        label = "{<port0>ref}|100|{<port1>ref}|200|ref|300|{<port3>ref}|400|ref|500|ref";
+    ];
 
-  struct2 [
-      label = "ref|111|ref|{<port2>135}|ref|152|ref|169|ref|190|ref"
-  ];
+    struct2 [
+        label = "ref|111|ref|{<port2>135}|ref|152|ref|169|ref|190|ref"
+    ];
 
-  struct3 [
-      label = "ref|210|ref|230|ref|{<port4>250}|{<port5>ref}|270|ref|290|ref"
-  ];
-  struct4 [
-      label = "250|val|251|val|252|{<port6>val}|253|val|254|val"
-  ];
-  struct1:port1 -> struct2:port2 [
-    label="100 <= key < 200";
-    style = "dotted";
-  ];
-  struct1:port3 -> struct3:port3 [label="200<= key < 300"];
-  struct3:port5 -> struct4:port6 [label="250 <= key < 270"];
-}
-#+END_SRC
+    struct3 [
+        label = "ref|210|ref|230|ref|{<port4>250}|{<port5>ref}|270|ref|290|ref"
+    ];
+    struct4 [
+        label = "250|val|251|val|252|{<port6>val}|253|val|254|val"
+    ];
+    struct1:port1 -> struct2:port2 [
+      label="100 <= key < 200";
+      style = "dotted";
+    ];
+    struct1:port3 -> struct3:port3 [label="200<= key < 300"];
+    struct3:port5 -> struct4:port6 [label="250 <= key < 270"];
+  }
+  ,#+END_SRC
 #+end_example
 保存后就会生成并引用图片，图片效果如下：
 [[file:images/b-tree-dot.png][B-tree DOT]]。
