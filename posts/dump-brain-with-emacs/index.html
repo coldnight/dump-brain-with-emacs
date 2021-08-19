@@ -908,35 +908,35 @@ Emacs 的 client/server 模式，来将内容发送到 Emacs。可以参考：</
  <span style="color:#e6db74">&#39;org-babel-load-languages</span>
  <span style="color:#f92672">&#39;</span>((dot <span style="color:#f92672">.</span> <span style="color:#66d9ef">t</span>)))
 </code></pre></div><p>接下来，插入 DOT 代码块就可以嵌入流程图，比如下面是一个描述 B-tree 的例子：</p>
-<pre><code class="language-nil" data-lang="nil">\#+BEGIN_SRC dot :file b-tree-dot.png :exports results
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">#+BEGIN_SRC dot :file b-tree-dot.png :exports results
 digraph {
   rankdir=TB;
   node [ shape=record ];
-  label = &quot;查找 user_id = 251&quot;;
-  labelloc = &quot;t&quot;;
+  label = &#34;查找 user_id = 251&#34;;
+  labelloc = &#34;t&#34;;
   struct1 [
-      label = &quot;{&lt;port0&gt;ref}|100|{&lt;port1&gt;ref}|200|ref|300|{&lt;port3&gt;ref}|400|ref|500|ref&quot;;
+      label = &#34;{&lt;port0&gt;ref}|100|{&lt;port1&gt;ref}|200|ref|300|{&lt;port3&gt;ref}|400|ref|500|ref&#34;;
   ];
 
   struct2 [
-      label = &quot;ref|111|ref|{&lt;port2&gt;135}|ref|152|ref|169|ref|190|ref&quot;
+      label = &#34;ref|111|ref|{&lt;port2&gt;135}|ref|152|ref|169|ref|190|ref&#34;
   ];
 
   struct3 [
-      label = &quot;ref|210|ref|230|ref|{&lt;port4&gt;250}|{&lt;port5&gt;ref}|270|ref|290|ref&quot;
+      label = &#34;ref|210|ref|230|ref|{&lt;port4&gt;250}|{&lt;port5&gt;ref}|270|ref|290|ref&#34;
   ];
   struct4 [
-      label = &quot;250|val|251|val|252|{&lt;port6&gt;val}|253|val|254|val&quot;
+      label = &#34;250|val|251|val|252|{&lt;port6&gt;val}|253|val|254|val&#34;
   ];
   struct1:port1 -&gt; struct2:port2 [
-    label=&quot;100 &lt;= key &lt; 200&quot;;
-    style = &quot;dotted&quot;;
+    label=&#34;100 &lt;= key &lt; 200&#34;;
+    style = &#34;dotted&#34;;
   ];
-  struct1:port3 -&gt; struct3:port3 [label=&quot;200&lt;= key &lt; 300&quot;];
-  struct3:port5 -&gt; struct4:port6 [label=&quot;250 &lt;= key &lt; 270&quot;];
+  struct1:port3 -&gt; struct3:port3 [label=&#34;200&lt;= key &lt; 300&#34;];
+  struct3:port5 -&gt; struct4:port6 [label=&#34;250 &lt;= key &lt; 270&#34;];
 }
-\#+END_SRC
-</code></pre><p>保存后就会生成并引用图片，图片效果如下：
+#+END_SRC
+</code></pre></div><p>保存后就会生成并引用图片，图片效果如下：
 <a href="/dump-brain-with-emacs/ox-hugo/b-tree-dot.png">B-tree DOT</a>。</p>
 <p>当然，除了画流程图，社区还提供了 <a href="https://github.com/millejoh/emacs-ipython-notebook">emacs-ipython-notebook</a> 可以在 Orgmode 中实现类似 Jupyter Notebook 的功能。</p>
 <h2 id="接下来">接下来？</h2>
