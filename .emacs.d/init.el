@@ -296,7 +296,6 @@
 
 (use-package org
   :straight (:type git :host github :repo "bzg/org-mode")
-  :after ein
   :bind
   ("C-c c" . org-capture)
   ("C-c a o" . org-agenda)
@@ -329,8 +328,7 @@
     (org-id-update-id-locations (directory-files "." t "\.org\$" t)))
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((ein . t)
-     (dot . t))))
+   '((dot . t))))
 
 (use-package org-journal
   :after org
