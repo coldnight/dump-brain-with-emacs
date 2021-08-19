@@ -607,7 +607,6 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(setq my/dump-brain-root <span style="color:#e6db74">&#34;~/notes/&#34;</span>)
 (use-package org
   :straight (:type git :host github :repo <span style="color:#e6db74">&#34;bzg/org-mode&#34;</span>)
-  :after ein
   :bind
   (<span style="color:#e6db74">&#34;C-c c&#34;</span> <span style="color:#f92672">.</span> org-capture)
   (<span style="color:#e6db74">&#34;C-c a o&#34;</span> <span style="color:#f92672">.</span> org-agenda)
@@ -640,8 +639,7 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
     (org-id-update-id-locations (<span style="color:#a6e22e">directory-files</span> <span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#66d9ef">t</span> <span style="color:#e6db74">&#34;\.org\$&#34;</span> <span style="color:#66d9ef">t</span>)))
   (org-babel-do-load-languages
    <span style="color:#e6db74">&#39;org-babel-load-languages</span>
-   <span style="color:#f92672">&#39;</span>((ein <span style="color:#f92672">.</span> <span style="color:#66d9ef">t</span>)
-     (dot <span style="color:#f92672">.</span> <span style="color:#66d9ef">t</span>))))
+   <span style="color:#f92672">&#39;</span>((dot <span style="color:#f92672">.</span> <span style="color:#66d9ef">t</span>))))
 
 (use-package org-roam
   :after org
