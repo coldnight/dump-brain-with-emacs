@@ -29,12 +29,17 @@
 
 ** Linux
 + yum（CentOS/RHEL/Fedora）
-  #+BEGIN_SRC
+  #+BEGIN_SRC shell
+  sudo yum install emacs
   #+END_SRC
 + apt（Debian/Ubuntu）
-  #+BEGIN_SRC
+  #+BEGIN_SRC shell
+  sudo apt install emacs
   #+END_SRC
 + pacman（Archlinux）
+  #+begin_src shell
+    sudo pacman -S emacs
+  #+end_src
 ** macOS
 macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安装最新版。我之前比较常用的是 emacs-mac 这个版本，可以通过 [[https://brew.sh/][Homebrew]] 安装：
 #+BEGIN_SRC shell
