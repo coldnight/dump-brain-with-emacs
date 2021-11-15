@@ -8,6 +8,7 @@ FUNC =
 emacs-batch:
 	@echo ""
 	@echo "$(ORG_FILE) ::"
+	@mkdir -p $(shell pwd)/.cache/org-persist/
 	@env HOME=$(shell pwd)/ $(EMACS) -l $(shell pwd)/.emacs.d/init.el --batch \
 		--eval "(load-file (expand-file-name \"lisp/generate-hugo-md.el\" \"~\"))" \
 		-f $(FUNC) \
