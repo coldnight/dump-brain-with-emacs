@@ -19,7 +19,7 @@
 安装、启动、退出 目前（2021-07-29）最新稳定版是 27.2，主线版本 Emacs 28 并且已经合并了 Native Comp，我日常使用的就是编译了 Native Comp 的主线版本。
 我们这里选择最新的稳定版本 27.2。
 Linux   yum（CentOS/RHEL/Fedora）
-  apt（Debian/Ubuntu）</description>
+sudo yum install emacs   apt（Debian/Ubuntu）</description>
     </item>
     
   </channel>
