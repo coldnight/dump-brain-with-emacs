@@ -22,11 +22,12 @@ jobs:
       - name: Generate hugo site
         run: make --no-print-directory -j1 md
       - name: Find and Replace image files
-        uses: jacobtomlinson/gha-find-replace@master
+        uses: jacobtomlinson/gha-find-replace@2.0.0
         with:
           find: "/ox-hugo/"
           replace: "/dump-brain-with-emacs/ox-hugo/"
-          include: "notes/content/"
+          include: "notes/content/**"
+          regex: false
       - name: Hugo Actions
         uses: srt32/hugo-action@v0.0.3
         with:
