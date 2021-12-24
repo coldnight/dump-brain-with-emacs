@@ -265,16 +265,10 @@ Emacs 安装插件的方式多种多样，一般可以：
 为了启动整个包管理世界，我们需要先安装包管理，手动的安装：
 #+BEGIN_SRC shell
 $ cd ~/.emacs.d/
-$ git clone git@github.com:jwiegley/use-package.git
 $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 #+END_SRC
 然后在 ~init.el~ 中追加下面配置内容：
 #+BEGIN_SRC elisp
-;; use package
-(eval-when-compile
-  (add-to-list 'load-path "~/.emacs.d/use-package")
-  (require 'use-package))
-
 ;; straight.el to manage package
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -288,6 +282,7 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+(straight-use-package 'use-package)
 #+END_SRC
 然后我们开始执行当前 buffer： ~M-x eval-buffer RET~ ，然后 straight.el 就会开始同步源：
 [[file:images/02-package.png]]
