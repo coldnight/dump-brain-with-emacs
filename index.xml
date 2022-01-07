@@ -6,20 +6,36 @@
     <description>Recent content on Dump brain with Emacs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 28 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://coldnight.github.io/dump-brain-with-emacs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 07 Jan 2022 17:54:00 +0800</lastBuildDate><atom:link href="https://coldnight.github.io/dump-brain-with-emacs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>工欲善其事，必先利其器：Emacs 配置篇</title>
+      <link>https://coldnight.github.io/dump-brain-with-emacs/posts/20220107175445-%E5%B7%A5%E6%AC%B2%E5%96%84%E5%85%B6%E4%BA%8B_%E5%BF%85%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8_emacs_%E9%85%8D%E7%BD%AE%E7%AF%87/</link>
+      <pubDate>Fri, 07 Jan 2022 17:54:00 +0800</pubDate>
+      
+      <guid>https://coldnight.github.io/dump-brain-with-emacs/posts/20220107175445-%E5%B7%A5%E6%AC%B2%E5%96%84%E5%85%B6%E4%BA%8B_%E5%BF%85%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8_emacs_%E9%85%8D%E7%BD%AE%E7%AF%87/</guid>
+      <description>前言 不同于其他 Emacs 教程，本文着重于从零开始通过 Emacs 做笔记管理，这样做的好处如下：
+ 不着眼于替换你现在的编辑器或者 IDE 避免降低工作效率； org-mode 是一种非常具有表达力的文档标记格式，并且配合 org-babel 可以执行代码块保存实验结果（类似 Jupyter Notebook）； org-roam 基于 org-mode 实现 Roam Research1, 2 的方式进行先进的笔记管理； 在 GitHub 上进行免费托管和发布（发布 GitHub Pages）。  也许通过记录笔记你会爱上 Emacs 并开始慢慢掌握它，将它作为主要编辑器！
+安装、启动、退出 目前（2021-07-29）最新稳定版是 27.2，主线版本 Emacs 28 并且已经合并了 Native Comp，我日常使用的就是编译了 Native Comp 的主线版本。
+我们这里选择最新的稳定版本 27.2。
+Linux   yum（CentOS/RHEL/Fedora）
+sudo yum install emacs   apt（Debian/Ubuntu）
+sudo apt install emacs   pacman（Archlinux）
+sudo pacman -S emacs   macOS macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安装最新版。我之前比较常用的是 emacs-mac 这个版本，可以通过 Homebrew 安装：</description>
+    </item>
+    
     <item>
       <title>从零开始用 Emacs 管理笔记</title>
       <link>https://coldnight.github.io/dump-brain-with-emacs/posts/dump-brain-with-emacs/</link>
       <pubDate>Wed, 28 Jul 2021 00:00:00 +0000</pubDate>
       
       <guid>https://coldnight.github.io/dump-brain-with-emacs/posts/dump-brain-with-emacs/</guid>
-      <description>其他入门教程：
- 一年成为Emacs高手 (像神一样使用编辑器) An Emacs Tutorial for Vim User Master Emacs in 21 Days  前言 不同于其他 Emacs 教程，本文着重于从零开始通过 Emacs 做笔记管理，这样做的好处如下：
- 不着眼于替换你现在的编辑器或者 IDE 避免降低工作效率； org-mode 是一种非常具有表达力的文档标记格式，并且配合 org-babel 可以执行代码块保存实验结果（类似 Jupyter Notebook）； org-roam 基于 org-mode 实现 Roam Research1, 2 的方式进行先进的笔记管理； 在 GitHub 上进行免费托管和发布（发布 GitHub Pages）。  也许通过记录笔记你会爱上 Emacs 并开始慢慢掌握它，将它作为主要编辑器！
-安装、启动、退出 目前（2021-07-29）最新稳定版是 27.2，主线版本 Emacs 28 并且已经合并了 Native Comp，我日常使用的就是编译了 Native Comp 的主线版本。
-我们这里选择最新的稳定版本 27.2。
-Linux   yum（CentOS/RHEL/Fedora）
-sudo yum install emacs   apt（Debian/Ubuntu）</description>
+      <description> 
+ 其他入门教程：
+ 一年成为Emacs高手 (像神一样使用编辑器) An Emacs Tutorial for Vim User Master Emacs in 21 Days  快速体验   克隆当前项目到本地：
+git clone https://github.com/coldnight/dump-brain-with-emacs.git ~/dump-brain-with-emacs   确保 Emacs 已经安装，如果没有请先安装 Emacs 最新版。
+  使用当前项目 Emacs 配置文件启动项目：
+env HOME=~/dump-brain-with-emacs emacs   等待包管理自动安装相关插件。
+  主题构成  工欲善其事，必先利其器：Emacs 安装 工欲善其事，必先利其器：Emacs 配置 工欲善其事，必先利其器：笔记发布 工欲善其事，必先利其器：笔记增强 道法自然：聪明的笔记记录方式  </description>
     </item>
     
   </channel>
