@@ -63,6 +63,13 @@
  x-stretch-cursor t                               ;; 将光标拉伸到字形宽度
  kill-whole-line t)  ;; C-k时,同时删除该行
 
+;;; Tidy workdir
+(make-directory "~/.emacs.d/data/backup/" t)
+(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/data/backup/" t)) ; Write auto-save files to a separate directory
+      backup-directory-alist '(("." . "~/.emacs.d/data/backup/"))          ; Write backup files to a separate directory
+      create-lockfiles nil                                                 ; Disable lockfiles as I use only one Emacs instance
+      )
+
 (setq
  fringes-outside-margins t   ;; fringe 放在外面
  echo-keystrokes 0.1         ;; 尽快显示按键序列
