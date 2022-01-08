@@ -50,4 +50,4 @@
    - 首先按下 =C-x C-f ~/.emacs.d/my.el= 打开文件，
    - 确认你的 HTTP 代理是否为 =127.0.0.1:1087=，如果不是请做更改 =my-url-http-proxy-service= 的值，
    - 按下 ~M-x eval-buffer RET~ 执行，按下 ~M-x my/url-proxy-on RET~ 启用代理，
-   - 按下 =C-x C-f ~/.emacs.d/init.el= ，然后按下 =M-x eval-buffer RET= 继续安装。
+   - 按下 =C-x C-f ~/.emacs.d/init.el= 打开配置文件，然后按下 =M-x eval-buffer RET= 继续安装。
