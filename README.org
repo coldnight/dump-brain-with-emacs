@@ -43,12 +43,29 @@
 4. 工欲善其事，必先利其器：笔记发布
 5. 工欲善其事，必先利其器：笔记增强
 6. 道法自然：聪明的笔记记录方式
-* FAQ
+* 常见问题
 1. 网络问题无法启动如何应用代理？
 
    比如你看到如下报错：[[https://user-images.githubusercontent.com/2527265/148623621-62a18c90-1a53-43dc-a986-a0b1b017cede.png]].
 
-   - 首先按下 =C-x C-f ~/.emacs.d/my.el= 打开文件，
-   - 确认你的 HTTP 代理是否为 =127.0.0.1:1087= ，如果不是请做更改 =my-url-http-proxy-service= 的值，
-   - 按下 ~M-x eval-buffer RET~ 执行，按下 ~M-x my/url-proxy-on RET~ 启用代理，
-   - 按下 =C-x C-f ~/.emacs.d/init.el= 打开配置文件，然后按下 =M-x eval-buffer RET= 继续安装。
+   - 打开代理文件： =C-x C-f ~/.emacs.d/my.el=
+   - 确认你的 HTTP 代理是否为 =127.0.0.1:1087= ，如果不是请做更改 =my-url-http-proxy-service= 的值;
+   - 执行当前 buffer: ~M-x eval-buffer RET~
+   - 打开配置文件: =C-x C-f ~/.emacs.d/init.el=
+   - 查找 ~straight.el~ 初始化的位置：~C-s straight RET~，在其上面一行增加：
+     #+begin_src elisp
+       (my/url-proxy-on)
+     #+end_src
+   - 执行当前 buffer 重试：  ~M-x eval-buffer RET~ 。
+2. straight.el 通过 Git 正常安装依赖: Failed to run "git"; see buffer =*straight-process*=
+
+   一般情况都是 GitHub HTTPS 克隆失败，可以配置 Git 使用 SSH 替代 HTTPS 来克隆 GitHub 的项目。
+
+   - 打开 Git 配置文件: =C-x C-f ~/.gitconfig=
+   - 加入如下配置：
+     #+begin_src text
+       [url "git@github.com:"]
+           insteadOf = https://github.com/
+     #+end_src
+   - 切回 init.el : ~C-x b init.el RET~
+   - 执行当前 buffer 重试：  ~M-x eval-buffer RET~ 。
