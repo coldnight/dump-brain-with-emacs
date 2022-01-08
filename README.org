@@ -52,7 +52,7 @@
    - 确认你的 HTTP 代理是否为 =127.0.0.1:1087= ，如果不是请做更改 =my-url-http-proxy-service= 的值;
    - 执行当前 buffer: ~M-x eval-buffer RET~
    - 打开配置文件: =C-x C-f ~/.emacs.d/init.el=
-   - 查找 ~straight.el~ 初始化的位置：~C-s straight RET~，在其上面一行增加：
+   - 查找 ~straight.el~ 初始化的位置： ~C-s straight RET~ ，在其上面一行增加：
      #+begin_src elisp
        (my/url-proxy-on)
      #+end_src
