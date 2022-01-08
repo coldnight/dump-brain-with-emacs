@@ -134,6 +134,9 @@
   (add-to-list 'load-path "~/.emacs.d/use-package")
   (require 'use-package))
 
+;; 移除下方一行的注释应用代理，相关代码请参见 my.el
+;; (my/url-proxy-on)
+
 ;; straight.el to manage package
 (defvar bootstrap-version)
 (let ((bootstrap-file
