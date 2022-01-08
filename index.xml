@@ -6,7 +6,38 @@
     <description>Recent content on Dump brain with Emacs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Jan 2022 17:54:00 +0800</lastBuildDate><atom:link href="https://coldnight.github.io/dump-brain-with-emacs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Jan 2022 07:27:00 +0800</lastBuildDate><atom:link href="https://coldnight.github.io/dump-brain-with-emacs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>先利其器</title>
+      <link>https://coldnight.github.io/dump-brain-with-emacs/notes/20220109072723-%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8/</link>
+      <pubDate>Sun, 09 Jan 2022 07:27:00 +0800</pubDate>
+      
+      <guid>https://coldnight.github.io/dump-brain-with-emacs/notes/20220109072723-%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Emacs</title>
+      <link>https://coldnight.github.io/dump-brain-with-emacs/notes/20220109072645-emacs/</link>
+      <pubDate>Sun, 09 Jan 2022 07:26:00 +0800</pubDate>
+      
+      <guid>https://coldnight.github.io/dump-brain-with-emacs/notes/20220109072645-emacs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>先利其器：Emacs 安装及其黑话</title>
+      <link>https://coldnight.github.io/dump-brain-with-emacs/posts/20220109072633-%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8_emacs_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%85%B6%E9%BB%91%E8%AF%9D/</link>
+      <pubDate>Sun, 09 Jan 2022 07:26:00 +0800</pubDate>
+      
+      <guid>https://coldnight.github.io/dump-brain-with-emacs/posts/20220109072633-%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8_emacs_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%85%B6%E9%BB%91%E8%AF%9D/</guid>
+      <description>tags: Emacs,先利其器  安装、启动、退出 目前（2021-07-29）最新稳定版是 27.2，主线版本 Emacs 28 并且已经合并了 Native Comp，我日常使用的就是编译了 Native Comp 的主线版本。
+我们这里选择最新的稳定版本 27.2。
+Linux Linux 平台下对于 CentOS/RHEL/Fedora 和 Debian/Ubuntu 推荐从源码中编译安装：
+安装依赖   yum（CentOS/RHEL/Fedora）1
+sudo yum install \  GConf2-devel \  Xaw3d-devel \  dbus-devel \  dbus-glib-devel \  dbus-python \  gcc \  giflib-devel \  gnutls-devel \  gpm-devel \  gtk+-devel \  gtk2-devel \  ImageMagick \  ImageMagick-devel \  jansson-devel \  libX11-devel \  libXft-devel \  libXpm-devel \  libjpeg-devel \  libpng-devel \  libtiff-devel \  libungif-devel \  make \  ncurses-devel \  pkgconfig \  texi2html \  texinfo   apt（Debian/Ubuntu） 2</description>
+    </item>
+    
     <item>
       <title>工欲善其事，必先利其器：Emacs 配置篇</title>
       <link>https://coldnight.github.io/dump-brain-with-emacs/posts/20220107175445-%E5%B7%A5%E6%AC%B2%E5%96%84%E5%85%B6%E4%BA%8B_%E5%BF%85%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8_emacs_%E9%85%8D%E7%BD%AE%E7%AF%87/</link>

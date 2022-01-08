@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<title>先利其器：Emacs 安装及其黑话 | Dump brain with Emacs</title>
+<meta charset="utf-8">
+<meta name="generator" content="Hugo 0.89.4" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://coldnight.github.io/dump-brain-with-emacs/css/index.css">
+<link rel="canonical" href="https://coldnight.github.io/dump-brain-with-emacs/posts/20220109072633-%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8_emacs_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%85%B6%E9%BB%91%E8%AF%9D/">
+<link rel="alternate" type="application/rss+xml" href="" title="Dump brain with Emacs">
+
+<header>
+  
+    <a href="https://coldnight.github.io/dump-brain-with-emacs/" class="title">Dump brain with Emacs</a>
+  
+  
+</header>
+
+<article>
+  <header>
+    <h1>先利其器：Emacs 安装及其黑话</h1>
+    <time datetime="2022-01-09T07:26:00&#43;08:00">January 09, 2022</time>
+  </header>
+  <ul>
+<li>tags: <a href="/dump-brain-with-emacs/notes/20220109072645-emacs/">Emacs</a>,<a href="/dump-brain-with-emacs/notes/20220109072723-%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8/">先利其器</a></li>
+</ul>
+<h2 id="安装-启动-退出">安装、启动、退出</h2>
+<p>目前（2021-07-29）最新稳定版是 27.2，主线版本 Emacs 28 并且已经合并了 Native Comp，我日常使用的就是编译了 Native Comp 的主线版本。</p>
+<p>我们这里选择最新的稳定版本 27.2。</p>
+<h3 id="linux">Linux</h3>
+<p>Linux 平台下对于 CentOS/RHEL/Fedora 和 Debian/Ubuntu 推荐从源码中编译安装：</p>
+<h4 id="安装依赖">安装依赖</h4>
+<ul>
+<li>
+<p>yum（CentOS/RHEL/Fedora）<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo yum install <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    GConf2-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    Xaw3d-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    dbus-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    dbus-glib-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    dbus-python <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    gcc <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    giflib-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    gnutls-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    gpm-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    gtk+-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    gtk2-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>        ImageMagick <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>        ImageMagick-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    jansson-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libX11-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libXft-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libXpm-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libjpeg-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libpng-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libtiff-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libungif-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    make <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    ncurses-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    pkgconfig <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    texi2html <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    texinfo
+</code></pre></div></li>
+<li>
+<p>apt（Debian/Ubuntu） <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo apt update
+sudo apt install -y autoconf automake bsd-mailx dbus-x11 debhelper dpkg-dev <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libacl1-dev libasound2-dev libdbus-1-dev libgif-dev libgnutls28-dev libgpm-dev <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libgtk-3-dev libjansson-dev libjpeg-dev liblcms2-dev liblockfile-dev libm17n-dev <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libncurses5-dev liboss4-salsa2 libotf-dev libpng-dev librsvg2-dev <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libselinux1-dev libsystemd-dev libtiff-dev libxml2-dev libxpm-dev procps quilt <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    sharutils texinfo zlib1g-dev gvfs language-pack-en-base libasound2 libaspell15 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libasyncns0 libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libbrotli1 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libcairo-gobject2 libcairo2 libcanberra-gtk3-0 libcanberra-gtk3-module <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libcanberra0 libcroco3 libdatrie1 libdb5.3 libdrm2 libegl1 libenchant1c2a <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libepoxy0 libflac8 libfontconfig1 libfreetype6 libgbm1 libgdk-pixbuf2.0-0 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libgif7 libgl1 libglvnd0 libglx0 libgpm2 libgraphite2-3 libgstreamer-gl1.0-0 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libgstreamer-plugins-base1.0-0 libgstreamer1.0-0 libgtk-3-0 libgudev-1.0-0 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libharfbuzz-icu0 libharfbuzz0b libhyphen0 libice6 libicu66 libjansson4 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libjavascriptcoregtk-4.0-18 libjbig0 libjpeg-turbo8 liblcms2-2 liblockfile1 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libltdl7 libm17n-0 libnotify4 libnss-mdns libnss-myhostname libnss-systemd <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libogg0 liborc-0.4-0 libotf0 libpango-1.0-0 libpangocairo-1.0-0 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libpangoft2-1.0-0 libpixman-1-0 libpng16-16 libpulse0 librsvg2-2 libsasl2-2 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libsecret-1-0 libsm6 libsndfile1 libsoup2.4-1 libssl1.1 libstdc++6 libtdb1 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libthai0 libtiff5 libvorbis0a libvorbisenc2 libvorbisfile3 libwayland-client0 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libwayland-cursor0 libwayland-egl1 libwayland-server0 libwebp6 libwebpdemux2 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libwoff1 libx11-6 libx11-xcb1 libxau6 libxcb-render0 libxcb-shm0 libxcb1 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libxcomposite1 libxcursor1 libxdamage1 libxdmcp6 libxext6 libxfixes3 libxi6 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libxinerama1 libxkbcommon0 libxml2 libxpm4 libxrandr2 libxrender1 libxslt1.1 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    libyajl2
+</code></pre></div></li>
+</ul>
+<h4 id="源码安装">源码安装</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git clone https://git.savannah.gnu.org/git/emacs.git
+cd emacs
+git tag -l
+git checkout emacs-27.2
+./autogen.sh
+./configure
+make -j4 <span style="color:#f92672">&amp;&amp;</span> sudo make install
+</code></pre></div><p>对于 Archlinux 推荐参考其<a href="https://wiki.archlinux.org/title/Emacs_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">官方文档</a>对照安装。</p>
+<h3 id="macos">macOS</h3>
+<p>macOS 默认安装了 Emacs，但是版本比较低，建议大家从社区安装最新版。我之前比较常用的是 emacs-mac 这个版本，可以通过 <a href="https://brew.sh/">Homebrew</a> 安装：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ brew tap railwaycat/emacsmacport
+$ brew install emacs-mac
+</code></pre></div><p>然后在终端里通过以下命令打开 Emacs：</p>
+<pre tabindex="0"><code class="language-nil" data-lang="nil">$ open -a /usr/local/opt/emacs-mac/Emacs.app/
+</code></pre><h3 id="windows">Windows</h3>
+<p>推荐使用 WSL，首先初始化 WSL 虚拟机，然后在 Linux 环境下参考 Linux 的安装，接下来可以参考 <a href="https://zhuanlan.zhihu.com/p/144155479">WSL 运行 Emacs GUI - 知乎</a> 配置运行图像环境<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<p>当然也可以通过 Powershell 和 <a href="https://chocolatey.org/">Chocolatey</a><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 直接安装到 Windows 系统，但是配置 Git 等会稍微复杂：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">PS&gt; choco install emacs-full
+</code></pre></div><p>安装后可以在 Powershell 中启动 Emacs：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">PS&gt; emacs
+</code></pre></div><h3 id="退出-emacs">退出 Emacs</h3>
+<p>快捷键按 <code>C-x C-c</code> （就是按住 <code>Ctrl</code> 不松开继续按 <code>x</code> ，然后再按住 <code>Ctrl</code> 不松开继续按 <code>c</code> ，聪明的你肯定发现只要按住 <code>Ctrl</code> 不松开依次按 <code>x</code> 和 <code>c</code> 键就可以了）。</p>
+<h2 id="黑话">黑话</h2>
+<p>Emacs 诞生的时间比较早，有些概念也是很早就确定了，带着时代的气息，可能不是很好理解。所以为了便于大家理解，我们在此提前进行解释，大家遇到不懂的可以随时翻回来查看:</p>
+<h3 id="快捷键">快捷键</h3>
+<table>
+<thead>
+<tr>
+<th>黑话</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C-c</code></td>
+<td>按住 <code>Ctrl</code> 不松开然后按 <code>c</code></td>
+</tr>
+<tr>
+<td><code>C-x b</code></td>
+<td>按住 <code>Ctrl</code> 不松开按 <code>x</code>, 然后松开以上按键后再按 <code>b</code></td>
+</tr>
+<tr>
+<td><code>C-x C-c</code> <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></td>
+<td>组合快捷键，你需要先按出 <code>C-x</code> ，然后继续按出 <code>Ctrl-c</code> ，两段快捷键中间可以间隔任意时间</td>
+</tr>
+<tr>
+<td><code>C-g</code></td>
+<td>假如你快捷键按到一半想要放弃，可以通过这个快捷键放弃。（当然不仅是放弃快捷键，很多操作都可以通过这个快捷键终止）</td>
+</tr>
+<tr>
+<td><code>M-x</code></td>
+<td><code>Meta</code> + <code>c</code> ，Meta 键一般意味着 Alt 或者 ESC</td>
+</tr>
+<tr>
+<td><code>s-l</code></td>
+<td><code>Super</code> + <code>l</code> , Super 键现在比较少见，可以通过 <code>C-x @ s</code> 按出 <code>s-</code> 前缀，所以这个完整的快捷键是 <code>C-x @ s l</code></td>
+</tr>
+<tr>
+<td><code>C-x @</code> 前缀</td>
+<td>可以用这个前缀快捷键按出一些比较奇怪的「修饰键」，比如上面的 <code>Super</code> ,其他还有 <code>Hyper</code></td>
+</tr>
+<tr>
+<td><code>M-x org-id-get-create RET</code></td>
+<td><code>M-x</code> 会弹出命令输出框，然后输入 <code>org-id-get-create</code> 按回车（ <code>RET</code> 表示回车）</td>
+</tr>
+<tr>
+<td><code>C-u</code> 前缀</td>
+<td>可以给 <code>M-x</code> 命令传递数字参数，比如禁用某些 minor mode <code>C-u 0 M-x flycheck-mode RET</code> 就是给 <code>flycheck-mode</code> 这个函数传递参数 <code>0</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="概念">概念</h3>
+<table>
+<thead>
+<tr>
+<th>黑话</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>frame</td>
+<td>图形界面的窗口：通过 <code>C-x 5 2</code> 创建一个试试，然后 <code>C-x 5 0</code> 关闭</td>
+</tr>
+<tr>
+<td>window</td>
+<td>分割面板：通过 <code>C-x 2</code> 水平分割， <code>C-x 3</code> 垂直分割， <code>C-x o</code> 切换面板， <code>C-x 0</code> 关闭当前面板</td>
+</tr>
+<tr>
+<td>face</td>
+<td>文本显示方式，字体等</td>
+</tr>
+<tr>
+<td>fringe</td>
+<td>分割面板的边缘</td>
+</tr>
+<tr>
+<td>kill</td>
+<td>剪切， <code>C-k</code> 剪切光标后面到行尾</td>
+</tr>
+<tr>
+<td>kill-ring</td>
+<td>剪切板，可以保存多个，可以通过 <code>M-y</code> 选择</td>
+</tr>
+<tr>
+<td>mode-line</td>
+<td>窗口底部的一个显示状态的横条</td>
+</tr>
+<tr>
+<td>minibuffers</td>
+<td>mode-line 下面的消息回显区，同时某些命令下输入区也会在这</td>
+</tr>
+</tbody>
+</table>
+<h3 id="buffer">buffer</h3>
+<p>这个可能和大多数编辑器不太一样，Emacs 突出了 buffer 的语义，从而弱化了编辑文件语义，比如在其他编辑器或者 IDE 你可能是想的切换编辑文件，
+但是 Emacs 更突出了是切换到对应的 buffer（ <code>C-x b</code> ） 编辑，而后通过 <code>C-x C-s</code> 将 buffer 的内容保存到文件中（如果是生成的 buffer 则会提示选择要保存的文件名）。</p>
+<p>同时 Emacs 有很多临时的 buffer 来充当日志的角色，比如默认的 <code>*Messages*</code> (<code>C-x b *Messages* RET</code>) 就是一个只读 buffer 显示一些日志信息，某些操作失败了之后也会保存一些错误消息到指定的 buffer 中，我们只要切换过去就能看到。</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p><a href="https://justyn.io/til/compile-emacs-27-on-centos-7/">Compile Emacs 27 on CentOS 7,23 FEB 2021,JUSTYN</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>这里有一个完整的教程可以参考：<a href="https://github.com/hubisan/emacs-wsl">https://github.com/hubisan/emacs-wsl</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p><a href="https://zhuanlan.zhihu.com/p/111673670">在 Windows 上安装 GNU Emacs</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>这是退出 Emacs 的快捷键，非常有用，相信我&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+</article>
+
+
+
+</html>
