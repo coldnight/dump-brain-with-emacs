@@ -57,7 +57,7 @@
        (my/url-proxy-on)
      #+end_src
    - 执行当前 buffer 重试：  ~M-x eval-buffer RET~ 。
-2. straight.el 通过 Git 正常安装依赖: Failed to run "git"; see buffer =*straight-process*=
+2. straight.el 通过 Git 安装依赖: Failed to run "git"; see buffer =*straight-process*=
 
    一般情况都是 GitHub HTTPS 克隆失败，可以配置 Git 使用 SSH 替代 HTTPS 来克隆 GitHub 的项目。
 
