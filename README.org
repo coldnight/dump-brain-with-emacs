@@ -35,7 +35,7 @@
      env HOME=~/dump-brain-with-emacs emacs
    #+end_src
 4. 等待包管理自动安装相关插件。
-5. 在 Emacs 中查看当前系列文章：~M-x C-c n f Emacs~
+5. 在 Emacs 中查看当前系列文章： ~M-x C-c n f Emacs~
 * 主题构成
 1. 工欲善其事，必先利其器：Emacs 安装
 2. 工欲善其事，必先利其器：Emacs 黑话
