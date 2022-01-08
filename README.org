@@ -30,7 +30,7 @@
     git submodule update
   #+end_src
 2. 确保 Emacs 已经安装，如果没有请先安装 Emacs 最新版。
-3. 使用当前项目 Emacs 配置文件启动项目：
+3. 使用当前项目配置文件启动 Emacs：
    #+begin_src shell
      env HOME=~/dump-brain-with-emacs emacs
    #+end_src
@@ -38,10 +38,11 @@
 5. 在 Emacs 中查看当前系列文章：~M-x C-c n f Emacs~
 * 主题构成
 1. 工欲善其事，必先利其器：Emacs 安装
-2. [[https://coldnight.github.io/dump-brain-with-emacs/posts/20220107175445-%E5%B7%A5%E6%AC%B2%E5%96%84%E5%85%B6%E4%BA%8B_%E5%BF%85%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8_emacs_%E9%85%8D%E7%BD%AE%E7%AF%87/][工欲善其事，必先利其器：Emacs 配置]]
-3. 工欲善其事，必先利其器：笔记发布
-3. 工欲善其事，必先利其器：笔记增强
-4. 道法自然：聪明的笔记记录方式
+2. 工欲善其事，必先利其器：Emacs 黑话
+3. [[https://coldnight.github.io/dump-brain-with-emacs/posts/20220107175445-%E5%B7%A5%E6%AC%B2%E5%96%84%E5%85%B6%E4%BA%8B_%E5%BF%85%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8_emacs_%E9%85%8D%E7%BD%AE%E7%AF%87/][工欲善其事，必先利其器：Emacs 配置]]
+4. 工欲善其事，必先利其器：笔记发布
+5. 工欲善其事，必先利其器：笔记增强
+6. 道法自然：聪明的笔记记录方式
 * FAQ
 1. 网络问题无法启动如何应用代理？
 
