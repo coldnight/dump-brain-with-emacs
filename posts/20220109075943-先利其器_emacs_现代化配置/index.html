@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<title>先利其器：Emacs 现代化配置 | Dump brain with Emacs</title>
+<meta charset="utf-8">
+<meta name="generator" content="Hugo 0.89.4" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://coldnight.github.io/dump-brain-with-emacs/css/index.css">
+<link rel="canonical" href="https://coldnight.github.io/dump-brain-with-emacs/posts/20220109075943-%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8_emacs_%E7%8E%B0%E4%BB%A3%E5%8C%96%E9%85%8D%E7%BD%AE/">
+<link rel="alternate" type="application/rss+xml" href="" title="Dump brain with Emacs">
+
+<header>
+  
+    <a href="https://coldnight.github.io/dump-brain-with-emacs/" class="title">Dump brain with Emacs</a>
+  
+  
+</header>
+
+<article>
+  <header>
+    <h1>先利其器：Emacs 现代化配置</h1>
+    <time datetime="2022-01-09T07:59:00&#43;08:00">January 09, 2022</time>
+  </header>
+  <ul>
+<li>tags: <a href="/dump-brain-with-emacs/notes/20220109072645-emacs/">Emacs</a>,<a href="/dump-brain-with-emacs/notes/20220109072723-%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8/">先利其器</a></li>
+</ul>
+<p>默认安装的 Emacs 可以说是又丑又不好用，所以为了使用更加顺畅或者更贴合现代<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>编辑器，我们需要修改一些配置并做一些插件的扩展。</p>
+<figure><img src="/dump-brain-with-emacs/ox-hugo/00-installation.png"/>
+</figure>
+
+<h2 id="创建配置文件">创建配置文件</h2>
+<p>Emacs 的配置文件都写在 <code>$HOME/.emacs.d/init.el</code> 中，其中 <code>$HOME</code> 就是用户的家目录，对应到不同的系统位置会有细微的差异：</p>
+<ul>
+<li>
+<p>Linux 或者 macOS:</p>
+<pre tabindex="0"><code class="language-nil" data-lang="nil">mkdir ~/.emacs.d/
+touch ~/.emacs.d/init.el
+</code></pre></li>
+<li>
+<p>Windows: C:/Users/&lt;username&gt;/AppData/Roaming/.emacs.d/init.el（这个目录很深，而且默认状态下AppData目录是隐藏的。）<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+</li>
+</ul>
+<h2 id="共享系统剪切板">共享系统剪切板</h2>
+<p>默认 Emacs 的剪切板和系统是不共享的，也就是说下面的配置你可能没有办法粘贴到 Emacs 中，这给我们抄配置或者记笔记带来了很大的困扰，
+所以我们先配置 Emacs 和系统共享剪切板。</p>
+<p>打开上面新创建的 <code>init.el</code> 配置文件（当然，用你熟悉的那个编辑器），追加如下内容：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp"><span style="color:#75715e">;; 系统共享剪切板</span>
+<span style="color:#75715e">;; see also:</span>
+<span style="color:#75715e">;;   https://www.emacswiki.org/emacs/CopyAndPaste</span>
+<span style="color:#75715e">;;   https://www.reddit.com/r/emacs/comments/5n9t3f/copypaste_from_system_clipboard_on_windows/</span>
+(defun copy-from-osx ()
+  (shell-command-to-string <span style="color:#e6db74">&#34;pbpaste&#34;</span>))
+
+(defun paste-to-osx (text <span style="color:#66d9ef">&amp;optional</span> push)
+  (let ((process-connection-type <span style="color:#66d9ef">nil</span>))
+    (let ((proc (<span style="color:#a6e22e">start-process</span> <span style="color:#e6db74">&#34;pbcopy&#34;</span> <span style="color:#e6db74">&#34;*Messages*&#34;</span> <span style="color:#e6db74">&#34;pbcopy&#34;</span>)))
+      (<span style="color:#a6e22e">process-send-string</span> proc text)
+      (<span style="color:#a6e22e">process-send-eof</span> proc))))
+
+(cond
+ ((<span style="color:#a6e22e">memq</span> <span style="color:#a6e22e">window-system</span> <span style="color:#f92672">&#39;</span>(x))
+  (setq x-select-enable-primary <span style="color:#66d9ef">t</span>
+        x-select-enable-clipboard <span style="color:#66d9ef">nil</span>))
+ ((<span style="color:#a6e22e">memq</span> <span style="color:#a6e22e">window-system</span> <span style="color:#f92672">&#39;</span>(mac ns))
+  (setq interprogram-cut-function <span style="color:#e6db74">&#39;paste-to-osx</span>
+        interprogram-paste-function <span style="color:#e6db74">&#39;copy-from-osx</span>))
+ ((<span style="color:#a6e22e">memq</span> <span style="color:#a6e22e">window-system</span> <span style="color:#f92672">&#39;</span>(win32 pc))
+  (setq select-enable-primary <span style="color:#66d9ef">t</span>
+        select-enable-clipboard <span style="color:#66d9ef">t</span>
+        save-interprogram-paste-before-kill <span style="color:#66d9ef">t</span>)))
+</code></pre></div><h2 id="基本配置">基本配置</h2>
+<p>此时我们打开 Emacs 进行如下操作，按下 <code>C-x C-f ~/.emacs.d/init.el RET</code> 打开 Emacs 配置文件，接下来将下面的配置内容粘贴进来，建议操作：</p>
+<ol>
+<li>首先拷贝下面内容，然后在 <code>init.el</code> buffer 里（ <code>C-x b init.el RET</code> 可以切换过来，如果当前不是那个 buffer 的话）</li>
+<li><code>M-.</code> 切换到文件末尾</li>
+<li><code>C-y</code> 进行粘贴</li>
+</ol>
+<p>（大家记住上面这些操作，下面所有追加配置内容都可以这样操作！）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp"><span style="color:#75715e">;; 指定自定义配置文件，防止自定义配置污染 init.el，并加载该配置文件</span>
+(setq custom-file (<span style="color:#a6e22e">expand-file-name</span> <span style="color:#e6db74">&#34;~/.emacs.d/custom.el&#34;</span>))
+(if (<span style="color:#a6e22e">file-exists-p</span> custom-file)
+    (<span style="color:#a6e22e">load</span> custom-file))
+
+<span style="color:#75715e">;; Font</span>
+<span style="color:#75715e">;; Download Victor Mono at https://rubjo.github.io/victor-mono/</span>
+(set-face-attribute <span style="color:#e6db74">&#39;default</span> <span style="color:#66d9ef">nil</span>
+                    :family <span style="color:#e6db74">&#34;Victor Mono&#34;</span> :height <span style="color:#ae81ff">145</span> :weight <span style="color:#e6db74">&#39;normal</span>)
+<span style="color:#75715e">;; 中文显示</span>
+(set-language-environment <span style="color:#e6db74">&#34;utf-8&#34;</span>)
+(set-buffer-file-coding-system <span style="color:#e6db74">&#39;utf-8</span>)
+(set-terminal-coding-system <span style="color:#e6db74">&#39;utf-8</span>)
+(set-keyboard-coding-system <span style="color:#e6db74">&#39;utf-8</span>)
+(set-selection-coding-system <span style="color:#e6db74">&#39;utf-8</span>)
+(set-default-coding-systems <span style="color:#e6db74">&#39;utf-8</span>)
+(set-clipboard-coding-system <span style="color:#e6db74">&#39;utf-8</span>)
+(modify-coding-system-alist <span style="color:#e6db74">&#39;process</span> <span style="color:#e6db74">&#34;*&#34;</span> <span style="color:#e6db74">&#39;utf-8</span>)
+(prefer-coding-system <span style="color:#e6db74">&#39;utf-8</span>)
+(setq-default pathname-coding-system <span style="color:#e6db74">&#39;utf-8</span>)
+(setq
+ default-process-coding-system <span style="color:#f92672">&#39;</span>(utf-8 <span style="color:#f92672">.</span> utf-8)
+ locale-coding-system <span style="color:#e6db74">&#39;utf-8</span>
+ file-name-coding-system <span style="color:#e6db74">&#39;utf-8</span>
+ default-buffer-file-coding-system <span style="color:#e6db74">&#39;utf-8</span>
+ slime-net-coding-system <span style="color:#e6db74">&#39;utf-8-unix</span>)
+
+(setenv <span style="color:#e6db74">&#34;LC_CTYPE&#34;</span> <span style="color:#e6db74">&#34;UTF-8&#34;</span>)
+(setenv <span style="color:#e6db74">&#34;LC_ALL&#34;</span> <span style="color:#e6db74">&#34;en_US.UTF-8&#34;</span>)
+(setenv <span style="color:#e6db74">&#34;LANG&#34;</span> <span style="color:#e6db74">&#34;en_US.UTF-8&#34;</span>)                           <span style="color:#75715e">; Iterate through CamelCase words</span>
+
+<span style="color:#75715e">;; 基本设置</span>
+(setq-default
+ indicate-buffer-boundaries <span style="color:#e6db74">&#39;left</span> <span style="color:#75715e">;; 在窗口边缘上显示一个小箭头指示当前 buffer 的边界</span>
+ delete-by-moving-to-trash <span style="color:#66d9ef">t</span>                      <span style="color:#75715e">;; 删除文件移动到垃圾箱</span>
+ window-combination-resize <span style="color:#66d9ef">t</span>                      <span style="color:#75715e">;; 新窗口平均其他左右窗口</span>
+ x-stretch-cursor <span style="color:#66d9ef">t</span>                               <span style="color:#75715e">;; 将光标拉伸到字形宽度</span>
+ kill-whole-line <span style="color:#66d9ef">t</span>)  <span style="color:#75715e">;; C-k时,同时删除该行</span>
+
+<span style="color:#75715e">;;; Tidy workdir</span>
+(make-directory <span style="color:#e6db74">&#34;~/.emacs.d/data/backup/&#34;</span> <span style="color:#66d9ef">t</span>)
+(setq auto-save-file-name-transforms <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">&#34;.*&#34;</span> <span style="color:#e6db74">&#34;~/.emacs.d/data/backup/&#34;</span> <span style="color:#66d9ef">t</span>)) <span style="color:#75715e">; Write auto-save files to a separate directory</span>
+      backup-directory-alist <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;~/.emacs.d/data/backup/&#34;</span>))          <span style="color:#75715e">; Write backup files to a separate directory</span>
+      create-lockfiles <span style="color:#66d9ef">nil</span>                                                 <span style="color:#75715e">; Disable lockfiles as I use only one Emacs instance</span>
+      )
+
+(setq
+ fringes-outside-margins <span style="color:#66d9ef">t</span>   <span style="color:#75715e">;; fringe 放在外面</span>
+ echo-keystrokes <span style="color:#ae81ff">0.1</span>         <span style="color:#75715e">;; 尽快显示按键序列</span>
+ system-time-locale <span style="color:#e6db74">&#34;zh_CN&#34;</span>  <span style="color:#75715e">;; 设置系统时间显示格式</span>
+ tab-always-indent <span style="color:#e6db74">&#39;complete</span> <span style="color:#75715e">;; Tab 键优先格式化再补全</span>
+ font-lock-global-modes <span style="color:#f92672">&#39;</span>(not shell-mode text-mode) <span style="color:#75715e">;; 设置语法高亮.除shell-mode和text-mode之外的模式</span>
+ mouse-yank-at-point <span style="color:#66d9ef">t</span>       <span style="color:#75715e">;; 不在鼠标点击的地方插入剪贴板内容</span>
+ kill-ring-max <span style="color:#ae81ff">200</span>           <span style="color:#75715e">;; 设置 kill ring 个数</span>
+ default-fill-column <span style="color:#ae81ff">60</span>      <span style="color:#75715e">;; 把fill-column设为60.让文字更好读</span>
+ enable-recursive-minibuffers <span style="color:#66d9ef">t</span>  <span style="color:#75715e">;; 递归的使用minibuffer</span>
+ scroll-margin <span style="color:#ae81ff">3</span>             <span style="color:#75715e">;; 在靠近屏幕边沿 3 行时就开始滚动,可很好看到上下文</span>
+ scroll-conservatively <span style="color:#ae81ff">10000</span> <span style="color:#75715e">;; 防止页面滚动时跳动</span>
+ select-enable-clipboard <span style="color:#66d9ef">t</span>   <span style="color:#75715e">;; 允许emacs和外部程序进行粘贴</span>
+ track-eol <span style="color:#66d9ef">t</span>                 <span style="color:#75715e">;; 当光标在行尾上下移动的时候,始终保持在行尾</span>
+ next-line-add-newlines <span style="color:#66d9ef">nil</span>  <span style="color:#75715e">;; 按C-n或down时不添加新行</span>
+ <span style="color:#75715e">;; emacs启动时显示的内容可以通过变量initial-scratch-message来设置</span>
+ initial-scratch-message <span style="color:#66d9ef">nil</span>
+ dired-listing-switches <span style="color:#e6db74">&#34;-vha&#34;</span> <span style="color:#75715e">;;  dired 列出文件的参数（man ls）</span>
+ show-paren-style <span style="color:#e6db74">&#39;parenthesis</span> <span style="color:#75715e">;; 括号匹配时高亮显示另一边的括号，而不是跳到另一个括号处</span>
+ undo-limit <span style="color:#ae81ff">80000000</span>           <span style="color:#75715e">;; 提升撤销限制</span>
+ auto-save-default <span style="color:#66d9ef">t</span>           <span style="color:#75715e">;; 打开自动保存</span>
+ truncate-string-ellipsis <span style="color:#e6db74">&#34;…&#34;</span>  <span style="color:#75715e">;; Unicode ellispis are nicer than &#34;...&#34;, and also save /precious/ space</span>
+ <span style="color:#75715e">;; 当寻找一个同名的文件,改变两个buffer的名字,前面加上目录名</span>
+ uniquify-buffer-name-style <span style="color:#e6db74">&#39;post-forward-angle-brackets</span>)
+(if (display-graphic-p)
+    (progn
+      (menu-bar-mode <span style="color:#ae81ff">-1</span>)            <span style="color:#75715e">;; 取消菜单栏</span>
+      (scroll-bar-mode <span style="color:#ae81ff">-1</span>)          <span style="color:#75715e">;; 取消滚动条（在 Emacs 26 中无效）</span>
+      (tool-bar-mode <span style="color:#ae81ff">-1</span>)))          <span style="color:#75715e">;; 取消工具栏</span>
+(<span style="color:#a6e22e">fset</span> <span style="color:#e6db74">&#39;yes-or-no-p</span> <span style="color:#e6db74">&#39;y-or-n-p</span>) <span style="color:#75715e">;; 按y或space表示yes,n表示no</span>
+(global-font-lock-mode <span style="color:#66d9ef">t</span>)     <span style="color:#75715e">;; 语法高亮</span>
+(show-paren-mode <span style="color:#66d9ef">t</span>)           <span style="color:#75715e">;; 打开括号匹配显示模式</span>
+(mouse-avoidance-mode <span style="color:#e6db74">&#39;animate</span>) <span style="color:#75715e">;; 鼠标靠近光标指针时,让鼠标自动让开</span>
+(auto-compression-mode <span style="color:#ae81ff">1</span>) <span style="color:#75715e">;; 打开压缩文件时自动解压缩</span>
+(global-auto-revert-mode <span style="color:#ae81ff">1</span>)       <span style="color:#75715e">;; 自动重载更改的文件</span>
+(blink-cursor-mode <span style="color:#ae81ff">-1</span>)            <span style="color:#75715e">;; 指针不要闪</span>
+(toggle-truncate-lines <span style="color:#66d9ef">t</span>)         <span style="color:#75715e">;; 当一行文字太长时,不自动换行</span>
+(column-number-mode <span style="color:#66d9ef">t</span>)            <span style="color:#75715e">;; 在minibuffer上面的状态栏显示文件的行号,列号</span>
+(line-number-mode <span style="color:#66d9ef">t</span>)              <span style="color:#75715e">;;设定显示文件的参数,以版本/人性化的显示,就是ls的参数</span>
+(global-linum-mode <span style="color:#66d9ef">t</span>)             <span style="color:#75715e">;; 显示行号</span>
+(require <span style="color:#e6db74">&#39;saveplace</span>)
+(save-place-mode <span style="color:#ae81ff">1</span>)               <span style="color:#75715e">;; 记住上次打开文件光标的位置</span>
+(global-subword-mode <span style="color:#ae81ff">1</span>)           <span style="color:#75715e">;; 拆分连字符：oneWord 会被当作两个单词处理</span>
+
+<span style="color:#75715e">;; 设置4个空格缩进</span>
+(setq-default indent-tabs-mode <span style="color:#66d9ef">nil</span>)
+(setq tab-width <span style="color:#ae81ff">4</span>) <span style="color:#75715e">; or any other preferred value</span>
+
+<span style="color:#75715e">;; 时间显示设置</span>
+(display-time-mode <span style="color:#ae81ff">1</span>)   <span style="color:#75715e">;; 启用时间显示设置,在minibuffer上面的那个杠上</span>
+(setq display-time-24hr-format <span style="color:#66d9ef">t</span>   <span style="color:#75715e">;; 时间使用24小时制</span>
+      display-time-day-and-date <span style="color:#66d9ef">t</span>   <span style="color:#75715e">;; 时间显示包括日期和具体时间</span>
+      display-time-use-mail-icon <span style="color:#66d9ef">t</span>   <span style="color:#75715e">;; 时间栏旁边启用邮件设置</span>
+      display-time-interval <span style="color:#ae81ff">10</span>   <span style="color:#75715e">;; 时间的变化频率</span>
+      display-time-format <span style="color:#e6db74">&#34;%A %H:%M&#34;</span>)   <span style="color:#75715e">;; 显示时间的格式</span>
+
+(unless (string-match-p <span style="color:#e6db74">&#34;^Power N/A&#34;</span> (battery))   <span style="color:#75715e">; 笔记本上显示电量</span>
+  (display-battery-mode <span style="color:#ae81ff">1</span>))
+</code></pre></div><p>此时我们可以运行当前 buffer 让配置生效： <code>M-x eval-buffer RET</code> ，然后通过 <code>C-x C-s</code> 进行保存。
+此时效果如下：</p>
+<figure><img src="/dump-brain-with-emacs/ox-hugo/01-basic.png"/>
+</figure>
+
+<p>对比上面可以看到中间灰色的就是 mode-line，其上面增加显示了时间、电量，并且去掉了菜单栏滚动条等，并且在左边显示了行号。同时我觉得有必要解释下 mode-line 各个部分的值：</p>
+<ul>
+<li><code>U:**-</code> 可以简单的理解为 U 表示编码系统（UTF-8）， <code>**</code> 表示 buffer 更改（未保存）<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></li>
+<li><code>Bot(100,27)</code> 表示光标位置 Bot 即 Bottom 的缩写，即 Bottom(row,column) 。</li>
+<li><code>(Emacs-Lisp, ElDoc)</code> 表示当前 buffer 的主模式和次模式（主模式只能有一个，但是次模式可以有多个）。</li>
+</ul>
+<h2 id="插件包管理">插件包管理</h2>
+<p>Emacs 安装插件的方式多种多样，一般可以：</p>
+<ul>
+<li>简单粗暴：直接拷贝 elisp 文件到指定位置；</li>
+<li>内置的 package.el 可以安装 <a href="https://melpa.org/#/getting-started">MELPA</a> 的包。</li>
+<li><a href="https://github.com/dimitri/el-get">el-get</a> 可以支持多种源，如 MELPA、EmacsWiki、GitHub 等等</li>
+<li><a href="https://github.com/raxod502/straight.el">straight.el</a> 同样支持很多种源，并集成了 el-get 的源，同时还支持版本锁定、集成 <code>use-package</code> 、指向 fork、本地修改等。</li>
+</ul>
+<p>这里我们就以 <code>use-package</code> + <code>straight.el</code> 作为我们的插件包管理方案。<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<p>为了启动整个包管理世界，我们需要先安装包管理，手动的安装：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cd ~/.emacs.d/
+$ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
+</code></pre></div><p>然后在 <code>init.el</code> 中追加下面配置内容：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp"><span style="color:#75715e">;; straight.el to manage package</span>
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (<span style="color:#a6e22e">expand-file-name</span> <span style="color:#e6db74">&#34;straight/repos/straight.el/bootstrap.el&#34;</span> user-emacs-directory))
+      (bootstrap-version <span style="color:#ae81ff">5</span>))
+  (unless (<span style="color:#a6e22e">file-exists-p</span> bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         <span style="color:#e6db74">&#34;https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el&#34;</span>
+         <span style="color:#e6db74">&#39;silent</span> <span style="color:#e6db74">&#39;inhibit-cookies</span>)
+      (<span style="color:#a6e22e">goto-char</span> (<span style="color:#a6e22e">point-max</span>))
+      (eval-print-last-sexp)))
+  (<span style="color:#a6e22e">load</span> bootstrap-file <span style="color:#66d9ef">nil</span> <span style="color:#e6db74">&#39;nomessage</span>))
+(straight-use-package <span style="color:#e6db74">&#39;use-package</span>)
+</code></pre></div><p>然后我们开始执行当前 buffer： <code>M-x eval-buffer RET</code> ，然后 straight.el 就会开始同步源：
+<img src="/dump-brain-with-emacs/ox-hugo/02-package.png" alt=""></p>
+<h2 id="外观">外观</h2>
+<p>经过漫长的等待之后，我们终于可以进行下一步了：美化！我们将安装配置以下插件：</p>
+<ul>
+<li>doom-theme</li>
+<li>doom-modeline</li>
+<li>nyan-mode</li>
+<li>all-the-icons</li>
+<li>emojify</li>
+<li>dashboard</li>
+<li>centaur-tabs</li>
+</ul>
+<p>将以下配置追加到 <code>init.el</code> 中：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp"><span style="color:#75715e">;;; Appearance</span>
+(use-package doom-themes
+  :ensure <span style="color:#66d9ef">t</span>
+  :straight (doom-themes :host github :repo <span style="color:#e6db74">&#34;hlissner/emacs-doom-themes&#34;</span>
+                         :files (<span style="color:#e6db74">&#34;*.el&#34;</span> <span style="color:#e6db74">&#34;themes&#34;</span>))
+  :init
+  <span style="color:#75715e">;; Global settings (defaults)</span>
+  (setq doom-themes-enable-bold <span style="color:#66d9ef">t</span>    <span style="color:#75715e">; if nil, bold is universally disabled</span>
+        doom-themes-enable-italic <span style="color:#66d9ef">t</span>) <span style="color:#75715e">; if nil, italics is universally disabled</span>
+  <span style="color:#75715e">;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme</span>
+  <span style="color:#75715e">;; may have their own settings.</span>
+  <span style="color:#75715e">;; (load-theme &#39;doom-nord t)</span>
+  (load-theme <span style="color:#e6db74">&#39;doom-vibrant</span> <span style="color:#66d9ef">t</span>)
+
+  <span style="color:#75715e">;; Enable flashing mode-line on errors</span>
+  (doom-themes-visual-bell-config)
+
+  <span style="color:#75715e">;; Enable custom neotree theme</span>
+  (doom-themes-neotree-config)  <span style="color:#75715e">; all-the-icons fonts must be installed!</span>
+
+  <span style="color:#75715e">;; Corrects (and improves) org-mode&#39;s native fontification.</span>
+  (doom-themes-org-config))
+
+(use-package doom-modeline
+  :straight <span style="color:#66d9ef">t</span>
+  :after nyan-mode
+  :custom
+  (doom-modeline-mu4e <span style="color:#66d9ef">nil</span>)
+  (doom-modeline-gnus <span style="color:#66d9ef">nil</span>)
+  (doom-modeline-buffer-file-name-style <span style="color:#e6db74">&#39;truncate-all</span>)
+  :init
+  (doom-modeline-mode <span style="color:#ae81ff">1</span>))
+
+(use-package nyan-mode
+  :straight <span style="color:#66d9ef">t</span>
+  :init
+  (nyan-mode <span style="color:#ae81ff">1</span>))
+
+(use-package emojify
+  :straight (emojify :host github :repo <span style="color:#e6db74">&#34;iqbalansari/emacs-emojify&#34;</span>
+                     :files (<span style="color:#e6db74">&#34;*.el&#34;</span> <span style="color:#e6db74">&#34;data&#34;</span>))
+  :hook
+  (after-init <span style="color:#f92672">.</span> global-emojify-mode)
+  :init
+  (setq emojify-emoji-styles <span style="color:#f92672">&#39;</span>(unicode github)))
+
+(use-package dashboard
+  :straight (dashboard :host github :repo <span style="color:#e6db74">&#34;emacs-dashboard/emacs-dashboard&#34;</span>
+                       :files (<span style="color:#e6db74">&#34;*.el&#34;</span> <span style="color:#e6db74">&#34;banners&#34;</span>))
+  :custom
+  (dashboard-center-content <span style="color:#ae81ff">1</span>)
+  (dashboard-set-heading-icons <span style="color:#66d9ef">t</span>)
+  (dashboard-set-file-icons <span style="color:#66d9ef">t</span>)
+  (dashboard-items <span style="color:#f92672">&#39;</span>((projects <span style="color:#f92672">.</span> <span style="color:#ae81ff">5</span>)
+                     (recents <span style="color:#f92672">.</span> <span style="color:#ae81ff">5</span>)
+                     (agenda <span style="color:#f92672">.</span> <span style="color:#ae81ff">5</span>)
+                     (registers <span style="color:#f92672">.</span> <span style="color:#ae81ff">5</span>)))
+  :init
+  (dashboard-setup-startup-hook)
+  (setq initial-buffer-choice (lambda () (<span style="color:#a6e22e">get-buffer</span> <span style="color:#e6db74">&#34;*dashboard*&#34;</span>))))
+
+(use-package all-the-icons :straight <span style="color:#66d9ef">t</span>)
+
+(use-package centaur-tabs
+  :straight <span style="color:#66d9ef">t</span>
+  :demand
+  :config
+  (centaur-tabs-mode <span style="color:#66d9ef">t</span>)
+  :custom
+  (centaur-tabs-set-icons <span style="color:#66d9ef">t</span>)
+  (centaur-tabs-style <span style="color:#e6db74">&#34;wave&#34;</span>)
+  :bind
+  (<span style="color:#e6db74">&#34;C-c t p&#34;</span> <span style="color:#f92672">.</span> centaur-tabs-backward)
+  (<span style="color:#e6db74">&#34;C-c t n&#34;</span> <span style="color:#f92672">.</span> centaur-tabs-forward))
+</code></pre></div><p>又是一次漫长的等待！</p>
+<figure><img src="/dump-brain-with-emacs/ox-hugo/03-install-pretty.png"/>
+</figure>
+
+<p>好了，现在我们还需要安装一下 <code>all-the-icons</code> 的字体： <code>M-x all-the-icons-install-fonts RET</code> 。现在再看我们的 Emacs：</p>
+<figure><img src="/dump-brain-with-emacs/ox-hugo/04-pretty.png"/>
+</figure>
+
+<p>是不是漂亮多了（特意放大了窗体）！</p>
+<h2 id="操作">操作</h2>
+<p>在上面的配置过程中你可能已经感觉了 <code>M-x</code> 、 buffer 切换、文件打开等不太好用，其实社区已经有成熟的补全框架，可以对类似的场景进行补全，
+我们将通过一下插件增强操作性：</p>
+<ul>
+<li>ivy + counsel + swiper</li>
+<li>goto-line-preview 预览要跳转的行</li>
+<li>which-key 忘记下面该按哪个键的时候可以对你进行提醒</li>
+</ul>
+<p>将以下内容追加到 <code>init.el</code> ：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(use-package counsel
+  :straight <span style="color:#66d9ef">t</span>
+  :custom
+  (counsel-find-file-at-point <span style="color:#66d9ef">t</span>)
+  :init
+  (counsel-mode <span style="color:#ae81ff">+1</span>)
+  :bind
+  (<span style="color:#e6db74">&#34;C-x b&#34;</span> <span style="color:#f92672">.</span> counsel-switch-buffer)
+  (<span style="color:#e6db74">&#34;C-c a p&#34;</span> <span style="color:#f92672">.</span> counsel-ag)
+  (<span style="color:#e6db74">&#34;M-y&#34;</span> <span style="color:#f92672">.</span> counsel-yank-pop)
+  (<span style="color:#e6db74">&#34;M-x&#34;</span> <span style="color:#f92672">.</span> counsel-M-x)
+  (<span style="color:#e6db74">&#34;C-x C-f&#34;</span> <span style="color:#f92672">.</span> counsel-find-file)
+  (<span style="color:#e6db74">&#34;&lt;f1&gt; f&#34;</span> <span style="color:#f92672">.</span> counsel-describe-function)
+  (<span style="color:#e6db74">&#34;&lt;f1&gt; v&#34;</span> <span style="color:#f92672">.</span> counsel-describe-variable)
+  (<span style="color:#e6db74">&#34;&lt;f1&gt; o&#34;</span> <span style="color:#f92672">.</span> counsel-describe-symbol)
+  (<span style="color:#e6db74">&#34;&lt;f1&gt; l&#34;</span> <span style="color:#f92672">.</span> counsel-find-library)
+  (<span style="color:#e6db74">&#34;&lt;f2&gt; i&#34;</span> <span style="color:#f92672">.</span> counsel-info-lookup-symbol)
+  (<span style="color:#e6db74">&#34;&lt;f2&gt; u&#34;</span> <span style="color:#f92672">.</span> counsel-unicode-char)
+  (<span style="color:#e6db74">&#34;C-c g&#34;</span> <span style="color:#f92672">.</span> counsel-git)
+  <span style="color:#75715e">;; (&#34;C-c j&#34; . counsel-git-grep)</span>
+  (<span style="color:#e6db74">&#34;C-c k&#34;</span> <span style="color:#f92672">.</span> counsel-ag)
+  (<span style="color:#e6db74">&#34;C-x l&#34;</span> <span style="color:#f92672">.</span> counsel-locate)
+  (<span style="color:#e6db74">&#34;C-S-o&#34;</span> <span style="color:#f92672">.</span> counsel-rhythmbox)
+  (:map minibuffer-local-map
+        ((<span style="color:#e6db74">&#34;C-r&#34;</span> <span style="color:#f92672">.</span> counsel-minibuffer-history))))
+
+(use-package ivy
+  :straight <span style="color:#66d9ef">t</span>
+  :init
+  (ivy-mode <span style="color:#ae81ff">1</span>)
+  :custom
+  (ivy-use-virtual-buffers <span style="color:#66d9ef">t</span>)
+  (enable-recursive-minibuffers <span style="color:#66d9ef">t</span>)
+  (ivy-wrap <span style="color:#66d9ef">t</span>)
+  :bind
+  (<span style="color:#e6db74">&#34;\C-s&#34;</span> <span style="color:#f92672">.</span> swiper)
+  (<span style="color:#e6db74">&#34;\C-r&#34;</span> <span style="color:#f92672">.</span> swiper-backward)
+  (<span style="color:#e6db74">&#34;C-c C-r&#34;</span> <span style="color:#f92672">.</span> ivy-resume)
+  (<span style="color:#e6db74">&#34;&lt;f6&gt;&#34;</span> <span style="color:#f92672">.</span> ivy-resume))
+
+(use-package ivy-posframe
+  :straight <span style="color:#66d9ef">t</span>
+  :custom
+  (ivy-posframe-display-functions-alist
+   <span style="color:#f92672">&#39;</span>((swiper          <span style="color:#f92672">.</span> ivy-posframe-display-at-point)  <span style="color:#75715e">;; swiper 紧随光标弹出</span>
+     (complete-symbol <span style="color:#f92672">.</span> ivy-posframe-display-at-point)  <span style="color:#75715e">;; 符号补全紧随光标弹出</span>
+     (<span style="color:#66d9ef">t</span> <span style="color:#f92672">.</span> ivy-posframe-display)))                       <span style="color:#75715e">;; 其他所有都在中心位置弹出</span>
+  (ivy-posframe-parameters <span style="color:#f92672">&#39;</span>((left-fringe <span style="color:#f92672">.</span> <span style="color:#ae81ff">8</span>)
+                             (right-fringe <span style="color:#f92672">.</span> <span style="color:#ae81ff">8</span>)))       <span style="color:#75715e">;; 指示弹出窗口标边缘</span>
+  :init
+  (ivy-posframe-mode <span style="color:#ae81ff">1</span>))
+
+(use-package ivy-rich
+  :straight <span style="color:#66d9ef">t</span>
+  :after (ivy)
+  :init
+  (<span style="color:#a6e22e">setcdr</span> (<span style="color:#a6e22e">assq</span> <span style="color:#66d9ef">t</span> ivy-format-functions-alist) <span style="color:#a6e22e">#&#39;</span>ivy-format-function-line)
+  (ivy-rich-mode <span style="color:#ae81ff">+1</span>)
+  (ivy-rich-project-root-cache-mode <span style="color:#ae81ff">+1</span>))
+
+(use-package all-the-icons-ivy-rich
+  :straight <span style="color:#66d9ef">t</span>
+  :after (ivy-rich)
+  :init (all-the-icons-ivy-rich-mode <span style="color:#ae81ff">1</span>))
+
+(use-package goto-line-preview :straight <span style="color:#66d9ef">t</span>
+  :bind ((<span style="color:#e6db74">&#34;M-g g&#34;</span> <span style="color:#f92672">.</span> goto-line-preview)))
+
+(use-package which-key
+  :straight <span style="color:#66d9ef">t</span>
+  :hook
+  (lsp-mode <span style="color:#f92672">.</span> lsp-enable-which-key-integration)
+  :custom
+  (which-key-show-early-on-C-h <span style="color:#66d9ef">t</span>)
+  :init
+  (which-key-mode))
+</code></pre></div><p>看下现在的操作：</p>
+<figure><img src="/dump-brain-with-emacs/ox-hugo/08QtGtwill.gif"/>
+</figure>
+
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>这里所谓的「现代」只是在描述我的使用习惯，并没有包含像 VSCode 那种侧边栏文件浏览，底部 Console 这种现代，因为 Emacs 的操作逻辑不需要这些东西，当然如果你喜欢这些 Emacs 也是可以配置到这种程度的。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p><a href="https://www.jianshu.com/p/186a3409e878">https://www.jianshu.com/p/186a3409e878</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>其实这里要复杂的多，具体的可以参见文档 <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Mode-Line.html">Mode Line</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>一些网上给的配置如果不是 <code>use-package</code> 的格式，我们可以简单的将配置放在 <code>use-package</code> 的 <code>:init</code> 下。&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+</article>
+
+
+
+</html>

@@ -6,7 +6,22 @@
     <description>Recent content on Dump brain with Emacs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 09 Jan 2022 07:27:00 +0800</lastBuildDate><atom:link href="https://coldnight.github.io/dump-brain-with-emacs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Jan 2022 07:59:00 +0800</lastBuildDate><atom:link href="https://coldnight.github.io/dump-brain-with-emacs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>先利其器：Emacs 现代化配置</title>
+      <link>https://coldnight.github.io/dump-brain-with-emacs/posts/20220109075943-%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8_emacs_%E7%8E%B0%E4%BB%A3%E5%8C%96%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sun, 09 Jan 2022 07:59:00 +0800</pubDate>
+      
+      <guid>https://coldnight.github.io/dump-brain-with-emacs/posts/20220109075943-%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8_emacs_%E7%8E%B0%E4%BB%A3%E5%8C%96%E9%85%8D%E7%BD%AE/</guid>
+      <description>tags: Emacs,先利其器  默认安装的 Emacs 可以说是又丑又不好用，所以为了使用更加顺畅或者更贴合现代1编辑器，我们需要修改一些配置并做一些插件的扩展。
+ 创建配置文件 Emacs 的配置文件都写在 $HOME/.emacs.d/init.el 中，其中 $HOME 就是用户的家目录，对应到不同的系统位置会有细微的差异：
+  Linux 或者 macOS:
+mkdir ~/.emacs.d/ touch ~/.emacs.d/init.el   Windows: C:/Users/&amp;lt;username&amp;gt;/AppData/Roaming/.emacs.d/init.el（这个目录很深，而且默认状态下AppData目录是隐藏的。）2
+  共享系统剪切板 默认 Emacs 的剪切板和系统是不共享的，也就是说下面的配置你可能没有办法粘贴到 Emacs 中，这给我们抄配置或者记笔记带来了很大的困扰， 所以我们先配置 Emacs 和系统共享剪切板。
+打开上面新创建的 init.el 配置文件（当然，用你熟悉的那个编辑器），追加如下内容：
+;; 系统共享剪切板 ;; see also: ;; https://www.emacswiki.org/emacs/CopyAndPaste ;; https://www.reddit.com/r/emacs/comments/5n9t3f/copypaste_from_system_clipboard_on_windows/ (defun copy-from-osx () (shell-command-to-string &amp;#34;pbpaste&amp;#34;)) (defun paste-to-osx (text &amp;amp;optional push) (let ((process-connection-type nil)) (let ((proc (start-process &amp;#34;pbcopy&amp;#34; &amp;#34;*Messages*&amp;#34; &amp;#34;pbcopy&amp;#34;))) (process-send-string proc text) (process-send-eof proc)))) (cond ((memq window-system &amp;#39;(x)) (setq x-select-enable-primary t x-select-enable-clipboard nil)) ((memq window-system &amp;#39;(mac ns)) (setq interprogram-cut-function &amp;#39;paste-to-osx interprogram-paste-function &amp;#39;copy-from-osx)) ((memq window-system &amp;#39;(win32 pc)) (setq select-enable-primary t select-enable-clipboard t save-interprogram-paste-before-kill t))) 基本配置 此时我们打开 Emacs 进行如下操作，按下 C-x C-f ~/.</description>
+    </item>
+    
     <item>
       <title>先利其器</title>
       <link>https://coldnight.github.io/dump-brain-with-emacs/notes/20220109072723-%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8/</link>
