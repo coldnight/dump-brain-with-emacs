@@ -6,5 +6,3 @@
 #+DATE: [2022-01-09 日 07:27]
 #+HUGO_BASE_DIR: ../
 #+HUGO_SECTION: notes
-
-
