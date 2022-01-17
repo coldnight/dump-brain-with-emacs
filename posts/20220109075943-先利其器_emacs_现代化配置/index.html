@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<title>先利其器：Emacs 现代化配置 | Dump brain with Emacs</title>
+<title>先利其器：Emacs 配置 | Dump brain with Emacs</title>
 <meta charset="utf-8">
 <meta name="generator" content="Hugo 0.89.4" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,17 +17,15 @@
 
 <article>
   <header>
-    <h1>先利其器：Emacs 现代化配置</h1>
+    <h1>先利其器：Emacs 配置</h1>
     <time datetime="2022-01-09T07:59:00&#43;08:00">January 09, 2022</time>
   </header>
-  <ul>
-<li>tags: <a href="/dump-brain-with-emacs/notes/20220109072645-emacs/">Emacs</a>,<a href="/dump-brain-with-emacs/notes/20220109072723-%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8/">先利其器</a></li>
-</ul>
-<p>默认安装的 Emacs 可以说是又丑又不好用，所以为了使用更加顺畅或者更贴合现代<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>编辑器，我们需要修改一些配置并做一些插件的扩展。</p>
+  <p>默认安装的 Emacs 可以说是又丑又不好用，所以为了使用更加顺畅或者更贴合现代<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>编辑器，我们需要修改一些配置并做一些插件的扩展。</p>
 <figure><img src="/dump-brain-with-emacs/ox-hugo/00-installation.png"/>
 </figure>
 
-<h2 id="创建配置文件">创建配置文件</h2>
+<h2 id="从零开始">从零开始</h2>
+<h3 id="创建配置文件">创建配置文件</h3>
 <p>Emacs 的配置文件都写在 <code>$HOME/.emacs.d/init.el</code> 中，其中 <code>$HOME</code> 就是用户的家目录，对应到不同的系统位置会有细微的差异：</p>
 <ul>
 <li>
@@ -36,10 +34,10 @@
 touch ~/.emacs.d/init.el
 </code></pre></li>
 <li>
-<p>Windows: C:/Users/&lt;username&gt;/AppData/Roaming/.emacs.d/init.el（这个目录很深，而且默认状态下AppData目录是隐藏的。）<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>Windows: C:/Users/<!-- raw HTML omitted -->/AppData/Roaming/.emacs.d/init.el（这个目录很深，而且默认状态下AppData目录是隐藏的。）<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
 </li>
 </ul>
-<h2 id="共享系统剪切板">共享系统剪切板</h2>
+<h3 id="共享系统剪切板">共享系统剪切板</h3>
 <p>默认 Emacs 的剪切板和系统是不共享的，也就是说下面的配置你可能没有办法粘贴到 Emacs 中，这给我们抄配置或者记笔记带来了很大的困扰，
 所以我们先配置 Emacs 和系统共享剪切板。</p>
 <p>打开上面新创建的 <code>init.el</code> 配置文件（当然，用你熟悉的那个编辑器），追加如下内容：</p>
@@ -62,12 +60,14 @@ touch ~/.emacs.d/init.el
         x-select-enable-clipboard <span style="color:#66d9ef">nil</span>))
  ((<span style="color:#a6e22e">memq</span> <span style="color:#a6e22e">window-system</span> <span style="color:#f92672">&#39;</span>(mac ns))
   (setq interprogram-cut-function <span style="color:#e6db74">&#39;paste-to-osx</span>
-        interprogram-paste-function <span style="color:#e6db74">&#39;copy-from-osx</span>))
+        interprogram-paste-function <span style="color:#e6db74">&#39;copy-from-osx</span>
+        <span style="color:#75715e">;; Use Option as Meta</span>
+        mac-option-modifier <span style="color:#e6db74">&#39;meta</span>))
  ((<span style="color:#a6e22e">memq</span> <span style="color:#a6e22e">window-system</span> <span style="color:#f92672">&#39;</span>(win32 pc))
   (setq select-enable-primary <span style="color:#66d9ef">t</span>
         select-enable-clipboard <span style="color:#66d9ef">t</span>
         save-interprogram-paste-before-kill <span style="color:#66d9ef">t</span>)))
-</code></pre></div><h2 id="基本配置">基本配置</h2>
+</code></pre></div><h3 id="基本配置">基本配置</h3>
 <p>此时我们打开 Emacs 进行如下操作，按下 <code>C-x C-f ~/.emacs.d/init.el RET</code> 打开 Emacs 配置文件，接下来将下面的配置内容粘贴进来，建议操作：</p>
 <ol>
 <li>首先拷贝下面内容，然后在 <code>init.el</code> buffer 里（ <code>C-x b init.el RET</code> 可以切换过来，如果当前不是那个 buffer 的话）</li>
@@ -190,7 +190,7 @@ touch ~/.emacs.d/init.el
 <li><code>Bot(100,27)</code> 表示光标位置 Bot 即 Bottom 的缩写，即 Bottom(row,column) 。</li>
 <li><code>(Emacs-Lisp, ElDoc)</code> 表示当前 buffer 的主模式和次模式（主模式只能有一个，但是次模式可以有多个）。</li>
 </ul>
-<h2 id="插件包管理">插件包管理</h2>
+<h3 id="插件包管理">插件包管理</h3>
 <p>Emacs 安装插件的方式多种多样，一般可以：</p>
 <ul>
 <li>简单粗暴：直接拷贝 elisp 文件到指定位置；</li>
@@ -219,7 +219,7 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 (straight-use-package <span style="color:#e6db74">&#39;use-package</span>)
 </code></pre></div><p>然后我们开始执行当前 buffer： <code>M-x eval-buffer RET</code> ，然后 straight.el 就会开始同步源：
 <img src="/dump-brain-with-emacs/ox-hugo/02-package.png" alt=""></p>
-<h2 id="外观">外观</h2>
+<h3 id="美化外观">美化外观</h3>
 <p>经过漫长的等待之后，我们终于可以进行下一步了：美化！我们将安装配置以下插件：</p>
 <ul>
 <li>doom-theme</li>
@@ -314,7 +314,7 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 </figure>
 
 <p>是不是漂亮多了（特意放大了窗体）！</p>
-<h2 id="操作">操作</h2>
+<h3 id="操作增强">操作增强</h3>
 <p>在上面的配置过程中你可能已经感觉了 <code>M-x</code> 、 buffer 切换、文件打开等不太好用，其实社区已经有成熟的补全框架，可以对类似的场景进行补全，
 我们将通过一下插件增强操作性：</p>
 <ul>
@@ -403,6 +403,88 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 <figure><img src="/dump-brain-with-emacs/ox-hugo/08QtGtwill.gif"/>
 </figure>
 
+<h2 id="笔记环境配置">笔记环境配置</h2>
+<p>首先我们创建笔记位置，我们将笔记存放在 <code>~/notes/content-org</code> 下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mkdir -p ~/notes/content-org
+</code></pre></div><p>接下来安装需要需要的插件：</p>
+<ul>
+<li><a href="https://orgmode.org/">org-mode</a></li>
+<li><a href="https://www.orgroam.com/">org-roam</a></li>
+<li>org-superstar</li>
+</ul>
+<p>让我们将以下配置追加到 <code>init.el</code> 中：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp"><span style="color:#75715e">;; 指定笔记存放位置</span>
+(setq my/dump-brain-root <span style="color:#e6db74">&#34;~/notes/&#34;</span>)
+
+(use-package org
+  :straight (:type git :host github :repo <span style="color:#e6db74">&#34;bzg/org-mode&#34;</span>)
+  :bind
+  (<span style="color:#e6db74">&#34;C-c c&#34;</span> <span style="color:#f92672">.</span> org-capture)
+  (<span style="color:#e6db74">&#34;C-c a o&#34;</span> <span style="color:#f92672">.</span> org-agenda)
+  (<span style="color:#e6db74">&#34;C-c C-.&#34;</span> <span style="color:#f92672">.</span> org-mark-ring-goto)
+  :custom
+  (org-startup-indented <span style="color:#66d9ef">t</span>)
+  (org-hide-leading-stars <span style="color:#66d9ef">t</span>)
+  (org-odd-level-only <span style="color:#66d9ef">nil</span>)
+  (org-insert-heading-respect-content <span style="color:#66d9ef">nil</span>)
+  (org-M-RET-may-split-line <span style="color:#f92672">&#39;</span>((item) (default <span style="color:#f92672">.</span> <span style="color:#66d9ef">t</span>)))
+  (org-special-ctrl-a/e <span style="color:#66d9ef">t</span>)
+  (org-return-follows-link <span style="color:#66d9ef">nil</span>)
+  (org-use-speed-commands <span style="color:#66d9ef">t</span>)
+  (org-startup-align-all-tables <span style="color:#66d9ef">nil</span>)
+  (org-log-into-drawer <span style="color:#66d9ef">nil</span>)
+  (org-tags-column <span style="color:#ae81ff">1</span>)
+  (org-ellipsis <span style="color:#e6db74">&#34; \u25bc&#34;</span> )
+  (org-speed-commands-user <span style="color:#66d9ef">nil</span>)
+  (org-blank-before-new-entry <span style="color:#f92672">&#39;</span>((heading <span style="color:#f92672">.</span> <span style="color:#66d9ef">nil</span>) (plain-list-item <span style="color:#f92672">.</span> <span style="color:#66d9ef">nil</span>)))
+  (org-completion-use-ido <span style="color:#66d9ef">t</span>)
+  (org-indent-mode <span style="color:#66d9ef">t</span>)
+  (org-startup-truncated <span style="color:#66d9ef">nil</span>)
+  :custom-face
+  (org-headline-done ((<span style="color:#66d9ef">nil</span> (:strike-through <span style="color:#66d9ef">t</span>))))
+  :init
+  (require <span style="color:#e6db74">&#39;org-id</span>)
+  (defun my/org-id-update-id-locations-current-dir()
+    <span style="color:#e6db74">&#34;Update id locations from current dir.&#34;</span>
+    (interactive)
+    (org-id-update-id-locations (<span style="color:#a6e22e">directory-files</span> <span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#66d9ef">t</span> <span style="color:#e6db74">&#34;\.org\$&#34;</span> <span style="color:#66d9ef">t</span>)))
+  (org-babel-do-load-languages
+   <span style="color:#e6db74">&#39;org-babel-load-languages</span>
+   <span style="color:#f92672">&#39;</span>((dot <span style="color:#f92672">.</span> <span style="color:#66d9ef">t</span>))))
+
+(use-package org-roam
+  :after org
+  :straight <span style="color:#66d9ef">t</span>
+  :config
+  (org-roam-setup)
+  <span style="color:#75715e">;; If using org-roam-protocol</span>
+  (require <span style="color:#e6db74">&#39;org-roam-protocol</span>)
+  :bind
+  (<span style="color:#e6db74">&#34;C-c n l&#34;</span> <span style="color:#f92672">.</span> org-roam-buffer-toggle)
+  (<span style="color:#e6db74">&#34;C-c n f&#34;</span> <span style="color:#f92672">.</span> org-roam-node-find)
+  (<span style="color:#e6db74">&#34;C-c n g&#34;</span> <span style="color:#f92672">.</span> org-roam-graph)
+  (<span style="color:#e6db74">&#34;C-c n i&#34;</span> <span style="color:#f92672">.</span> org-roam-node-insert)
+  (<span style="color:#e6db74">&#34;C-c n c&#34;</span> <span style="color:#f92672">.</span> org-roam-capture)
+  <span style="color:#75715e">;; Dailies</span>
+  (<span style="color:#e6db74">&#34;C-c n j&#34;</span> <span style="color:#f92672">.</span> org-roam-dailies-capture-today)
+  :custom
+  (org-roam-v2-ack <span style="color:#66d9ef">t</span>)
+  (org-roam-directory (string-join (<span style="color:#a6e22e">cons</span> my/dump-brain-root <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">&#34;content-org&#34;</span>)) <span style="color:#e6db74">&#34;/&#34;</span>))
+  (org-roam-capture-templates <span style="color:#f92672">`</span>((<span style="color:#e6db74">&#34;d&#34;</span> <span style="color:#e6db74">&#34;default&#34;</span> plain <span style="color:#e6db74">&#34;%?&#34;</span>
+                                 :unnarrowed <span style="color:#66d9ef">t</span>
+                                 :if-new (file+head <span style="color:#e6db74">&#34;%&lt;%Y%m%d%H%M%S&gt;-${slug}.org&#34;</span>
+                                                    <span style="color:#e6db74">&#34;#+TITLE: ${title}
+</span><span style="color:#e6db74">#+AUTHOR: Gray King
+</span><span style="color:#e6db74">#+DATE: %U
+</span><span style="color:#e6db74">#+HUGO_BASE_DIR: ../
+</span><span style="color:#e6db74">#+HUGO_SECTION: notes
+</span><span style="color:#e6db74">&#34;</span>)))))
+
+(use-package org-superstar
+  :straight <span style="color:#66d9ef">t</span>
+  :hook
+  (org-mode <span style="color:#f92672">.</span> (lambda () (org-superstar-mode <span style="color:#ae81ff">1</span>))))
+</code></pre></div><p>然后通过 <code>M-x eval-buffer RET</code> 使其生效（现在输入这个命令是不是愉快多了？）！</p>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -413,7 +495,7 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 <p><a href="https://www.jianshu.com/p/186a3409e878">https://www.jianshu.com/p/186a3409e878</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:3" role="doc-endnote">
-<p>其实这里要复杂的多，具体的可以参见文档 <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Mode-Line.html">Mode Line</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>其实这里要复杂的多，具体的可以参见文档 <a href="https://www.gnu.org/software/emacs/manual/html%5Fnode/emacs/Mode-Line.html">Mode Line</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:4" role="doc-endnote">
 <p>一些网上给的配置如果不是 <code>use-package</code> 的格式，我们可以简单的将配置放在 <code>use-package</code> 的 <code>:init</code> 下。&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
