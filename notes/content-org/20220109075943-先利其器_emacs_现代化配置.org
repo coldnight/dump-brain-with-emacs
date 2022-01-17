@@ -1,16 +1,16 @@
 :PROPERTIES:
 :ID:       32016F32-3D1B-4B9A-B95E-7F02A57DCF4E
 :END:
-#+TITLE: 先利其器：Emacs 现代化配置
+#+TITLE: 先利其器：Emacs 配置
 #+AUTHOR: Gray King
 #+DATE: [2022-01-09 日 07:59]
 #+HUGO_BASE_DIR: ../
-+ tags: [[id:C8956634-823D-4A86-A9AD-476FEC69029C][Emacs]],[[id:CEBCEF28-217F-4EB0-A137-FF6F7808D401][先利其器]]
 
 默认安装的 Emacs 可以说是又丑又不好用，所以为了使用更加顺畅或者更贴合现代[fn:1]编辑器，我们需要修改一些配置并做一些插件的扩展。
 
 [[file:images/00-installation.png]]
 
+* 从零开始
 ** 创建配置文件
 Emacs 的配置文件都写在 ~$HOME/.emacs.d/init.el~ 中，其中 ~$HOME~ 就是用户的家目录，对应到不同的系统位置会有细微的差异：
 
@@ -45,7 +45,9 @@ Emacs 的配置文件都写在 ~$HOME/.emacs.d/init.el~ 中，其中 ~$HOME~ 就
         x-select-enable-clipboard nil))
  ((memq window-system '(mac ns))
   (setq interprogram-cut-function 'paste-to-osx
-        interprogram-paste-function 'copy-from-osx))
+        interprogram-paste-function 'copy-from-osx
+        ;; Use Option as Meta
+        mac-option-modifier 'meta))
  ((memq window-system '(win32 pc))
   (setq select-enable-primary t
         select-enable-clipboard t
@@ -208,7 +210,7 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 #+END_SRC
 然后我们开始执行当前 buffer： ~M-x eval-buffer RET~ ，然后 straight.el 就会开始同步源：
 [[file:images/02-package.png]]
-** 外观
+** 美化外观
 经过漫长的等待之后，我们终于可以进行下一步了：美化！我们将安装配置以下插件：
 + doom-theme
 + doom-modeline
@@ -303,7 +305,7 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 [[file:images/04-pretty.png]]
 
 是不是漂亮多了（特意放大了窗体）！
-** 操作
+** 操作增强
 在上面的配置过程中你可能已经感觉了 ~M-x~ 、 buffer 切换、文件打开等不太好用，其实社区已经有成熟的补全框架，可以对类似的场景进行补全，
 我们将通过一下插件增强操作性：
 + ivy + counsel + swiper
@@ -392,6 +394,95 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 看下现在的操作：
 
 [[file:images/08QtGtwill.gif]]
+* 笔记环境配置
+首先我们创建笔记位置，我们将笔记存放在 =~/notes/content-org= 下：
+#+begin_src shell
+mkdir -p ~/notes/content-org
+#+end_src
+
+接下来安装需要需要的插件：
+
++ [[https://orgmode.org/][org-mode]]
++ [[https://www.orgroam.com/][org-roam]]
++ org-superstar
+
+让我们将以下配置追加到 ~init.el~ 中：
+
+#+BEGIN_SRC elisp
+;; 指定笔记存放位置
+(setq my/dump-brain-root "~/notes/")
+
+(use-package org
+  :straight (:type git :host github :repo "bzg/org-mode")
+  :bind
+  ("C-c c" . org-capture)
+  ("C-c a o" . org-agenda)
+  ("C-c C-." . org-mark-ring-goto)
+  :custom
+  (org-startup-indented t)
+  (org-hide-leading-stars t)
+  (org-odd-level-only nil)
+  (org-insert-heading-respect-content nil)
+  (org-M-RET-may-split-line '((item) (default . t)))
+  (org-special-ctrl-a/e t)
+  (org-return-follows-link nil)
+  (org-use-speed-commands t)
+  (org-startup-align-all-tables nil)
+  (org-log-into-drawer nil)
+  (org-tags-column 1)
+  (org-ellipsis " \u25bc" )
+  (org-speed-commands-user nil)
+  (org-blank-before-new-entry '((heading . nil) (plain-list-item . nil)))
+  (org-completion-use-ido t)
+  (org-indent-mode t)
+  (org-startup-truncated nil)
+  :custom-face
+  (org-headline-done ((nil (:strike-through t))))
+  :init
+  (require 'org-id)
+  (defun my/org-id-update-id-locations-current-dir()
+    "Update id locations from current dir."
+    (interactive)
+    (org-id-update-id-locations (directory-files "." t "\.org\$" t)))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((dot . t))))
+
+(use-package org-roam
+  :after org
+  :straight t
+  :config
+  (org-roam-setup)
+  ;; If using org-roam-protocol
+  (require 'org-roam-protocol)
+  :bind
+  ("C-c n l" . org-roam-buffer-toggle)
+  ("C-c n f" . org-roam-node-find)
+  ("C-c n g" . org-roam-graph)
+  ("C-c n i" . org-roam-node-insert)
+  ("C-c n c" . org-roam-capture)
+  ;; Dailies
+  ("C-c n j" . org-roam-dailies-capture-today)
+  :custom
+  (org-roam-v2-ack t)
+  (org-roam-directory (string-join (cons my/dump-brain-root '("content-org")) "/"))
+  (org-roam-capture-templates `(("d" "default" plain "%?"
+                                 :unnarrowed t
+                                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                                                    "#+TITLE: ${title}
+#+AUTHOR: Gray King
+#+DATE: %U
+#+HUGO_BASE_DIR: ../
+#+HUGO_SECTION: notes
+")))))
+
+(use-package org-superstar
+  :straight t
+  :hook
+  (org-mode . (lambda () (org-superstar-mode 1))))
+#+END_SRC
+然后通过 ~M-x eval-buffer RET~ 使其生效（现在输入这个命令是不是愉快多了？）！
+
 * Footnotes
 
 [fn:4] 一些网上给的配置如果不是 ~use-package~ 的格式，我们可以简单的将配置放在 ~use-package~ 的 ~:init~ 下。

@@ -17,7 +17,9 @@
         x-select-enable-clipboard nil))
  ((memq window-system '(mac ns))
   (setq interprogram-cut-function 'paste-to-osx
-        interprogram-paste-function 'copy-from-osx))
+        interprogram-paste-function 'copy-from-osx
+        ;; Use Option as Meta
+        mac-option-modifier 'meta))
  ((memq window-system '(win32 pc))
   (setq select-enable-primary t
         select-enable-clipboard t
