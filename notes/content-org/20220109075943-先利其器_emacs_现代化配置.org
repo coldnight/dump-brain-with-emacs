@@ -482,7 +482,6 @@ mkdir -p ~/notes/content-org
   (org-mode . (lambda () (org-superstar-mode 1))))
 #+END_SRC
 然后通过 ~M-x eval-buffer RET~ 使其生效（现在输入这个命令是不是愉快多了？）！
-
 * Footnotes
 
 [fn:4] 一些网上给的配置如果不是 ~use-package~ 的格式，我们可以简单的将配置放在 ~use-package~ 的 ~:init~ 下。

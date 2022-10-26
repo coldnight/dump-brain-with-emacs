@@ -477,10 +477,10 @@ $ git clone git@github.com:raxod502/straight.el.git straight/repos/straight.el
 | 向上/向下   | ~C-v~ ~M-v~                                            |
 ** 选择和复制粘贴
 ~C-SPC~ (SPC 即空格)开始选择，然后通过上面快捷键移动。
-+ ~M-w~ 将选择内容放入 ~king-ring~ 但不删除选择区域
-+ ~C-w~ 删除选择区域并将内容放入 ~king-ring~
-+ ~M-y~ 从 ~king-ring~ 中选择粘贴
-+ ~C-y~ 将放入 ~king-ring~ 的最后一条进行粘贴
++ ~M-w~ 将选择内容放入 ~kill-ring~ 但不删除选择区域
++ ~C-w~ 删除选择区域并将内容放入 ~kill-ring~
++ ~M-y~ 从 ~kill-ring~ 中选择粘贴
++ ~C-y~ 将放入 ~kill-ring~ 的最后一条进行粘贴
 * 准备记录笔记
 我们接下来准备通过 hugo 发布站点，所以现在先让我们通过 hugo 创建一个站点：
 
